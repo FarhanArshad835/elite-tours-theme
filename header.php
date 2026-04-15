@@ -33,18 +33,21 @@
             <ul class="et-nav__list">
                 <?php
                 $nav_items = [
-                    [ 'label' => 'Home',                  'url' => home_url( '/' ) ],
-                    [ 'label' => 'Tailored Private Tours', 'url' => home_url( '/tailored-private-tours/' ) ],
-                    [ 'label' => 'Golf Tours',             'url' => home_url( '/golf-tours/' ) ],
-                    [ 'label' => 'About Us',               'url' => home_url( '/about-us/' ) ],
-                    [ 'label' => 'Contact / Enquire',      'url' => home_url( '/contact/' ) ],
+                    [ 'label' => 'Home',          'url' => home_url( '/' ) ],
+                    [ 'label' => 'Bespoke Tours', 'url' => home_url( '/bespoke-tours/' ) ],
+                    [ 'label' => 'Golf Tours',    'url' => home_url( '/golf-tours/' ) ],
+                    [ 'label' => 'Experiences',   'url' => home_url( '/experiences/' ) ],
+                    [ 'label' => 'Accommodation', 'url' => home_url( '/accommodation/' ) ],
+                    [ 'label' => 'About Us',      'url' => home_url( '/about-us/' ) ],
+                    [ 'label' => 'Blog',          'url' => home_url( '/blog/' ) ],
+                    [ 'label' => 'Contact',       'url' => home_url( '/contact/' ) ],
                 ];
                 foreach ( $nav_items as $item ) :
                     $is_active = ( trailingslashit( get_permalink() ) === trailingslashit( $item['url'] ) );
                 ?>
                     <li class="et-nav__item">
                         <a href="<?php echo esc_url( $item['url'] ); ?>"
-                           class="et-nav__link<?php echo $is_active ? ' et-nav__link--active' : ''; ?>">
+                           class="et-nav__link<?php echo $is_active ? ' et-nav__link--active' : ''; ?><?php echo ( $item['label'] === 'Bespoke Tours' ) ? ' et-nav__link--bespoke' : ''; ?>">
                             <?php echo esc_html( $item['label'] ); ?>
                         </a>
                     </li>

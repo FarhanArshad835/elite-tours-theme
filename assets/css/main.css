@@ -220,11 +220,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .et-nav__link {
     display: block;
-    padding: 8px 12px;
+    padding: 8px 9px;
     font-family: var(--et-font-body);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     color: rgba(255,255,255,0.88);
     border-radius: var(--et-radius);
     transition: color var(--et-transition), background var(--et-transition);
@@ -234,6 +234,16 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .et-nav__link--active {
     color: var(--et-white);
     background: rgba(255,255,255,0.1);
+}
+
+/* Bespoke Tours — priority highlight */
+.et-nav__link--bespoke {
+    color: var(--et-gold);
+    font-weight: 600;
+}
+.et-nav__link--bespoke:hover {
+    color: var(--et-white);
+    background: rgba(196,162,101,0.15);
 }
 .et-header.is-scrolled .et-nav__link:hover,
 .et-header.is-scrolled .et-nav__link--active {
