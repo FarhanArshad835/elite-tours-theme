@@ -68,6 +68,15 @@ if ( ! function_exists( 'et_site' ) ) {
     }
 }
 
+// ─── Admin: append live deploy timestamp to theme row ───────────────────────
+add_filter( 'theme_row_meta', function ( array $meta, string $stylesheet ): array {
+    if ( $stylesheet === get_template() ) {
+        $ts     = filemtime( get_template_directory() . '/style.css' );
+        $meta[] = 'Deployed: <strong>' . gmdate( 'j M Y, H:i', $ts ) . ' UTC</strong>';
+    }
+    return $meta;
+}, 10, 2 );
+
 // ─── Disable maintenance mode during plugin/theme updates ───────────────────
 // WP Pusher deploys take 5-10 min — this keeps the site live during updates
 add_filter( 'enable_maintenance_mode', '__return_false' );
