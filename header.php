@@ -8,6 +8,10 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php if ( ! apply_filters( 'et_use_custom_header', true ) ) : ?>
+<?php return; // Elementor Pro Theme Builder is handling the header ?>
+<?php endif; ?>
+
 <header class="et-header" id="et-header">
     <div class="et-header__inner">
 
