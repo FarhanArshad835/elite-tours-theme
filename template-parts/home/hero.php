@@ -10,14 +10,27 @@ $video_url     = et_option( 'hero_video_url',     '' );
 $image_id      = et_option( 'hero_image_id',      '' );
 $image_url     = $image_id ? wp_get_attachment_image_url( (int) $image_id, 'full' ) : '';
 
-// Trust logos — reference: executivetoursireland.com footer
-$trust_logos = [
-    [ 'label' => 'TripAdvisor',      'icon' => 'tripadvisor' ],
-    [ 'label' => 'Fáilte Ireland',   'icon' => 'failte'      ],
-    [ 'label' => 'ASTA',             'icon' => 'asta'        ],
-    [ 'label' => 'IAGTO',            'icon' => 'iagto'       ],
-    [ 'label' => 'Since 1973',       'icon' => 'since'       ],
-];
+// Trust bar — pull editable sub-labels and logo IDs from plugin settings
+$trust_failte_sub  = et_option( 'trust_failte_sub',  'Approved Partner' );
+$trust_failte_logo = et_option( 'trust_failte_logo_id', '' );
+$trust_asta_sub    = et_option( 'trust_asta_sub',    'Member' );
+$trust_asta_logo   = et_option( 'trust_asta_logo_id', '' );
+$trust_iagto_sub   = et_option( 'trust_iagto_sub',   'Golf Tourism' );
+$trust_iagto_logo  = et_option( 'trust_iagto_logo_id', '' );
+$trust_since_label = et_option( 'trust_since_label', 'Since 1973' );
+$trust_since_sub   = et_option( 'trust_since_sub',   '50+ years experience' );
+$trust_ta_sub      = et_option( 'trust_ta_sub',       '5-Star Rated' );
+
+// Resolve logo URLs (fall back to bundled assets)
+$failte_url = $trust_failte_logo
+    ? wp_get_attachment_image_url( (int) $trust_failte_logo, 'full' )
+    : get_template_directory_uri() . '/assets/images/trust/failte-ireland.png';
+$asta_url   = $trust_asta_logo
+    ? wp_get_attachment_image_url( (int) $trust_asta_logo, 'full' )
+    : get_template_directory_uri() . '/assets/images/trust/asta.png';
+$iagto_url  = $trust_iagto_logo
+    ? wp_get_attachment_image_url( (int) $trust_iagto_logo, 'full' )
+    : get_template_directory_uri() . '/assets/images/trust/iagto.jpg';
 ?>
 
 <section class="et-hero" id="et-hero">
@@ -93,47 +106,48 @@ $trust_logos = [
                         <text x="20" y="17" font-size="11" font-family="Arial,sans-serif" font-weight="600" fill="white">TripAdvisor</text>
                     </svg>
                     <div class="et-trust-bar__stars" aria-label="5 stars">★★★★★</div>
+                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_ta_sub ); ?></span>
                 </div>
 
                 <div class="et-trust-bar__divider"></div>
 
                 <!-- Fáilte Ireland -->
                 <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/failte-ireland.png' ); ?>"
-                         alt="Fáilte Ireland — Approved Partner"
+                    <img src="<?php echo esc_url( $failte_url ); ?>"
+                         alt="Fáilte Ireland"
                          class="et-trust-bar__logo"
                          loading="lazy">
-                    <span class="et-trust-bar__sub">Approved Partner</span>
+                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_failte_sub ); ?></span>
                 </div>
 
                 <div class="et-trust-bar__divider"></div>
 
                 <!-- ASTA -->
                 <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/asta.png' ); ?>"
-                         alt="ASTA Member"
+                    <img src="<?php echo esc_url( $asta_url ); ?>"
+                         alt="ASTA"
                          class="et-trust-bar__logo"
                          loading="lazy">
-                    <span class="et-trust-bar__sub">Member</span>
+                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_asta_sub ); ?></span>
                 </div>
 
                 <div class="et-trust-bar__divider"></div>
 
                 <!-- IAGTO -->
                 <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/iagto.jpg' ); ?>"
-                         alt="IAGTO — Golf Tourism"
+                    <img src="<?php echo esc_url( $iagto_url ); ?>"
+                         alt="IAGTO"
                          class="et-trust-bar__logo et-trust-bar__logo--iagto"
                          loading="lazy">
-                    <span class="et-trust-bar__sub">Golf Tourism</span>
+                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_iagto_sub ); ?></span>
                 </div>
 
                 <div class="et-trust-bar__divider"></div>
 
                 <!-- Since -->
                 <div class="et-trust-bar__item">
-                    <span class="et-trust-bar__badge et-trust-bar__badge--gold">Since 1973</span>
-                    <span class="et-trust-bar__sub">50+ years experience</span>
+                    <span class="et-trust-bar__badge et-trust-bar__badge--gold"><?php echo esc_html( $trust_since_label ); ?></span>
+                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_since_sub ); ?></span>
                 </div>
 
             </div>

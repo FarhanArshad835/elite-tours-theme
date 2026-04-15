@@ -414,9 +414,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 
 .et-trust-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 1fr;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
 }
 
@@ -425,17 +425,16 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    flex: 1;
-    padding: 6px 12px;
+    gap: 4px;
+    padding: 6px 16px;
     text-align: center;
 }
 
 .et-trust-bar__divider {
     width: 1px;
-    height: 28px;
-    background: rgba(255,255,255,0.15);
-    flex-shrink: 0;
+    height: 36px;
+    background: rgba(255,255,255,0.22);
+    justify-self: center;
 }
 
 .et-trust-bar__badge {
@@ -497,8 +496,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 @media (max-width: 1024px) {
     .et-nav__link { padding: 8px 9px; font-size: 12px; }
     .et-header__phone { display: none; }
-    .et-trust-bar { grid-template-columns: repeat(2, 1fr); }
-    .et-trust-bar__item:nth-child(2) { border-right: none; }
+    /* Trust bar: hide last item + its divider, collapse to 4 items */
+    .et-trust-bar { grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr; }
+    .et-trust-bar > :nth-last-child(-n+2) { display: none; }
 }
 
 /* ── Mobile (max 768px) ─────────────────────────────────────── */
@@ -551,9 +551,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     .et-hero__ctas { gap: 10px; }
     .et-btn--pill { width: 100%; justify-content: center; }
 
-    /* Trust bar — 2 columns on mobile */
-    .et-trust-bar { justify-content: center; gap: 0; }
+    /* Trust bar — 2-column grid on mobile, hide pipe dividers */
+    .et-trust-bar { grid-template-columns: 1fr 1fr; }
     .et-trust-bar__divider { display: none; }
-    .et-trust-bar__item { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 10px 12px; }
+    .et-trust-bar__item { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 10px 12px; }
     .et-trust-bar__item:nth-last-child(-n+2) { border-bottom: none; }
 }
