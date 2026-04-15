@@ -68,6 +68,10 @@ if ( ! function_exists( 'et_site' ) ) {
     }
 }
 
+// ─── Disable maintenance mode during plugin/theme updates ───────────────────
+// WP Pusher deploys take 5-10 min — this keeps the site live during updates
+add_filter( 'enable_maintenance_mode', '__return_false' );
+
 // ─── Elementor Integration ───────────────────────────────────────────────────
 
 // 1. Declare Elementor support
