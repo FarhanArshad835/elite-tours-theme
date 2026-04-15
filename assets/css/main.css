@@ -4,16 +4,16 @@
 
 /* ── CSS Variables ─────────────────────────────────────────── */
 :root {
-    --et-green:        #1A4731;
+    --et-green:        #1A4F31;
     --et-green-dark:   #123320;
     --et-green-light:  #22593e;
     --et-white:        #FFFFFF;
-    --et-off-white:    #F5F8F5;
-    --et-gold:         #C9A96E;
-    --et-black:        #0A0A0A;
-    --et-grey-dark:    #2A2A2A;
+    --et-off-white:    #F2F7F2;
+    --et-gold:         #C4A265;
+    --et-black:        #000000;
+    --et-grey-dark:    #1A1A1A;
     --et-grey:         #6B6B6B;
-    --et-grey-light:   #D4D4D4;
+    --et-grey-light:   #D0D0D0;
 
     --et-font-heading: 'Old Standard TT', Georgia, serif;
     --et-font-body:    'Arial Nova', Arial, sans-serif;
@@ -140,6 +140,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .et-header.is-scrolled .et-header__phone {
     color: var(--et-grey-dark);
 }
+.et-header.is-scrolled .et-header__logo-text .et-header__logo-since {
+    color: var(--et-grey);
+}
 .et-header.is-scrolled .et-header__logo-text .et-header__logo-et {
     color: var(--et-green);
 }
@@ -173,30 +176,35 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .et-header__logo-text {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    line-height: 1;
+    gap: 1px;
+}
+.et-header__logo-since {
+    font-family: var(--et-font-body);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
 }
 .et-header__logo-et {
     font-family: var(--et-font-heading);
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 700;
     color: var(--et-white);
     line-height: 1;
+    letter-spacing: -0.02em;
 }
 .et-header__logo-name {
     font-family: var(--et-font-body);
-    font-size: 11px;
+    font-size: 7.5px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--et-white);
-    line-height: 1.4;
-}
-.et-header__logo-name small {
-    display: block;
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    opacity: 0.8;
+    color: rgba(255,255,255,0.85);
+    line-height: 1;
 }
 
 /* ── Nav ────────────────────────────────────────────────────── */
@@ -440,7 +448,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     line-height: 1.2;
 }
 
-/* TripAdvisor inline */
+/* TripAdvisor inline SVG */
 .et-trust-bar__svg {
     height: 18px;
     width: auto;
@@ -452,6 +460,22 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     color: #34E0A1;
     letter-spacing: 1px;
     line-height: 1;
+}
+
+/* Partner logo images */
+.et-trust-bar__logo {
+    height: 28px;
+    width: auto;
+    max-width: 110px;
+    object-fit: contain;
+    display: block;
+    filter: brightness(0) invert(1);   /* force white on dark bg */
+    opacity: 0.9;
+}
+/* IAGTO logo is colour-based — keep it, just slightly dim */
+.et-trust-bar__logo--iagto {
+    filter: none;
+    opacity: 0.85;
 }
 
 /* ============================================================

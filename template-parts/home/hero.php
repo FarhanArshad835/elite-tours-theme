@@ -97,9 +97,12 @@ $trust_logos = [
 
                 <div class="et-trust-bar__divider"></div>
 
-                <!-- Fáilte Ireland text badge -->
+                <!-- Fáilte Ireland -->
                 <div class="et-trust-bar__item">
-                    <span class="et-trust-bar__badge">Fáilte Ireland</span>
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/failte-ireland.png' ); ?>"
+                         alt="Fáilte Ireland — Approved Partner"
+                         class="et-trust-bar__logo"
+                         loading="lazy">
                     <span class="et-trust-bar__sub">Approved Partner</span>
                 </div>
 
@@ -107,7 +110,10 @@ $trust_logos = [
 
                 <!-- ASTA -->
                 <div class="et-trust-bar__item">
-                    <span class="et-trust-bar__badge">ASTA</span>
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/asta.png' ); ?>"
+                         alt="ASTA Member"
+                         class="et-trust-bar__logo"
+                         loading="lazy">
                     <span class="et-trust-bar__sub">Member</span>
                 </div>
 
@@ -115,7 +121,10 @@ $trust_logos = [
 
                 <!-- IAGTO -->
                 <div class="et-trust-bar__item">
-                    <span class="et-trust-bar__badge">IAGTO</span>
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/iagto.jpg' ); ?>"
+                         alt="IAGTO — Golf Tourism"
+                         class="et-trust-bar__logo et-trust-bar__logo--iagto"
+                         loading="lazy">
                     <span class="et-trust-bar__sub">Golf Tourism</span>
                 </div>
 

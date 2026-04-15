@@ -21,8 +21,9 @@
                 <img src="<?php echo esc_url( $logo_url ); ?>" alt="Elite Tours Ireland" width="140" height="60">
             <?php else : ?>
                 <span class="et-header__logo-text">
+                    <span class="et-header__logo-since">SINCE 1973</span>
                     <span class="et-header__logo-et">ET</span>
-                    <span class="et-header__logo-name">Elite Tours<br><small>Ireland</small></span>
+                    <span class="et-header__logo-name">ELITE TOURS IRELAND</span>
                 </span>
             <?php endif; ?>
         </a>
@@ -32,13 +33,11 @@
             <ul class="et-nav__list">
                 <?php
                 $nav_items = [
-                    [ 'label' => 'Home',           'url' => home_url( '/' ) ],
-                    [ 'label' => 'Bespoke Tours',  'url' => home_url( '/bespoke-tours/' ) ],
-                    [ 'label' => 'Golf Tours',     'url' => home_url( '/golf-tours/' ) ],
-                    [ 'label' => 'Experiences',    'url' => home_url( '/experiences/' ) ],
-                    [ 'label' => 'Accommodation',  'url' => home_url( '/accommodation/' ) ],
-                    [ 'label' => 'About Us',       'url' => home_url( '/about-us/' ) ],
-                    [ 'label' => 'Blog',           'url' => home_url( '/blog/' ) ],
+                    [ 'label' => 'Home',                  'url' => home_url( '/' ) ],
+                    [ 'label' => 'Tailored Private Tours', 'url' => home_url( '/tailored-private-tours/' ) ],
+                    [ 'label' => 'Golf Tours',             'url' => home_url( '/golf-tours/' ) ],
+                    [ 'label' => 'About Us',               'url' => home_url( '/about-us/' ) ],
+                    [ 'label' => 'Contact / Enquire',      'url' => home_url( '/contact/' ) ],
                 ];
                 foreach ( $nav_items as $item ) :
                     $is_active = ( trailingslashit( get_permalink() ) === trailingslashit( $item['url'] ) );
