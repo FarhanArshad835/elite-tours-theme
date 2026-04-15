@@ -161,7 +161,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     max-width: var(--et-container);
     margin-inline: auto;
     padding-inline: var(--et-container-pad);
-    gap: 24px;
+    gap: 16px;
 }
 
 /* ── Logo ───────────────────────────────────────────────────── */
@@ -220,9 +220,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .et-nav__link {
     display: block;
-    padding: 8px 9px;
+    padding: 8px 11px;
     font-family: var(--et-font-body);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.03em;
     color: rgba(255,255,255,0.88);
@@ -416,8 +416,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .et-trust-bar {
     display: flex;
     align-items: center;
-    gap: 0;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .et-trust-bar__item {
@@ -425,8 +425,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    padding: 6px 24px;
+    gap: 3px;
+    flex: 1;
+    padding: 6px 12px;
     text-align: center;
 }
 

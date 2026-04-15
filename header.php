@@ -33,7 +33,6 @@
             <ul class="et-nav__list">
                 <?php
                 $nav_items = [
-                    [ 'label' => 'Home',          'url' => home_url( '/' ) ],
                     [ 'label' => 'Bespoke Tours', 'url' => home_url( '/bespoke-tours/' ) ],
                     [ 'label' => 'Golf Tours',    'url' => home_url( '/golf-tours/' ) ],
                     [ 'label' => 'Experiences',   'url' => home_url( '/experiences/' ) ],
