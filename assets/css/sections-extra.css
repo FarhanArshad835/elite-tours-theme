@@ -424,17 +424,34 @@
 
 @media (max-width: 768px) {
     .et-sticky-cta { display: block; }
-    body { padding-bottom: 72px; }
+    body { padding-bottom: 64px; }
 
-    .et-testimonials { padding-block: 64px; }
-    .et-testimonials__grid { grid-template-columns: 1fr; }
+    /* Testimonials — compact */
+    .et-testimonials { padding-block: 48px; }
+    .et-testimonials__header { margin-bottom: 28px; }
+    .et-testimonials__heading { font-size: 24px; }
+    .et-testimonials__sub { font-size: 13px; }
+    .et-testimonials__grid { grid-template-columns: 1fr; gap: 16px; }
+    .et-testimonial { padding: 24px 20px; }
+    .et-testimonial__quote-mark { font-size: 36px; margin-bottom: 8px; }
+    .et-testimonial__body { font-size: 14px; line-height: 1.55; }
 
-    .et-founder { padding-block: 64px; }
-    .et-founder__grid { grid-template-columns: 1fr; gap: 40px; }
-    .et-founder__img-wrap img { height: 360px; }
+    /* Founder — compact */
+    .et-founder { padding-block: 48px; }
+    .et-founder__grid { grid-template-columns: 1fr; gap: 32px; }
+    .et-founder__heading { font-size: 26px; }
+    .et-founder__body { font-size: 14px; line-height: 1.55; }
+    .et-founder__img-wrap img { height: 300px; }
+    .et-founder__quote { font-size: 14px; }
+    .et-founder__cite { font-size: 12px; }
 
-    .et-footer__grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    /* Footer — compact */
+    .et-footer__main { padding-block: 40px; }
+    .et-footer__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .et-footer__col--brand { grid-column: 1 / -1; }
-    .et-footer__trust-bar { gap: 20px; }
+    .et-footer__col-title { font-size: 13px; }
+    .et-footer__links a { font-size: 13px; }
+    .et-footer__trust-bar { gap: 16px; }
+    .et-footer__trust-logo { height: 22px; }
     .et-footer__legal .et-container { flex-direction: column; gap: 8px; text-align: center; }
 }
