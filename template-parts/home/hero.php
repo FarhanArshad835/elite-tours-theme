@@ -8,7 +8,9 @@ $cta_primary   = et_option( 'hero_cta_primary',   'Visit the Emerald Isle' );
 $cta_secondary = et_option( 'hero_cta_secondary', 'Explore Our Tours' );
 $video_url     = et_option( 'hero_video_url',     '' );
 $image_id      = et_option( 'hero_image_id',      '' );
-$image_url     = $image_id ? wp_get_attachment_image_url( (int) $image_id, 'full' ) : '';
+$image_url     = $image_id
+    ? wp_get_attachment_image_url( (int) $image_id, 'full' )
+    : get_template_directory_uri() . '/assets/images/hero-default.jpg';
 
 // Trust bar — pull editable sub-labels and logo IDs from plugin settings
 $trust_failte_sub  = et_option( 'trust_failte_sub',  'Approved Partner' );

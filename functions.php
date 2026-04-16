@@ -19,7 +19,13 @@ add_action( 'wp_enqueue_scripts', function () {
         'elite-tours-main',
         get_template_directory_uri() . '/assets/css/main.css',
         [],
-        '1.0.0'
+        '1.2.0'
+    );
+    wp_enqueue_style(
+        'elite-tours-sections',
+        get_template_directory_uri() . '/assets/css/sections-extra.css',
+        [ 'elite-tours-main' ],
+        '1.2.0'
     );
 
     wp_enqueue_script(
@@ -36,6 +42,24 @@ if ( ! function_exists( 'et_option' ) ) {
     function et_option( string $key, string $fallback = '' ): string {
         $options = get_option( 'et_homepage_settings', [] );
         return ! empty( $options[ $key ] ) ? esc_attr( $options[ $key ] ) : $fallback;
+    }
+}
+
+// ─── Helper: get homepage setting (raw, unescaped) ───────────────────────────
+if ( ! function_exists( 'et_hp' ) ) {
+    function et_hp( string $key, string $fallback = '' ): string {
+        static $opts = null;
+        if ( $opts === null ) $opts = get_option( 'et_homepage_settings', [] );
+        return ( isset( $opts[ $key ] ) && $opts[ $key ] !== '' ) ? $opts[ $key ] : $fallback;
+    }
+}
+
+// ─── Helper: get homepage setting as integer ──────────────────────────────────
+if ( ! function_exists( 'et_hp_int' ) ) {
+    function et_hp_int( string $key, int $fallback = 0 ): int {
+        static $opts = null;
+        if ( $opts === null ) $opts = get_option( 'et_homepage_settings', [] );
+        return ( isset( $opts[ $key ] ) && $opts[ $key ] !== '' ) ? (int) $opts[ $key ] : $fallback;
     }
 }
 
