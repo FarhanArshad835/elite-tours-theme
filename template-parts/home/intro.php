@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 $label       = et_hp( 'intro_label',   'Who We Are' );
 $heading     = et_hp( 'intro_heading', 'More Than a Tour.<br>A Deeper Connection to Ireland.' );
-$body        = et_hp( 'intro_body',    '<p>For many people, a journey to Ireland is not just a holiday. It is a return to something — ancestry, identity, a sense of belonging. Yet too often, that experience is rushed, impersonal, and built for volume rather than meaning.</p><p>Elite Tours was built to change that.</p><p>Every journey we create is built entirely around you — your interests, your family, your pace. We don\'t move people from place to place. We welcome them into Ireland properly. Every detail is considered. Every experience is shaped to feel effortless, personal, and worth remembering.</p><p>This is not a tour. This is how Ireland should be experienced.</p>' );
+$body        = et_hp( 'intro_body',    '<p>For many people, a journey to Ireland is not just a holiday. It is a return to something. Ancestry, identity, a sense of belonging. Yet too often, that experience is rushed, impersonal, and built for volume rather than meaning.</p><p>Elite Tours was built to change that.</p><p>Every journey we create is built entirely around you. Your interests, your family, your pace. We don\'t move people from place to place. We welcome them into Ireland properly. Every detail is considered. Every experience is shaped to feel effortless, personal, and worth remembering.</p><p>This is not a tour. This is how Ireland should be experienced.</p>' );
 $cta_text    = et_hp( 'intro_cta_text', 'Meet Our Story' );
 $cta_url     = et_hp( 'intro_cta_url',  home_url( '/about-us/' ) );
 $badge_num   = et_hp( 'intro_badge_num',  '50+' );
@@ -38,7 +38,7 @@ $image_url = $image_id
             <div class="et-intro__media">
                 <div class="et-intro__img-wrap">
                     <img src="<?php echo esc_url( $image_url ); ?>"
-                         alt="Ireland — Elite Tours"
+                         alt="Ireland - Elite Tours"
                          loading="lazy">
                     <div class="et-intro__badge">
                         <span class="et-intro__badge-num"><?php echo esc_html( $badge_num ); ?></span>

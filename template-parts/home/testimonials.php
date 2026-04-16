@@ -5,21 +5,23 @@ $t_label   = et_hp( 'testimonials_label',   'Client Stories' );
 $t_heading = et_hp( 'testimonials_heading', 'What Our Clients Say' );
 $t_sub     = et_hp( 'testimonials_sub',     'These are not reviews. These are stories.' );
 
+$ta_url = esc_url( 'https://www.tripadvisor.com/Attraction_Review-g186621-d19840247-Reviews-Elite_Tours_Ireland-Limerick_County_Limerick.html' );
+
 $testimonials = [
     [
-        'quote'  => et_hp( 't_1_quote',  "We arrived not knowing what to expect. We left feeling like Ireland was part of us. Ray thought of everything — things we didn't even know we needed. It was the most personal trip we've ever taken." ),
-        'name'   => et_hp( 't_1_name',   'Patricia &amp; Tom M.' ),
-        'origin' => et_hp( 't_1_origin', 'Boston' ),
+        'quote'  => et_hp( 't_1_quote',  "Ray went above and beyond and completely transformed our trip from good to simply amazing. He took time to know us and customize a really special tour that was perfectly suited to our family. I cannot imagine trying to explore Ireland without him." ),
+        'name'   => et_hp( 't_1_name',   'Beth G.' ),
+        'origin' => et_hp( 't_1_origin', 'TripAdvisor' ),
     ],
     [
-        'quote'  => et_hp( 't_2_quote',  "The golf was extraordinary. Old Head was a moment I'll never forget. But it was the way everything was handled — every tee time, every detail — that made it truly special." ),
-        'name'   => et_hp( 't_2_name',   'James K.' ),
-        'origin' => et_hp( 't_2_origin', 'New York' ),
+        'quote'  => et_hp( 't_2_quote',  "Ray is more than a driver. He\'s a storyteller, a guide, and now, a dear friend. Whether we were at the Cliffs of Moher, winding through the Gap of Dunloe, or soaking in the charm of Cobh, Ray brought each place to life in a way only someone deeply connected to Ireland could." ),
+        'name'   => et_hp( 't_2_name',   'Margaret B.' ),
+        'origin' => et_hp( 't_2_origin', 'TripAdvisor' ),
     ],
     [
-        'quote'  => et_hp( 't_3_quote',  "We came to find our family's roots in County Cork. What we found was far more than we expected. This wasn't tourism — it was a homecoming." ),
-        'name'   => et_hp( 't_3_name',   'The McCarthy Family' ),
-        'origin' => et_hp( 't_3_origin', 'Chicago' ),
+        'quote'  => et_hp( 't_3_quote',  "By the end of the trip, it felt like we were saying goodbye to a friend rather than a driver. Ray\'s insider tips led us away from the typical tourist crowds and gave us a more authentic experience. He is truly a gem, and we can\'t recommend him highly enough." ),
+        'name'   => et_hp( 't_3_name',   'Ellie M.' ),
+        'origin' => et_hp( 't_3_origin', 'Boston' ),
     ],
 ];
 ?>
@@ -49,12 +51,12 @@ $testimonials = [
         </div>
 
         <!-- TripAdvisor trust signal -->
-        <div class="et-testimonials__trust">
+        <a href="<?php echo $ta_url; ?>" class="et-testimonials__trust" target="_blank" rel="noopener noreferrer">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/tripadvisor.svg' ); ?>"
                  alt="TripAdvisor" class="et-testimonials__ta-logo" onerror="this.style.display='none'">
             <div class="et-testimonials__ta-stars" aria-label="5 stars">★★★★★</div>
-            <span class="et-testimonials__ta-label">5-Star Rated on TripAdvisor</span>
-        </div>
+            <span class="et-testimonials__ta-label">5.0 Rating &middot; 90 Reviews &middot; #1 in Limerick</span>
+        </a>
 
     </div>
 </section>

@@ -15,17 +15,17 @@ $steps = [
     [
         'num'   => et_hp( 'step_2_num',   '02' ),
         'title' => et_hp( 'step_2_title', 'We Design' ),
-        'desc'  => et_hp( 'step_2_desc',  'We create a bespoke itinerary built entirely around you — your interests, your family, your pace.' ),
+        'desc'  => et_hp( 'step_2_desc',  'We create a bespoke itinerary built entirely around you. Your interests, your family, your pace.' ),
     ],
     [
         'num'   => et_hp( 'step_3_num',   '03' ),
         'title' => et_hp( 'step_3_title', 'We Handle Everything' ),
-        'desc'  => et_hp( 'step_3_desc',  "From accommodation to access, transfers to timing — every detail is managed, so you don't have to think about a thing." ),
+        'desc'  => et_hp( 'step_3_desc',  "From accommodation to access, transfers to timing, every detail is managed, so you don't have to think about a thing." ),
     ],
     [
         'num'   => et_hp( 'step_4_num',   '04' ),
         'title' => et_hp( 'step_4_title', 'You Experience Ireland Properly' ),
-        'desc'  => et_hp( 'step_4_desc',  'Arrive as a visitor. Leave with a deeper connection to Ireland — and often, a lifelong friend.' ),
+        'desc'  => et_hp( 'step_4_desc',  'Arrive as a visitor. Leave with a deeper connection to Ireland, and often, a lifelong friend.' ),
     ],
 ];
 ?>

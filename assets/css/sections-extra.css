@@ -2,7 +2,7 @@
    TESTIMONIALS
    ============================================================ */
 .et-testimonials {
-    padding-block: 100px;
+    padding-block: 120px;
     background: var(--et-green);
 }
 .et-testimonials__header {
@@ -76,6 +76,14 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
+    margin-top: 40px;
+    text-decoration: none;
+}
+.et-testimonials__ta-logo {
+    height: 28px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
 }
 .et-testimonials__ta-stars {
     font-size: 18px;
@@ -87,14 +95,24 @@
     font-size: 13px;
     color: rgba(255,255,255,0.65);
     letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .et-testimonials__trust {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .et-testimonials__ta-logo {
+        height: 22px;
+    }
 }
 
 /* ============================================================
    FOUNDER / FINAL CTA
    ============================================================ */
 .et-founder {
-    padding-block: 100px;
-    background: var(--et-white);
+    padding-block: 120px;
+    background: var(--et-off-white);
 }
 .et-founder__grid {
     display: grid;
@@ -245,6 +263,19 @@
     transition: border-color var(--et-transition), color var(--et-transition);
 }
 .et-footer__social-link:hover { border-color: var(--et-gold); color: var(--et-gold); }
+.et-footer__social-link--ta {
+    width: auto;
+    border-radius: 18px;
+    padding: 0 14px;
+}
+.et-footer__social-ta-logo {
+    height: 14px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+    transition: opacity var(--et-transition);
+}
+.et-footer__social-link--ta:hover .et-footer__social-ta-logo { opacity: 1; }
 .et-footer__links {
     list-style: none;
     margin: 0;
@@ -277,10 +308,13 @@
     font-size: 14px;
     color: rgba(255,255,255,0.65);
 }
-.et-footer__contact a {
+.et-footer__contact a,
+.et-footer__contact span {
     color: rgba(255,255,255,0.65);
     text-decoration: none;
     transition: color var(--et-transition);
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 .et-footer__contact a:hover { color: var(--et-white); }
 .et-footer__contact svg { flex-shrink: 0; color: var(--et-gold); }

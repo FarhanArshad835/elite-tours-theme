@@ -61,7 +61,7 @@
         <!-- Right Side: Phone + CTA -->
         <div class="et-header__actions">
             <?php
-            $phone       = et_site( 'phone_us', '+1 888 000 0000' );
+            $phone       = et_site( 'phone_us', '+353 86 050 0500' );
             $phone_clean = preg_replace( '/[^+0-9]/', '', $phone );
             ?>
             <a href="tel:<?php echo esc_attr( $phone_clean ); ?>" class="et-header__phone">

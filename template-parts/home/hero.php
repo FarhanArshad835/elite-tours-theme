@@ -1,10 +1,10 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$label         = et_option( 'hero_label',        'ELITE TOURS IRELAND — SINCE 1973' );
+$label         = et_option( 'hero_label',        'ELITE TOURS IRELAND · SINCE 1973' );
 $headline      = et_option_raw( 'hero_headline',  'Ireland,<br>Experienced Properly.' );
-$subheading    = et_option( 'hero_subheading',    'Bespoke private journeys — tailored to you, delivered with genuine Irish care.' );
-$cta_primary   = et_option( 'hero_cta_primary',   'Visit the Emerald Isle' );
+$subheading    = et_option( 'hero_subheading',    'Bespoke private journeys, tailored to you, delivered with genuine Irish care.' );
+$cta_primary   = et_option( 'hero_cta_primary',   'Plan Your Journey' );
 $cta_secondary = et_option( 'hero_cta_secondary', 'Explore Our Tours' );
 $video_url     = et_option( 'hero_video_url',     '' );
 $image_id      = et_option( 'hero_image_id',      '' );
@@ -21,7 +21,7 @@ $trust_iagto_sub   = et_option( 'trust_iagto_sub',   'Golf Tourism' );
 $trust_iagto_logo  = et_option( 'trust_iagto_logo_id', '' );
 $trust_since_label = et_option( 'trust_since_label', 'Since 1973' );
 $trust_since_sub   = et_option( 'trust_since_sub',   '50+ years experience' );
-$trust_ta_sub      = et_option( 'trust_ta_sub',       '5-Star Rated' );
+$trust_ta_sub      = et_option( 'trust_ta_sub',       '5.0 · 90 Reviews' );
 
 // Resolve logo URLs (fall back to bundled assets)
 $failte_url = $trust_failte_logo
@@ -46,12 +46,12 @@ $iagto_url  = $trust_iagto_logo
             </video>
         <?php elseif ( $image_url ) : ?>
             <img class="et-hero__image" src="<?php echo esc_url( $image_url ); ?>"
-                 alt="Ireland — Elite Tours" loading="eager" fetchpriority="high">
+                 alt="Ireland - Elite Tours" loading="eager" fetchpriority="high">
         <?php else : ?>
             <div class="et-hero__placeholder"></div>
         <?php endif; ?>
 
-        <!-- Gradient overlay — darker at bottom like Adams & Butler -->
+        <!-- Gradient overlay -->
         <div class="et-hero__overlay"></div>
     </div>
 
@@ -74,7 +74,7 @@ $iagto_url  = $trust_iagto_logo
                     <?php echo esc_html( $subheading ); ?>
                 </p>
 
-                <!-- CTAs — pill style like Adams & Butler -->
+                <!-- CTAs -->
                 <div class="et-hero__ctas">
                     <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"
                        class="et-btn et-btn--pill et-btn--pill-light">
@@ -100,13 +100,8 @@ $iagto_url  = $trust_iagto_logo
 
                 <!-- TripAdvisor -->
                 <div class="et-trust-bar__item">
-                    <svg class="et-trust-bar__svg" viewBox="0 0 124 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="TripAdvisor">
-                        <circle cx="8"  cy="12" r="7" fill="#34E0A1"/>
-                        <circle cx="8"  cy="12" r="3" fill="white"/>
-                        <circle cx="116" cy="12" r="7" fill="#34E0A1"/>
-                        <circle cx="116" cy="12" r="3" fill="white"/>
-                        <text x="20" y="17" font-size="11" font-family="Arial,sans-serif" font-weight="600" fill="white">TripAdvisor</text>
-                    </svg>
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/tripadvisor.svg' ); ?>"
+                         alt="TripAdvisor" class="et-trust-bar__logo et-trust-bar__logo--ta" loading="lazy">
                     <div class="et-trust-bar__stars" aria-label="5 stars">★★★★★</div>
                     <span class="et-trust-bar__sub"><?php echo esc_html( $trust_ta_sub ); ?></span>
                 </div>

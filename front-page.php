@@ -6,7 +6,7 @@ get_header();
 get_template_part( 'template-parts/home/hero' );
 
 // Dynamic sections — order and visibility driven by admin panel
-$default_order = [ 'trust-stats', 'intro', 'offers', 'process', 'experiences', 'testimonials', 'founder-cta' ];
+$default_order = [ 'intro', 'offers', 'process', 'experiences', 'testimonials', 'founder-cta' ];
 $stored_order  = et_hp( 'section_order', '' );
 $order         = $stored_order ? json_decode( $stored_order, true ) : $default_order;
 if ( ! is_array( $order ) ) {

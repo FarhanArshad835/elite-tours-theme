@@ -6,7 +6,7 @@ $base_uri = get_template_directory_uri() . '/assets/images/';
 // Card 1 — Bespoke
 $o1_label    = et_hp( 'offer_1_label',    'Bespoke Private Tours' );
 $o1_heading  = et_hp( 'offer_1_heading',  'Ireland,<br>Built Around You.' );
-$o1_desc     = et_hp( 'offer_1_desc',     'Deeply personal, privately guided journeys — ancestry, culture, heritage, whiskey, scenic routes. No fixed itineraries. Everything designed from scratch, around the people taking it.' );
+$o1_desc     = et_hp( 'offer_1_desc',     'Deeply personal, privately guided journeys. Ancestry, culture, heritage, whiskey, scenic routes. No fixed itineraries. Everything designed from scratch, around the people taking it.' );
 $o1_cta_text = et_hp( 'offer_1_cta_text', 'Explore Bespoke Tours' );
 $o1_cta_url  = et_hp( 'offer_1_cta_url',  home_url( '/bespoke-tours/' ) );
 $o1_img_id   = et_hp_int( 'offer_1_image_id', 0 );
@@ -17,7 +17,7 @@ $o1_img_url  = $o1_img_id
 // Card 2 — Golf
 $o2_label    = et_hp( 'offer_2_label',    'Golf Tours' );
 $o2_heading  = et_hp( 'offer_2_heading',  "Play Ireland's Greatest Courses." );
-$o2_desc     = et_hp( 'offer_2_desc',     "Fully managed golf journeys across Ireland's most iconic links — with priority access, private chauffeur, and Ray's personal hosting standard throughout." );
+$o2_desc     = et_hp( 'offer_2_desc',     "Fully managed golf journeys across Ireland's most iconic links, with priority access, private chauffeur, and Ray's personal hosting standard throughout." );
 $o2_cta_text = et_hp( 'offer_2_cta_text', 'Explore Golf Tours' );
 $o2_cta_url  = et_hp( 'offer_2_cta_url',  home_url( '/golf-tours/' ) );
 $o2_img_id   = et_hp_int( 'offer_2_image_id', 0 );

@@ -1,10 +1,11 @@
 <?php
-$phone       = et_site( 'phone_us', '+1 888 000 0000' );
+$phone       = et_site( 'phone_us', '+353 86 050 0500' );
 $phone_clean = preg_replace( '/[^+0-9]/', '', $phone );
-$email       = et_site( 'contact_email', 'info@elitetoursireland.com' );
+$email       = et_site( 'contact_email', 'elitetoursireland@gmail.com' );
+$address     = et_site( 'address', '26 Mallow St, Limerick, V94 V049, Ireland' );
 $ig_url      = et_site( 'social_instagram', '' );
 $fb_url      = et_site( 'social_facebook',  '' );
-$ta_url      = et_site( 'social_tripadvisor', '' );
+$ta_url      = et_site( 'social_tripadvisor', 'https://www.tripadvisor.com/Attraction_Review-g186621-d19840247-Reviews-Elite_Tours_Ireland-Limerick_County_Limerick.html' );
 $base        = get_template_directory_uri();
 ?>
 
@@ -45,8 +46,8 @@ $base        = get_template_directory_uri();
                         </a>
                         <?php endif; ?>
                         <?php if ( $ta_url ) : ?>
-                        <a href="<?php echo esc_url( $ta_url ); ?>" class="et-footer__social-link" aria-label="TripAdvisor" rel="noopener noreferrer" target="_blank">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6" cy="12" r="4"/><circle cx="18" cy="12" r="4"/><path d="M2 7c0 0 4-4 10-4s10 4 10 4"/></svg>
+                        <a href="<?php echo esc_url( $ta_url ); ?>" class="et-footer__social-link et-footer__social-link--ta" aria-label="TripAdvisor" rel="noopener noreferrer" target="_blank">
+                            <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>" alt="TripAdvisor" width="80" height="14" class="et-footer__social-ta-logo">
                         </a>
                         <?php endif; ?>
                     </div>
@@ -92,6 +93,12 @@ $base        = get_template_directory_uri();
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                             <a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
                         </li>
+                        <?php if ( $address ) : ?>
+                        <li>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span><?php echo esc_html( $address ); ?></span>
+                        </li>
+                        <?php endif; ?>
                     </ul>
                     <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-footer__cta">
                         Plan Your Journey
@@ -113,11 +120,8 @@ $base        = get_template_directory_uri();
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/iagto.jpg' ); ?>"
                      alt="IAGTO" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--colour">
                 <div class="et-footer__trust-ta">
-                    <svg viewBox="0 0 120 22" fill="none" xmlns="http://www.w3.org/2000/svg" height="20" aria-label="TripAdvisor">
-                        <circle cx="7" cy="11" r="6" fill="#34E0A1"/><circle cx="7" cy="11" r="2.5" fill="white"/>
-                        <circle cx="113" cy="11" r="6" fill="#34E0A1"/><circle cx="113" cy="11" r="2.5" fill="white"/>
-                        <text x="18" y="15.5" font-size="10" font-family="Arial,sans-serif" font-weight="600" fill="white">TripAdvisor</text>
-                    </svg>
+                    <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>"
+                         alt="TripAdvisor" loading="lazy" class="et-footer__trust-logo">
                     <span class="et-footer__trust-stars">★★★★★</span>
                 </div>
             </div>
@@ -148,5 +152,56 @@ $base        = get_template_directory_uri();
 </div>
 
 <?php wp_footer(); ?>
+
+<!-- Scroll reveal + nav scroll effect -->
+<script>
+(function(){
+    // Auto-apply scroll reveal to section content
+    var selectors = [
+        '.et-intro__text', '.et-intro__media',
+        '.et-offer-card',
+        '.et-process__header', '.et-process__step',
+        '.et-experiences__header', '.et-experiences__filters', '.et-exp-card',
+        '.et-testimonials__header', '.et-testimonial',
+        '.et-founder__text', '.et-founder__media',
+        '.et-footer__grid'
+    ];
+    selectors.forEach(function(sel) {
+        document.querySelectorAll(sel).forEach(function(el, i) {
+            el.classList.add('et-reveal');
+            if (i > 0 && i < 4) el.classList.add('et-reveal--delay-' + i);
+        });
+    });
+
+    // Observe all .et-reveal elements
+    var reveals = document.querySelectorAll('.et-reveal');
+    if (reveals.length && 'IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(function(el) { obs.observe(el); });
+    }
+
+    // Nav — transparent on hero, solid on scroll
+    var header = document.querySelector('.et-header');
+    if (header) {
+        var scrolled = false;
+        function checkScroll() {
+            var s = window.scrollY > 60;
+            if (s !== scrolled) {
+                scrolled = s;
+                header.classList.toggle('is-scrolled', s);
+            }
+        }
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        checkScroll();
+    }
+})();
+</script>
 </body>
 </html>

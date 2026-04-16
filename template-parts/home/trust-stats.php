@@ -18,7 +18,7 @@ $items = [
         'desc'  => et_hp( 'stats_3_desc',  'Discretion, professionalism, reliability' ),
     ],
     [
-        'icon'  => et_hp( 'stats_4_icon',  'check' ),
+        'icon'  => et_hp( 'stats_4_icon',  'clock' ),
         'label' => et_hp( 'stats_4_label', 'Every Detail Handled' ),
         'desc'  => et_hp( 'stats_4_desc',  'Door-to-door, from first conversation to last day' ),
     ],
