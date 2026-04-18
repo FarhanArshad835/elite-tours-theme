@@ -21,16 +21,19 @@ $founder_url = $founder_id
 
             <!-- CTA Text -->
             <div class="et-founder__text">
-                <?php if ( $f_label ) : ?>
-                <span class="et-label"><?php echo esc_html( $f_label ); ?></span>
-                <?php endif; ?>
                 <h2 class="et-founder__heading"><?php echo wp_kses( $f_heading, [ 'br' => [] ] ); ?></h2>
                 <p class="et-founder__body"><?php echo esc_html( $f_body ); ?></p>
 
-                <a href="<?php echo esc_url( $f_cta_url ); ?>" class="et-btn et-btn--primary et-btn--lg">
-                    <?php echo esc_html( $f_cta_text ); ?>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <!-- Quick enquiry form -->
+                <form class="et-founder__form" method="post" action="<?php echo esc_url( home_url( '/contact/' ) ); ?>">
+                    <input type="text" name="name" placeholder="Name" class="et-founder__input" required>
+                    <input type="email" name="email" placeholder="Email" class="et-founder__input" required>
+                    <textarea name="message" placeholder="Tell us about your trip..." class="et-founder__textarea" rows="3"></textarea>
+                    <button type="submit" class="et-btn et-btn--primary et-btn--lg et-founder__submit">
+                        <?php echo esc_html( $f_cta_text ); ?>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </form>
 
                 <div class="et-founder__quote-wrap">
                     <p class="et-founder__quote">"<?php echo esc_html( $f_quote ); ?>"</p>

@@ -93,61 +93,38 @@ $iagto_url  = $trust_iagto_logo
     </div>
 
     <!-- ── Trust Bar (above fold, bottom of hero) ────────────── -->
-    <!-- Reference: executivetoursireland.com footer badge row   -->
     <div class="et-hero__trust">
-        <div class="et-container">
-            <div class="et-trust-bar">
-
-                <!-- TripAdvisor -->
+        <div class="et-trust-wrap">
+            <button type="button" class="et-trust-arrow et-trust-arrow--left" aria-label="Scroll left">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="et-trust-bar" id="et-hero-trust-scroll">
                 <div class="et-trust-bar__item">
                     <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/tripadvisor.svg' ); ?>"
                          alt="TripAdvisor" class="et-trust-bar__logo et-trust-bar__logo--ta" loading="lazy">
                     <div class="et-trust-bar__stars" aria-label="5 stars">★★★★★</div>
                     <span class="et-trust-bar__sub"><?php echo esc_html( $trust_ta_sub ); ?></span>
                 </div>
-
-                <div class="et-trust-bar__divider"></div>
-
-                <!-- Fáilte Ireland -->
                 <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( $failte_url ); ?>"
-                         alt="Fáilte Ireland"
-                         class="et-trust-bar__logo"
-                         loading="lazy">
+                    <img src="<?php echo esc_url( $failte_url ); ?>" alt="Fáilte Ireland" class="et-trust-bar__logo" loading="lazy">
                     <span class="et-trust-bar__sub"><?php echo esc_html( $trust_failte_sub ); ?></span>
                 </div>
-
-                <div class="et-trust-bar__divider"></div>
-
-                <!-- ASTA -->
                 <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( $asta_url ); ?>"
-                         alt="ASTA"
-                         class="et-trust-bar__logo"
-                         loading="lazy">
+                    <img src="<?php echo esc_url( $asta_url ); ?>" alt="ASTA" class="et-trust-bar__logo" loading="lazy">
                     <span class="et-trust-bar__sub"><?php echo esc_html( $trust_asta_sub ); ?></span>
                 </div>
-
-                <div class="et-trust-bar__divider"></div>
-
-                <!-- IAGTO -->
                 <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( $iagto_url ); ?>"
-                         alt="IAGTO"
-                         class="et-trust-bar__logo et-trust-bar__logo--iagto"
-                         loading="lazy">
+                    <img src="<?php echo esc_url( $iagto_url ); ?>" alt="IAGTO" class="et-trust-bar__logo et-trust-bar__logo--iagto" loading="lazy">
                     <span class="et-trust-bar__sub"><?php echo esc_html( $trust_iagto_sub ); ?></span>
                 </div>
-
-                <div class="et-trust-bar__divider"></div>
-
-                <!-- Since -->
                 <div class="et-trust-bar__item">
                     <span class="et-trust-bar__badge et-trust-bar__badge--gold"><?php echo esc_html( $trust_since_label ); ?></span>
                     <span class="et-trust-bar__sub"><?php echo esc_html( $trust_since_sub ); ?></span>
                 </div>
-
             </div>
+            <button type="button" class="et-trust-arrow et-trust-arrow--right" aria-label="Scroll right">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
         </div>
     </div>
 

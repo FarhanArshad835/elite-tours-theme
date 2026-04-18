@@ -25,7 +25,26 @@ add_action( 'wp_enqueue_scripts', function () {
         'elite-tours-sections',
         get_template_directory_uri() . '/assets/css/sections-extra.css',
         [ 'elite-tours-main' ],
-        '1.2.0'
+        '1.3.0'
+    );
+    wp_enqueue_style(
+        'elite-tours-pages',
+        get_template_directory_uri() . '/assets/css/pages.css',
+        [ 'elite-tours-main' ],
+        '1.3.0'
+    );
+    wp_enqueue_style(
+        'elite-tours-wishlist',
+        get_template_directory_uri() . '/assets/css/wishlist.css',
+        [ 'elite-tours-main' ],
+        '1.3.0'
+    );
+    wp_enqueue_script(
+        'elite-tours-wishlist',
+        get_template_directory_uri() . '/assets/js/wishlist.js',
+        [],
+        '1.3.0',
+        true
     );
 
     wp_enqueue_script(
@@ -60,6 +79,22 @@ if ( ! function_exists( 'et_hp_int' ) ) {
         static $opts = null;
         if ( $opts === null ) $opts = get_option( 'et_homepage_settings', [] );
         return ( isset( $opts[ $key ] ) && $opts[ $key ] !== '' ) ? (int) $opts[ $key ] : $fallback;
+    }
+}
+
+// ─── Helper: wishlist heart button ──────────────────────────────────────────
+if ( ! function_exists( 'et_heart' ) ) {
+    function et_heart( string $id, string $title = '', string $desc = '', string $img = '', string $url = '', string $type = '' ): string {
+        return '<button type="button" class="et-heart"'
+            . ' data-wishlist-id="' . esc_attr( $id ) . '"'
+            . ' data-wishlist-title="' . esc_attr( $title ) . '"'
+            . ' data-wishlist-desc="' . esc_attr( $desc ) . '"'
+            . ' data-wishlist-img="' . esc_attr( $img ) . '"'
+            . ' data-wishlist-url="' . esc_attr( $url ) . '"'
+            . ' data-wishlist-type="' . esc_attr( $type ) . '"'
+            . ' title="Add to wishlist">'
+            . '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+            . '</button>';
     }
 }
 

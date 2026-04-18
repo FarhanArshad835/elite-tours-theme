@@ -1,70 +1,69 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$base    = get_template_directory_uri() . '/assets/images/';
-$exp_label   = et_hp( 'exp_label',   'Experiences' );
+$base        = get_template_directory_uri() . '/assets/images/';
 $exp_heading = et_hp( 'exp_heading', "Every Journey Is Different. Here's Where Yours Might Begin." );
 
-$fallback_images = [
-    $base . 'kylemore-abbey.jpg',
-    $base . 'irish-pub.jpg',
-    $base . 'winding-road.jpg',
-    $base . 'golf-coastal.jpg',
-    $base . 'castle-hillside.jpg',
-    $base . 'gothic-castle.jpg',
-];
+// Read experiences from the Experiences admin panel (et_experiences option)
+$stored_experiences = get_option( 'et_experiences', [] );
 
-$exp_defaults = [
-    [ 'label' => 'Ancestry & Roots',        'title' => 'Trace Your Irish Heritage',    'desc' => 'Trace your Irish heritage with depth, dignity, and personal connection.',    'url' => home_url( '/bespoke-tours/' ), 'type' => 'tailormade',  'duration' => 'bespoke' ],
-    [ 'label' => 'Whiskey & Culture',        'title' => "Ireland's Craft Distilleries", 'desc' => "Ireland's craft distilleries and rich cultural story, privately curated.",  'url' => home_url( '/experiences/' ),    'type' => 'culinary',    'duration' => '6-10' ],
-    [ 'label' => 'Scenic & Coastal Ireland', 'title' => 'The Wild Atlantic',            'desc' => 'The Wild Atlantic, country roads, cliffs and castles, at your pace.',     'url' => home_url( '/bespoke-tours/' ), 'type' => 'adventure',   'duration' => '11-15' ],
-    [ 'label' => 'Golf Tours',               'title' => "Ireland's Iconic Links",       'desc' => "Ireland's most iconic links courses, seamlessly handled.",                  'url' => home_url( '/golf-tours/' ),    'type' => 'golf',        'duration' => '6-10' ],
-    [ 'label' => 'Family Private Journey',   'title' => 'For Every Generation',         'desc' => 'A meaningful Irish experience for every generation in your family.',        'url' => home_url( '/bespoke-tours/' ), 'type' => 'family',      'duration' => '11-15' ],
-    [ 'label' => 'Heritage & History',       'title' => 'Castles & Estate Stays',       'desc' => 'Castles, estates, and the stories of Ireland told through its landscape.',  'url' => home_url( '/experiences/' ),    'type' => 'tailormade',  'duration' => 'bespoke' ],
-];
-
-$experiences = [];
-for ( $n = 1; $n <= 6; $n++ ) {
-    $idx      = $n - 1;
-    $img_id   = et_hp_int( 'exp_' . $n . '_image_id', 0 );
-    $img_url  = $img_id
-        ? wp_get_attachment_image_url( $img_id, 'large' )
-        : $fallback_images[ $idx ];
-
-    $experiences[] = [
-        'img'      => $img_url,
-        'label'    => et_hp( 'exp_' . $n . '_label', $exp_defaults[ $idx ]['label'] ),
-        'title'    => et_hp( 'exp_' . $n . '_title', $exp_defaults[ $idx ]['title'] ),
-        'desc'     => et_hp( 'exp_' . $n . '_desc',  $exp_defaults[ $idx ]['desc'] ),
-        'url'      => et_hp( 'exp_' . $n . '_url',   $exp_defaults[ $idx ]['url'] ),
-        'type'     => et_hp( 'exp_' . $n . '_type',  $exp_defaults[ $idx ]['type'] ),
-        'duration' => et_hp( 'exp_' . $n . '_duration', $exp_defaults[ $idx ]['duration'] ),
+// Fallback to hardcoded defaults if no experiences saved yet
+if ( empty( $stored_experiences ) ) {
+    $fallback_images = [
+        $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg', $base . 'winding-road.jpg',
+        $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'gothic-castle.jpg',
+    ];
+    $stored_experiences = [
+        [ 'label' => 'Ancestry & Roots',        'title' => 'Trace Your Irish Heritage',    'desc' => 'Trace your Irish heritage with depth, dignity, and personal connection.',    'url' => '/bespoke-tours/', 'type' => 'tailormade',  'duration' => 'bespoke', 'image_id' => 0 ],
+        [ 'label' => 'Whiskey & Culture',        'title' => "Ireland's Craft Distilleries", 'desc' => "Ireland's craft distilleries and rich cultural story, privately curated.",  'url' => '/experiences/',    'type' => 'culinary',    'duration' => '6-10',    'image_id' => 0 ],
+        [ 'label' => 'Scenic & Coastal Ireland', 'title' => 'The Wild Atlantic',            'desc' => 'The Wild Atlantic, country roads, cliffs and castles, at your pace.',      'url' => '/bespoke-tours/', 'type' => 'adventure',   'duration' => '11-15',   'image_id' => 0 ],
+        [ 'label' => 'Golf Tours',               'title' => "Ireland's Iconic Links",       'desc' => "Ireland's most iconic links courses, seamlessly handled.",                  'url' => '/golf-tours/',    'type' => 'golf',        'duration' => '6-10',    'image_id' => 0 ],
+        [ 'label' => 'Family Private Journey',   'title' => 'For Every Generation',         'desc' => 'A meaningful Irish experience for every generation in your family.',        'url' => '/bespoke-tours/', 'type' => 'family',      'duration' => '11-15',   'image_id' => 0 ],
+        [ 'label' => 'Heritage & History',       'title' => 'Castles & Estate Stays',       'desc' => 'Castles, estates, and the stories of Ireland told through its landscape.',  'url' => '/experiences/',    'type' => 'tailormade',  'duration' => 'bespoke', 'image_id' => 0 ],
     ];
 }
 
-// Filter categories
-$type_filters = [
-    'all'        => 'All Experiences',
-    'tailormade' => 'Tailormade',
-    'golf'       => 'Golf',
-    'culinary'   => 'Culinary',
-    'adventure'  => 'Adventure',
-    'family'     => 'Family',
+$fallback_images = [
+    $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg', $base . 'winding-road.jpg',
+    $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'gothic-castle.jpg',
 ];
 
-$duration_filters = [
-    'all'     => 'All',
-    '6-10'    => '6-10 Days',
-    '11-15'   => '11-15 Days',
-    'bespoke' => 'Bespoke',
-];
+$experiences = [];
+foreach ( $stored_experiences as $i => $exp ) {
+    $img_id  = absint( $exp['image_id'] ?? 0 );
+    $img_url = $img_id
+        ? wp_get_attachment_image_url( $img_id, 'large' )
+        : ( $fallback_images[ $i % count( $fallback_images ) ] ?? $fallback_images[0] );
+
+    $experiences[] = [
+        'img'      => $img_url,
+        'label'    => $exp['label'] ?? '',
+        'title'    => $exp['title'] ?? '',
+        'desc'     => $exp['desc'] ?? '',
+        'url'      => $exp['url'] ? home_url( $exp['url'] ) : '#',
+        'type'     => $exp['type'] ?? 'tailormade',
+        'duration' => $exp['duration'] ?? 'bespoke',
+    ];
+}
+
+// Filter categories — read from saved taxonomies or use defaults
+$taxonomies = get_option( 'et_experience_taxonomies', [] );
+
+$type_filters = [ 'all' => 'All Experiences' ];
+$saved_types  = ! empty( $taxonomies['types'] ) ? $taxonomies['types']
+    : [ 'tailormade' => 'Tailormade', 'golf' => 'Golf', 'culinary' => 'Culinary', 'adventure' => 'Adventure', 'family' => 'Family' ];
+foreach ( $saved_types as $k => $v ) { $type_filters[ $k ] = $v; }
+
+$duration_filters = [ 'all' => 'All' ];
+$saved_durations  = ! empty( $taxonomies['durations'] ) ? $taxonomies['durations']
+    : [ '6-10' => '6-10 Days', '11-15' => '11-15 Days', 'bespoke' => 'Bespoke' ];
+foreach ( $saved_durations as $k => $v ) { $duration_filters[ $k ] = $v; }
 ?>
 
 <section class="et-experiences" id="et-experiences">
     <div class="et-container">
 
         <div class="et-experiences__header">
-            <span class="et-label"><?php echo esc_html( $exp_label ); ?></span>
             <h2 class="et-experiences__heading"><?php echo wp_kses( $exp_heading, [ 'br' => [] ] ); ?></h2>
         </div>
 
@@ -106,6 +105,7 @@ $duration_filters = [
                data-duration="<?php echo esc_attr( $exp['duration'] ); ?>">
                 <div class="et-exp-card__img" style="background-image: url('<?php echo esc_url( $exp['img'] ); ?>')"></div>
                 <div class="et-exp-card__overlay"></div>
+                <?php echo et_heart( 'exp-' . sanitize_title( $exp['title'] ), $exp['title'], $exp['desc'], $exp['img'], $exp['url'], $exp['type'] ); ?>
                 <div class="et-exp-card__content">
                     <span class="et-exp-card__label"><?php echo esc_html( $exp['label'] ); ?></span>
                     <h3 class="et-exp-card__title"><?php echo esc_html( $exp['title'] ); ?></h3>

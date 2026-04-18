@@ -30,7 +30,6 @@ $testimonials = [
     <div class="et-container">
 
         <div class="et-testimonials__header">
-            <span class="et-label"><?php echo esc_html( $t_label ); ?></span>
             <h2 class="et-testimonials__heading"><?php echo esc_html( $t_heading ); ?></h2>
             <p class="et-testimonials__sub"><?php echo esc_html( $t_sub ); ?></p>
         </div>

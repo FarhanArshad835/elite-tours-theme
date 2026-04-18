@@ -27,6 +27,7 @@ $o2_img_url  = $o2_img_id
 ?>
 
 <section class="et-offers" id="et-tours">
+    <div class="et-container">
     <div class="et-offers__grid">
 
         <!-- Card A — Bespoke Private Tours -->
@@ -57,5 +58,6 @@ $o2_img_url  = $o2_img_id
             </div>
         </div>
 
+    </div>
     </div>
 </section>

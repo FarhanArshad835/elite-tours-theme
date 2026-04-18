@@ -21,7 +21,6 @@ $image_url = $image_id
 
             <!-- Text -->
             <div class="et-intro__text">
-                <span class="et-label"><?php echo esc_html( $label ); ?></span>
                 <h2 class="et-intro__heading">
                     <?php echo wp_kses( $heading, [ 'br' => [] ] ); ?>
                 </h2>

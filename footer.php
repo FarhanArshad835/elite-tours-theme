@@ -16,40 +16,41 @@ $base        = get_template_directory_uri();
         <div class="et-container">
             <div class="et-footer__grid">
 
-                <!-- Col 1: Brand -->
+                <!-- Col 1: Brand — logo left, social right (like Oroko) -->
                 <div class="et-footer__col et-footer__col--brand">
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="et-footer__logo-link" aria-label="Elite Tours Ireland">
-                        <?php
-                        $logo_id  = et_site( 'logo_id' );
-                        $logo_url = $logo_id ? wp_get_attachment_image_url( (int) $logo_id, 'full' ) : '';
-                        if ( $logo_url ) :
-                        ?>
-                            <img src="<?php echo esc_url( $logo_url ); ?>" alt="Elite Tours Ireland" class="et-footer__logo" width="120" height="52">
-                        <?php else : ?>
-                            <span class="et-footer__logo-text">
-                                <span>SINCE 1973</span>
-                                <strong>ET</strong>
-                                <span>ELITE TOURS IRELAND</span>
-                            </span>
-                        <?php endif; ?>
-                    </a>
-                    <p class="et-footer__tagline">Ireland, experienced properly.</p>
-                    <div class="et-footer__social">
-                        <?php if ( $ig_url ) : ?>
-                        <a href="<?php echo esc_url( $ig_url ); ?>" class="et-footer__social-link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    <div class="et-footer__brand-row">
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="et-footer__logo-link" aria-label="Elite Tours Ireland">
+                            <?php
+                            $logo_id  = et_site( 'logo_id' );
+                            $logo_url = $logo_id ? wp_get_attachment_image_url( (int) $logo_id, 'full' ) : '';
+                            if ( $logo_url ) :
+                            ?>
+                                <img src="<?php echo esc_url( $logo_url ); ?>" alt="Elite Tours Ireland" class="et-footer__logo" width="120" height="52">
+                            <?php else : ?>
+                                <span class="et-footer__logo-text">
+                                    <span>SINCE 1973</span>
+                                    <strong>ET</strong>
+                                    <span>ELITE TOURS IRELAND</span>
+                                </span>
+                            <?php endif; ?>
                         </a>
-                        <?php endif; ?>
-                        <?php if ( $fb_url ) : ?>
-                        <a href="<?php echo esc_url( $fb_url ); ?>" class="et-footer__social-link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-                        </a>
-                        <?php endif; ?>
-                        <?php if ( $ta_url ) : ?>
-                        <a href="<?php echo esc_url( $ta_url ); ?>" class="et-footer__social-link et-footer__social-link--ta" aria-label="TripAdvisor" rel="noopener noreferrer" target="_blank">
-                            <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>" alt="TripAdvisor" width="80" height="14" class="et-footer__social-ta-logo">
-                        </a>
-                        <?php endif; ?>
+                        <div class="et-footer__social">
+                            <?php if ( $ta_url ) : ?>
+                            <a href="<?php echo esc_url( $ta_url ); ?>" class="et-footer__social-link et-footer__social-link--ta" aria-label="TripAdvisor" rel="noopener noreferrer" target="_blank">
+                                <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>" alt="TripAdvisor" class="et-footer__social-ta-logo">
+                            </a>
+                            <?php endif; ?>
+                            <?php if ( $ig_url ) : ?>
+                            <a href="<?php echo esc_url( $ig_url ); ?>" class="et-footer__social-link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                            </a>
+                            <?php endif; ?>
+                            <?php if ( $fb_url ) : ?>
+                            <a href="<?php echo esc_url( $fb_url ); ?>" class="et-footer__social-link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                            </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
 
@@ -100,9 +101,6 @@ $base        = get_template_directory_uri();
                         </li>
                         <?php endif; ?>
                     </ul>
-                    <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-footer__cta">
-                        Plan Your Journey
-                    </a>
                 </div>
 
             </div>
@@ -111,20 +109,23 @@ $base        = get_template_directory_uri();
 
     <!-- ── Trust bar ─────────────────────────────────────────── -->
     <div class="et-footer__trust">
-        <div class="et-container">
-            <div class="et-footer__trust-bar">
+        <div class="et-footer__trust-wrap">
+            <button type="button" class="et-footer__trust-arrow et-footer__trust-arrow--left" aria-label="Scroll left">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="et-footer__trust-bar" id="et-trust-scroll">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/failte-ireland.png' ); ?>"
                      alt="Fáilte Ireland" loading="lazy" class="et-footer__trust-logo">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/asta.png' ); ?>"
                      alt="ASTA" loading="lazy" class="et-footer__trust-logo">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/iagto.jpg' ); ?>"
                      alt="IAGTO" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--colour">
-                <div class="et-footer__trust-ta">
-                    <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>"
-                         alt="TripAdvisor" loading="lazy" class="et-footer__trust-logo">
-                    <span class="et-footer__trust-stars">★★★★★</span>
-                </div>
+                <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>"
+                     alt="TripAdvisor" loading="lazy" class="et-footer__trust-logo">
             </div>
+            <button type="button" class="et-footer__trust-arrow et-footer__trust-arrow--right" aria-label="Scroll right">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
         </div>
     </div>
 
@@ -201,6 +202,19 @@ $base        = get_template_directory_uri();
         window.addEventListener('scroll', checkScroll, { passive: true });
         checkScroll();
     }
+
+    // Trust strip arrow scroll (hero + footer)
+    [['et-hero-trust-scroll', '.et-trust-arrow'], ['et-trust-scroll', '.et-footer__trust-arrow']].forEach(function(pair) {
+        var strip = document.getElementById(pair[0]);
+        if (!strip) return;
+        var left = strip.closest('.et-trust-wrap, .et-footer__trust-wrap');
+        if (!left) return;
+        var arrL = left.querySelector(pair[1] + '--left');
+        var arrR = left.querySelector(pair[1] + '--right');
+        if (arrL) arrL.addEventListener('click', function() { strip.scrollBy({ left: -120, behavior: 'smooth' }); });
+        if (arrR) arrR.addEventListener('click', function() { strip.scrollBy({ left: 120, behavior: 'smooth' }); });
+    });
+
 })();
 </script>
 </body>

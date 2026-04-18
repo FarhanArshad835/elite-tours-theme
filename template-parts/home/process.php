@@ -34,7 +34,6 @@ $steps = [
     <div class="et-container">
 
         <div class="et-process__header">
-            <span class="et-label"><?php echo esc_html( $proc_label ); ?></span>
             <h2 class="et-process__heading"><?php echo wp_kses( $proc_heading, [ 'br' => [] ] ); ?></h2>
         </div>
 
