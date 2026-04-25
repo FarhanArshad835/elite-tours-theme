@@ -109,11 +109,20 @@ $base = get_template_directory_uri() . '/assets/images/';
             <h2 class="et-section__title">Where Other Golf Journeys Have Begun</h2>
         </div>
         <?php
-        $journeys = [
-            [ 'name' => 'The Classic Links', 'meta' => '7 Days / 5 Rounds', 'route' => 'Shannon &rarr; Lahinch &rarr; Ballybunion &rarr; Waterville &rarr; Old Head &rarr; Shannon', 'highlights' => [ '5-star accommodation', 'Private chauffeur throughout', 'Whiskey experience included', '5 championship rounds' ] ],
-            [ 'name' => 'The Ultimate Golf Journey', 'meta' => '10 Days / 7 Rounds', 'route' => 'Dublin &rarr; Royal County Down &rarr; Portmarnock &rarr; Lahinch &rarr; Ballybunion &rarr; Waterville &rarr; Old Head &rarr; Shannon', 'highlights' => [ 'Full curation, 7 rounds', 'Luxury accommodation', 'Cultural experiences between rounds', 'Private dining' ] ],
-            [ 'name' => 'Father & Son Ireland', 'meta' => '7 Days', 'route' => 'Custom route built around shared bucket-list courses', 'highlights' => [ 'Courses selected together', 'Relaxed pace', 'Shared memories', 'Post-round pub evenings' ] ],
-        ];
+        // Pull golf itineraries from admin (filter by type = golf)
+        $all_itineraries = get_option( 'et_itineraries', [] );
+        $journeys = array_filter( $all_itineraries, function( $it ) {
+            return ( $it['type'] ?? '' ) === 'golf';
+        } );
+
+        // Fallback defaults if no admin golf itineraries
+        if ( empty( $journeys ) ) {
+            $journeys = [
+                [ 'name' => 'The Classic Links', 'meta' => '7 Days / 5 Rounds', 'route' => 'Shannon → Lahinch → Ballybunion → Waterville → Old Head → Shannon', 'highlights' => [ '5-star accommodation', 'Private chauffeur throughout', 'Whiskey experience included', '5 championship rounds' ] ],
+                [ 'name' => 'The Ultimate Golf Journey', 'meta' => '10 Days / 7 Rounds', 'route' => 'Dublin → Royal County Down → Portmarnock → Lahinch → Ballybunion → Waterville → Old Head → Shannon', 'highlights' => [ 'Full curation, 7 rounds', 'Luxury accommodation', 'Cultural experiences between rounds', 'Private dining' ] ],
+                [ 'name' => 'Father & Son Ireland', 'meta' => '7 Days', 'route' => 'Custom route built around shared bucket-list courses', 'highlights' => [ 'Courses selected together', 'Relaxed pace', 'Shared memories', 'Post-round pub evenings' ] ],
+            ];
+        }
         foreach ( $journeys as $j ) : ?>
         <div class="et-itinerary et-reveal">
             <div class="et-itinerary__header" onclick="this.closest('.et-itinerary').classList.toggle('is-open')">

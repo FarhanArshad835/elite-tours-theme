@@ -3,6 +3,13 @@
  * Template Name: Wishlist
  */
 defined( 'ABSPATH' ) || exit;
+
+// Redirect to home when wishlist is disabled in Site Settings
+if ( ! et_wishlist_enabled() ) {
+    wp_safe_redirect( home_url( '/' ), 302 );
+    exit;
+}
+
 get_header();
 ?>
 

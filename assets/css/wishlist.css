@@ -116,7 +116,7 @@
 .et-wishlist-card__title {
     font-family: var(--et-font-heading);
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--et-black);
     margin-bottom: 4px;
 }

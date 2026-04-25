@@ -82,9 +82,19 @@ if ( ! function_exists( 'et_hp_int' ) ) {
     }
 }
 
+// ─── Helper: is wishlist feature enabled? ────────────────────────────────────
+if ( ! function_exists( 'et_wishlist_enabled' ) ) {
+    function et_wishlist_enabled(): bool {
+        $opts = get_option( 'et_site_settings', [] );
+        // Default ON when the key is missing (preserves pre-toggle behaviour)
+        return ! isset( $opts['wishlist_enabled'] ) || $opts['wishlist_enabled'] === '1';
+    }
+}
+
 // ─── Helper: wishlist heart button ──────────────────────────────────────────
 if ( ! function_exists( 'et_heart' ) ) {
     function et_heart( string $id, string $title = '', string $desc = '', string $img = '', string $url = '', string $type = '' ): string {
+        if ( ! et_wishlist_enabled() ) return '';
         return '<button type="button" class="et-heart"'
             . ' data-wishlist-id="' . esc_attr( $id ) . '"'
             . ' data-wishlist-title="' . esc_attr( $title ) . '"'

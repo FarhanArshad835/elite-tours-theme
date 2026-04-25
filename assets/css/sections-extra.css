@@ -13,7 +13,7 @@
 .et-testimonials__heading {
     font-family: var(--et-font-heading);
     font-size: clamp(26px, 3vw, 40px);
-    font-weight: 700;
+    font-weight: 400;
     color: var(--et-white);
     margin-bottom: 12px;
 }
@@ -131,7 +131,7 @@
 .et-founder__heading {
     font-family: var(--et-font-heading);
     font-size: clamp(28px, 3.5vw, 46px);
-    font-weight: 700;
+    font-weight: 400;
     color: var(--et-black);
     line-height: 1.15;
     margin-bottom: 24px;
@@ -226,7 +226,7 @@
     font-family: var(--et-font-heading);
     font-size: 16px;
     color: var(--et-white);
-    font-weight: 600;
+    font-weight: 400;
 }
 .et-founder__img-caption span:last-child {
     font-family: var(--et-font-body);

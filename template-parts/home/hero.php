@@ -6,6 +6,7 @@ $headline      = et_option_raw( 'hero_headline',  'Ireland,<br>Experienced Prope
 $subheading    = et_option( 'hero_subheading',    'Bespoke private journeys, tailored to you, delivered with genuine Irish care.' );
 $cta_primary   = et_option( 'hero_cta_primary',   'Plan Your Journey' );
 $cta_secondary = et_option( 'hero_cta_secondary', 'Explore Our Tours' );
+$proof_text    = et_option( 'hero_proof_text',    "Ireland's Highest-Rated Tour Provider on TripAdvisor" );
 $video_url     = et_option( 'hero_video_url',     '' );
 $image_id      = et_option( 'hero_image_id',      '' );
 $image_url     = $image_id
@@ -73,6 +74,14 @@ $iagto_url  = $trust_iagto_logo
                 <p class="et-hero__subheading">
                     <?php echo esc_html( $subheading ); ?>
                 </p>
+
+                <?php if ( $proof_text ) : ?>
+                <!-- TripAdvisor proof badge — above CTAs for conversion lift -->
+                <div class="et-hero__proof" aria-label="5-star rated">
+                    <span class="et-hero__proof-stars" aria-hidden="true">★★★★★</span>
+                    <span class="et-hero__proof-text"><?php echo esc_html( $proof_text ); ?></span>
+                </div>
+                <?php endif; ?>
 
                 <!-- CTAs -->
                 <div class="et-hero__ctas">

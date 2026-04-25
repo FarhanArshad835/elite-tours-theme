@@ -68,7 +68,7 @@
 .et-section__title {
     font-family: var(--et-font-heading);
     font-size: clamp(26px, 3vw, 42px);
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.15;
     color: var(--et-black);
     margin-bottom: 16px;
@@ -165,7 +165,7 @@
 .et-tile__title {
     font-family: var(--et-font-heading);
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.2;
     margin-bottom: 8px;
 }
@@ -235,7 +235,7 @@
 .et-itinerary__name {
     font-family: var(--et-font-heading);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--et-green);
 }
 .et-itinerary__meta {
@@ -482,7 +482,7 @@
 .et-blog-card__title {
     font-family: var(--et-font-heading);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--et-black);
     line-height: 1.3;
     margin-bottom: 8px;

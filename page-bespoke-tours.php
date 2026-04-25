@@ -107,11 +107,20 @@ $base = get_template_directory_uri() . '/assets/images/';
             <p class="et-section__subtitle" style="font-style:italic;">These are examples only. Every journey we design is unique.</p>
         </div>
         <?php
-        $itineraries = [
-            [ 'name' => 'The Ancestral Journey', 'meta' => '8 Days', 'route' => 'Dublin &rarr; County Clare &rarr; County Mayo &rarr; Connemara &rarr; Galway &rarr; Departure', 'highlights' => [ 'Ancestry records visit with local expert', 'Private family townland tour', 'Cliffs of Moher (private morning)', 'Ashford Castle area', 'Traditional Irish evening with live music', 'Connemara lakeside drive' ] ],
-            [ 'name' => 'The Grand Tour of Ireland', 'meta' => '12 Days', 'route' => 'Dublin &rarr; Wicklow &rarr; Kilkenny &rarr; Cork &rarr; Kerry &rarr; Clare &rarr; Galway &rarr; Connemara &rarr; Departure', 'highlights' => [ 'Powerscourt Estate', 'Rock of Cashel', 'Kilkenny Castle', 'Midleton Distillery', 'Ring of Kerry', 'Dingle Peninsula', 'Cliffs of Moher', 'Aran Islands' ] ],
-            [ 'name' => 'Whiskey & The West', 'meta' => '7 Days', 'route' => 'Shannon &rarr; Midleton &rarr; Cork City &rarr; Kerry &rarr; Dingle &rarr; Connemara &rarr; Departure', 'highlights' => [ 'Jameson Distillery Midleton (private)', 'Dingle Distillery', 'Skellig Coast', 'Dingle Peninsula drive', 'Artisan food and pub experiences', 'Connemara' ] ],
-        ];
+        // Pull bespoke itineraries from admin (filter by type = bespoke)
+        $all_itineraries = get_option( 'et_itineraries', [] );
+        $itineraries = array_filter( $all_itineraries, function( $it ) {
+            return ( $it['type'] ?? 'bespoke' ) === 'bespoke';
+        } );
+
+        // Fallback defaults if no admin itineraries
+        if ( empty( $itineraries ) ) {
+            $itineraries = [
+                [ 'name' => 'The Ancestral Journey', 'meta' => '8 Days', 'route' => 'Dublin → County Clare → County Mayo → Connemara → Galway → Departure', 'highlights' => [ 'Ancestry records visit with local expert', 'Private family townland tour', 'Cliffs of Moher (private morning)', 'Ashford Castle area', 'Traditional Irish evening with live music', 'Connemara lakeside drive' ] ],
+                [ 'name' => 'The Grand Tour of Ireland', 'meta' => '12 Days', 'route' => 'Dublin → Wicklow → Kilkenny → Cork → Kerry → Clare → Galway → Connemara → Departure', 'highlights' => [ 'Powerscourt Estate', 'Rock of Cashel', 'Kilkenny Castle', 'Midleton Distillery', 'Ring of Kerry', 'Dingle Peninsula', 'Cliffs of Moher', 'Aran Islands' ] ],
+                [ 'name' => 'Whiskey & The West', 'meta' => '7 Days', 'route' => 'Shannon → Midleton → Cork City → Kerry → Dingle → Connemara → Departure', 'highlights' => [ 'Jameson Distillery Midleton (private)', 'Dingle Distillery', 'Skellig Coast', 'Dingle Peninsula drive', 'Artisan food and pub experiences', 'Connemara' ] ],
+            ];
+        }
         foreach ( $itineraries as $it ) : ?>
         <div class="et-itinerary et-reveal">
             <div class="et-itinerary__header" onclick="this.closest('.et-itinerary').classList.toggle('is-open')">
