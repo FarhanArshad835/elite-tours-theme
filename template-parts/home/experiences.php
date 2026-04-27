@@ -29,6 +29,12 @@ $fallback_images = [
     $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'gothic-castle.jpg',
 ];
 
+// Map of card-title-slug → experience CPT post id (set by the v160 migration).
+// When present, cards route to their funnel page (/experiences/{slug}/) instead
+// of the legacy URL. Falls back to the legacy URL if the CPT post is missing.
+$cpt_map = get_option( 'et_experience_cpt_map', [] );
+if ( ! is_array( $cpt_map ) ) $cpt_map = [];
+
 $experiences = [];
 foreach ( $stored_experiences as $i => $exp ) {
     $img_id  = absint( $exp['image_id'] ?? 0 );
@@ -36,12 +42,19 @@ foreach ( $stored_experiences as $i => $exp ) {
         ? wp_get_attachment_image_url( $img_id, 'large' )
         : ( $fallback_images[ $i % count( $fallback_images ) ] ?? $fallback_images[0] );
 
+    $title    = $exp['title'] ?? '';
+    $slug     = sanitize_title( $title );
+    $cpt_id   = ! empty( $cpt_map[ $slug ] ) ? (int) $cpt_map[ $slug ] : 0;
+    $card_url = ( $cpt_id && get_post_status( $cpt_id ) === 'publish' )
+        ? get_permalink( $cpt_id )
+        : ( $exp['url'] ? home_url( $exp['url'] ) : '#' );
+
     $experiences[] = [
         'img'      => $img_url,
         'label'    => $exp['label'] ?? '',
-        'title'    => $exp['title'] ?? '',
+        'title'    => $title,
         'desc'     => $exp['desc'] ?? '',
-        'url'      => $exp['url'] ? home_url( $exp['url'] ) : '#',
+        'url'      => $card_url,
         'type'     => $exp['type'] ?? 'bespoke',
         'duration' => $exp['duration'] ?? 'bespoke',
     ];
