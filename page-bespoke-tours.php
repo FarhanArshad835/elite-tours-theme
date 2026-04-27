@@ -15,7 +15,7 @@ $base = get_template_directory_uri() . '/assets/images/';
         <div class="et-page-hero__content et-reveal">
             <h1 class="et-page-hero__title">Your Ireland.<br>Built Around You.</h1>
             <p class="et-page-hero__sub">No fixed routes. No templates. Every journey designed from scratch, for you.</p>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-btn--lg et-page-hero__cta">Start Planning Your Journey</a>
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-btn--lg et-page-hero__cta">Begin Your First Conversation</a>
         </div>
     </div>
 </section>
@@ -177,7 +177,7 @@ $base = get_template_directory_uri() . '/assets/images/';
             <p class="et-section__subtitle">Tell us who you are and what you're looking for. We'll come back to you personally, usually within 24 hours, with the start of your journey.</p>
         </div>
         <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Plan Your Journey</a>
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Begin Your First Conversation</a>
         </div>
     </div>
 </section>

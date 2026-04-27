@@ -13,9 +13,9 @@ $base = get_template_directory_uri() . '/assets/images/';
     <div class="et-page-hero__overlay"></div>
     <div class="et-container">
         <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">The Best Golf Trip of Your Life.<br>Without Having to Think About Anything.</h1>
-            <p class="et-page-hero__sub">Fully tailored golf journeys across Ireland's greatest courses, seamlessly handled, privately hosted, expertly curated.</p>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-btn--lg et-page-hero__cta">Plan Your Golf Journey</a>
+            <h1 class="et-page-hero__title">Play Ireland's<br>greatest courses.</h1>
+            <p class="et-page-hero__sub">Old Head, Lahinch, Doonbeg, Royal County Down, Adare Manor — fully managed, privately hosted, with Ray's standard of care across every round, transfer, and evening.</p>
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-btn--lg et-page-hero__cta">Begin Your First Conversation</a>
         </div>
     </div>
 </section>
@@ -78,12 +78,17 @@ $base = get_template_directory_uri() . '/assets/images/';
         <div class="et-tile-grid">
             <?php
             $courses = [
-                [ 'name' => 'Old Head of Kinsale', 'loc' => 'Co. Cork', 'desc' => 'One of the most spectacular settings in world golf, a peninsula jutting into the Atlantic.', 'img' => $base . 'golf-coastal.jpg' ],
-                [ 'name' => 'Ballybunion Links', 'loc' => 'Co. Kerry', 'desc' => 'A bucket-list course for every serious golfer. Championship links on the Wild Atlantic Way.', 'img' => $base . 'winding-road.jpg' ],
-                [ 'name' => 'Lahinch Golf Club', 'loc' => 'Co. Clare', 'desc' => 'Links golf at its finest, overlooking the Atlantic. One of Ireland\'s most beloved courses.', 'img' => $base . 'castle-hillside.jpg' ],
-                [ 'name' => 'Royal County Down', 'loc' => 'Co. Down', 'desc' => 'Consistently ranked in the world\'s top 10. A links masterpiece beneath the Mourne Mountains.', 'img' => $base . 'gothic-castle.jpg' ],
-                [ 'name' => 'Portmarnock Golf Club', 'loc' => 'Co. Dublin', 'desc' => 'A legendary championship links course north of Dublin.', 'img' => $base . 'kylemore-abbey.jpg' ],
-                [ 'name' => 'Waterville Golf Links', 'loc' => 'Co. Kerry', 'desc' => 'Remote, stunning, and unforgettable. A bucket-list course on the Ring of Kerry.', 'img' => $base . 'irish-pub.jpg' ],
+                [ 'name' => 'Old Head of Kinsale',  'loc' => 'Co. Cork',    'desc' => 'A peninsula jutting into the Atlantic — one of the most spectacular settings in world golf.',                       'img' => $base . 'golf-coastal.jpg' ],
+                [ 'name' => 'Lahinch Golf Club',    'loc' => 'Co. Clare',   'desc' => 'Links golf at its finest, overlooking the Atlantic. One of Ireland\'s most beloved courses.',                          'img' => $base . 'castle-hillside.jpg' ],
+                [ 'name' => 'Doonbeg (Trump International)','loc' => 'Co. Clare', 'desc' => 'A Greg Norman links design carved into Atlantic dunes — modern drama on the Wild Atlantic Way.',              'img' => $base . 'winding-road.jpg' ],
+                [ 'name' => 'Royal County Down',    'loc' => 'Co. Down',    'desc' => 'Consistently in the world\'s top 10. A links masterpiece beneath the Mourne Mountains.',                              'img' => $base . 'gothic-castle.jpg' ],
+                [ 'name' => 'Royal Portrush',       'loc' => 'Co. Antrim',  'desc' => 'Open Championship venue. Drama, dunes, and the North Coast at its best.',                                              'img' => $base . 'kylemore-abbey.jpg' ],
+                [ 'name' => 'Adare Manor',          'loc' => 'Co. Limerick','desc' => 'Ryder Cup 2027 host venue. A neo-Gothic estate paired with a championship parkland course.',                          'img' => $base . 'gothic-castle.jpg' ],
+                [ 'name' => 'The K Club',           'loc' => 'Co. Kildare', 'desc' => 'Twice Ryder Cup host. Refined parkland golf, an easy add-on from Dublin.',                                             'img' => $base . 'castle-hillside.jpg' ],
+                [ 'name' => 'Ballybunion Links',    'loc' => 'Co. Kerry',   'desc' => 'Championship links on the Wild Atlantic Way. A bucket-list course for every serious golfer.',                          'img' => $base . 'winding-road.jpg' ],
+                [ 'name' => 'Tralee Golf Club',     'loc' => 'Co. Kerry',   'desc' => 'Arnold Palmer\'s first European links design — coastal, elevated, unforgettable.',                                     'img' => $base . 'irish-pub.jpg' ],
+                [ 'name' => 'Waterville Golf Links','loc' => 'Co. Kerry',   'desc' => 'Remote, stunning, and unforgettable — bucket-list links on the Ring of Kerry.',                                        'img' => $base . 'kylemore-abbey.jpg' ],
+                [ 'name' => 'Portmarnock',          'loc' => 'Co. Dublin',  'desc' => 'A legendary championship links course north of Dublin. The capital\'s flagship.',                                     'img' => $base . 'castle-hillside.jpg' ],
             ];
             foreach ( $courses as $c ) : ?>
             <div class="et-tile et-reveal">
@@ -150,11 +155,11 @@ $base = get_template_directory_uri() . '/assets/images/';
 <section class="et-section et-section--green">
     <div class="et-container">
         <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">Let's Plan Your Golf Journey</h2>
-            <p class="et-section__subtitle">Ireland's top courses book out early, especially in peak season. The earlier you speak to us, the better we can secure the rounds that matter most.</p>
+            <h2 class="et-section__title">Let's plan your golf journey.</h2>
+            <p class="et-section__subtitle">Ireland's top courses book out early, especially in peak season — and Ryder Cup-host venues like Adare Manor and Royal County Down even earlier. The earlier you speak to us, the better we can secure the rounds that matter most.</p>
         </div>
         <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Enquire About Golf Tours</a>
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Begin Your First Conversation</a>
         </div>
     </div>
 </section>
