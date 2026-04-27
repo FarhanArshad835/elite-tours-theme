@@ -126,17 +126,12 @@ $type_filters['golf'] = 'Golf';
 $type_filters['accommodation'] = 'Accommodation';
 ?>
 
-<!-- Hero -->
-<section class="et-page-hero">
-    <div class="et-page-hero__bg" style="background-image:url('<?php echo esc_url( $base . 'irish-pub.jpg' ); ?>')"></div>
-    <div class="et-page-hero__overlay"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Ireland in Eleven Regions.<br>One Carefully Designed Journey.</h1>
-            <p class="et-page-hero__sub">From Dublin's foundations to the Causeway Coast, each region of Ireland brings its own character — its own people, landscapes, and stories. Below is the country we travel.</p>
-        </div>
-    </div>
-</section>
+<!-- Hero (CMS-driven via et_page_heroes['experiences']) -->
+<?php etm_render_page_hero( 'experiences', [
+    'title'          => 'Ireland in Eleven Regions.<br>One Carefully Designed Journey.',
+    'subtitle'       => "From Dublin's foundations to the Causeway Coast, each region of Ireland brings its own character — its own people, landscapes, and stories. Below is the country we travel.",
+    'image_filename' => 'irish-pub.jpg',
+], $base ); ?>
 
 <?php if ( ! empty( $regions ) && is_array( $regions ) ) : ?>
 <!-- Regions of Ireland — Phase 5 -->
@@ -227,18 +222,13 @@ $type_filters['accommodation'] = 'Accommodation';
     </div>
 </section>
 
-<!-- CTA -->
-<section class="et-section et-section--green">
-    <div class="et-container">
-        <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">Don't See What You're Looking For?</h2>
-            <p class="et-section__subtitle">We design experiences from scratch. Tell us what interests you and we'll build something entirely around it.</p>
-        </div>
-        <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Speak to Us</a>
-        </div>
-    </div>
-</section>
+<!-- Bottom CTA (CMS-driven via et_page_ctas['experiences']) -->
+<?php etm_render_page_cta( 'experiences', [
+    'title'    => "Don't See What You're Looking For?",
+    'subtitle' => "We design experiences from scratch. Tell us what interests you and we'll build something entirely around it.",
+    'cta_text' => 'Speak to Us',
+    'cta_url'  => '/contact/',
+] ); ?>
 
 <script>
 (function () {

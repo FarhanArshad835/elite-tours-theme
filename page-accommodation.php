@@ -49,17 +49,12 @@ function et_hotel_img_url( $hotel, $fallback ) {
 }
 ?>
 
-<!-- Hero -->
-<section class="et-page-hero">
-    <div class="et-page-hero__bg" style="background-image:url('<?php echo esc_url( $base . 'gothic-castle.jpg' ); ?>')"></div>
-    <div class="et-page-hero__overlay"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Where you stay,<br>chosen for how it feels.</h1>
-            <p class="et-page-hero__sub">Accommodation throughout your journey is carefully selected to reflect both the standard of experience and the character of Ireland itself. From Ashford Castle to handpicked Kinsale stays, each location is chosen for how it contributes to the journey — not just for its star rating.</p>
-        </div>
-    </div>
-</section>
+<!-- Hero (CMS-driven via et_page_heroes['accommodation']) -->
+<?php etm_render_page_hero( 'accommodation', [
+    'title'          => 'Where you stay,<br>chosen for how it feels.',
+    'subtitle'       => 'Accommodation throughout your journey is carefully selected to reflect both the standard of experience and the character of Ireland itself. From Ashford Castle to handpicked Kinsale stays, each location is chosen for how it contributes to the journey — not just for its star rating.',
+    'image_filename' => 'gothic-castle.jpg',
+], $base ); ?>
 
 <!-- Three Category Intros -->
 <section class="et-section et-section--white">
@@ -140,17 +135,12 @@ $accommodation_quote = $et_strings['accommodation_trust_quote'] ?? "We have buil
 </section>
 <?php endif; ?>
 
-<!-- CTA -->
-<section class="et-section et-section--green">
-    <div class="et-container">
-        <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">All accommodation handled for you.</h2>
-            <p class="et-section__subtitle">Every stay across your Bespoke journey is selected, booked, and looked after by us — paired carefully so the rhythm of the trip flows from one to the next.</p>
-        </div>
-        <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Begin Your First Conversation</a>
-        </div>
-    </div>
-</section>
+<!-- Bottom CTA (CMS-driven via et_page_ctas['accommodation']) -->
+<?php etm_render_page_cta( 'accommodation', [
+    'title'    => 'All accommodation handled for you.',
+    'subtitle' => 'Every stay across your Bespoke journey is selected, booked, and looked after by us — paired carefully so the rhythm of the trip flows from one to the next.',
+    'cta_text' => 'Begin Your First Conversation',
+    'cta_url'  => '/contact/',
+] ); ?>
 
 <?php get_footer(); ?>

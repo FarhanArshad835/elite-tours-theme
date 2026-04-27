@@ -10,32 +10,25 @@ $et_strings = get_option( 'et_page_strings', [] );
 if ( ! is_array( $et_strings ) ) $et_strings = [];
 ?>
 
-<!-- Hero -->
-<section class="et-page-hero">
-    <div class="et-page-hero__bg" style="background-image:url('<?php echo esc_url( $base . 'winding-road.jpg' ); ?>')"></div>
-    <div class="et-page-hero__overlay"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Your Ireland.<br>Built Around You.</h1>
-            <p class="et-page-hero__sub">No fixed routes. No templates. Every journey designed from scratch, for you.</p>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-btn--lg et-page-hero__cta">Begin Your First Conversation</a>
-        </div>
-    </div>
-</section>
+<!-- Hero (CMS-driven via et_page_heroes['bespoke-tours']) -->
+<?php etm_render_page_hero( 'bespoke-tours', [
+    'title'          => 'Your Ireland.<br>Built Around You.',
+    'subtitle'       => 'No fixed routes. No templates. Every journey designed from scratch, for you.',
+    'cta_text'       => 'Begin Your First Conversation',
+    'cta_url'        => '/contact/',
+    'image_filename' => 'winding-road.jpg',
+], $base ); ?>
 
-<!-- Philosophy -->
+<!-- Philosophy (CMS-driven via et_page_strings.bespoke_philosophy_*) -->
 <section class="et-section et-section--white">
     <div class="et-container">
         <div class="et-two-col">
             <div class="et-reveal">
                 <div class="et-section__header">
-                    <h2 class="et-section__title">This Is Not a Tour Package</h2>
+                    <h2 class="et-section__title"><?php echo esc_html( $et_strings['bespoke_philosophy_title'] ?? 'This Is Not a Tour Package' ); ?></h2>
                 </div>
                 <div class="et-content">
-                    <p>Most companies offer you a list of itineraries and ask you to choose. We don't.</p>
-                    <p>Every Elite Tours journey begins with a conversation about who you are, what brought you to Ireland, and what you want to feel when you leave. Then we build it entirely around you.</p>
-                    <p>No two tours are the same. That is not a marketing line. It is simply how we work.</p>
-                    <p>From ancestry searches in County Mayo to whiskey tastings on the Dingle Peninsula, every experience is chosen, sequenced, and delivered for the specific people taking it.</p>
+                    <?php etm_render_paragraphs( $et_strings['bespoke_philosophy_body'] ?? "Most companies offer you a list of itineraries and ask you to choose. We don't.\n\nEvery Elite Tours journey begins with a conversation about who you are, what brought you to Ireland, and what you want to feel when you leave. Then we build it entirely around you.\n\nNo two tours are the same. That is not a marketing line. It is simply how we work.\n\nFrom ancestry searches in County Mayo to whiskey tastings on the Dingle Peninsula, every experience is chosen, sequenced, and delivered for the specific people taking it." ); ?>
                 </div>
             </div>
             <div class="et-reveal">
@@ -174,17 +167,12 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
     </div>
 </section>
 
-<!-- CTA -->
-<section class="et-section et-section--green">
-    <div class="et-container">
-        <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">Ready to Begin?</h2>
-            <p class="et-section__subtitle">Tell us who you are and what you're looking for. We'll come back to you personally, usually within 24 hours, with the start of your journey.</p>
-        </div>
-        <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Begin Your First Conversation</a>
-        </div>
-    </div>
-</section>
+<!-- Bottom CTA (CMS-driven via et_page_ctas['bespoke-tours']) -->
+<?php etm_render_page_cta( 'bespoke-tours', [
+    'title'    => 'Ready to Begin?',
+    'subtitle' => "Tell us who you are and what you're looking for. We'll come back to you personally, usually within 24 hours, with the start of your journey.",
+    'cta_text' => 'Begin Your First Conversation',
+    'cta_url'  => '/contact/',
+] ); ?>
 
 <?php get_footer(); ?>

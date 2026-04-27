@@ -10,32 +10,29 @@ $et_strings = get_option( 'et_page_strings', [] );
 if ( ! is_array( $et_strings ) ) $et_strings = [];
 ?>
 
-<!-- Hero -->
-<section class="et-page-hero">
-    <div class="et-page-hero__bg" style="background-image:url('<?php echo esc_url( $base . 'golf-coastal.jpg' ); ?>')"></div>
-    <div class="et-page-hero__overlay"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Play Ireland's<br>greatest courses.</h1>
-            <p class="et-page-hero__sub">Old Head, Lahinch, Doonbeg, Royal County Down, Adare Manor — fully managed, privately hosted, with Ray's standard of care across every round, transfer, and evening.</p>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--primary et-btn--lg et-page-hero__cta">Begin Your First Conversation</a>
-        </div>
-    </div>
-</section>
+<!-- Hero (CMS-driven via et_page_heroes['golf-tours']) -->
+<?php etm_render_page_hero( 'golf-tours', [
+    'title'          => "Play Ireland's<br>greatest courses.",
+    'subtitle'       => "Old Head, Lahinch, Doonbeg, Royal County Down, Adare Manor — fully managed, privately hosted, with Ray's standard of care across every round, transfer, and evening.",
+    'cta_text'       => 'Begin Your First Conversation',
+    'cta_url'        => '/contact/',
+    'image_filename' => 'golf-coastal.jpg',
+], $base ); ?>
 
-<!-- Positioning -->
+<!-- Positioning (CMS-driven via et_page_strings.golf_philosophy_*) -->
 <section class="et-section et-section--white">
     <div class="et-container">
         <div class="et-two-col">
             <div class="et-reveal">
                 <div class="et-section__header">
-                    <h2 class="et-section__title">This Is Not a Golf Package</h2>
+                    <h2 class="et-section__title"><?php echo esc_html( $et_strings['golf_philosophy_title'] ?? 'This Is Not a Golf Package' ); ?></h2>
                 </div>
                 <div class="et-content">
-                    <p>We don't hand you a list of courses and ask you to pick three.</p>
-                    <p>We design a golf experience around the golfer. Your handicap, your bucket list courses, your pace, your group dynamic. Every tee time, every transfer, every detail is managed. You simply show up and play.</p>
-                    <p>This is what separates Elite Tours from every other golf operator in Ireland.</p>
-                    <blockquote>The best golf trip of your life, without having to think about anything.</blockquote>
+                    <?php etm_render_paragraphs( $et_strings['golf_philosophy_body'] ?? "We don't hand you a list of courses and ask you to pick three.\n\nWe design a golf experience around the golfer. Your handicap, your bucket list courses, your pace, your group dynamic. Every tee time, every transfer, every detail is managed. You simply show up and play.\n\nThis is what separates Elite Tours from every other golf operator in Ireland." ); ?>
+                    <?php $golf_quote = $et_strings['golf_philosophy_blockquote'] ?? 'The best golf trip of your life, without having to think about anything.'; ?>
+                    <?php if ( $golf_quote ) : ?>
+                    <blockquote><?php echo esc_html( $golf_quote ); ?></blockquote>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="et-reveal">
@@ -155,17 +152,12 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
     </div>
 </section>
 
-<!-- CTA -->
-<section class="et-section et-section--green">
-    <div class="et-container">
-        <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">Let's plan your golf journey.</h2>
-            <p class="et-section__subtitle">Ireland's top courses book out early, especially in peak season — and Ryder Cup-host venues like Adare Manor and Royal County Down even earlier. The earlier you speak to us, the better we can secure the rounds that matter most.</p>
-        </div>
-        <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Begin Your First Conversation</a>
-        </div>
-    </div>
-</section>
+<!-- Bottom CTA (CMS-driven via et_page_ctas['golf-tours']) -->
+<?php etm_render_page_cta( 'golf-tours', [
+    'title'    => "Let's plan your golf journey.",
+    'subtitle' => "Ireland's top courses book out early, especially in peak season — and Ryder Cup-host venues like Adare Manor and Royal County Down even earlier. The earlier you speak to us, the better we can secure the rounds that matter most.",
+    'cta_text' => 'Begin Your First Conversation',
+    'cta_url'  => '/contact/',
+] ); ?>
 
 <?php get_footer(); ?>
