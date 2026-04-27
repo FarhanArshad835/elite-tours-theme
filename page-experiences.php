@@ -6,8 +6,10 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 $base = get_template_directory_uri() . '/assets/images/';
 
-// Pull experiences from admin panel
-$admin_experiences = get_option( 'et_experiences', [] );
+// Single source of truth: et_get_experiences() derives cards from Experience
+// CPT posts (with legacy et_experiences as fallback). Keeps the homepage grid
+// and this page in lockstep — editing a post in the admin updates both.
+$admin_experiences = et_get_experiences();
 $regions           = get_option( 'et_regions', [] );
 $taxonomies        = get_option( 'et_experience_taxonomies', [] );
 $type_options = ! empty( $taxonomies['types'] ) ? $taxonomies['types']
@@ -23,20 +25,30 @@ $fallback_images = [
 // Build all experiences array (from admin + hardcoded extras)
 $all_experiences = [];
 
-// 1. From admin panel
+// 1. From single source of truth (CPT-derived, falls back to et_experiences)
 if ( ! empty( $admin_experiences ) ) {
     foreach ( $admin_experiences as $i => $exp ) {
         $img_id  = absint( $exp['image_id'] ?? 0 );
         $img_url = $img_id
             ? wp_get_attachment_image_url( $img_id, 'large' )
             : ( $fallback_images[ $i % count( $fallback_images ) ] ?? $fallback_images[0] );
+
+        // CPT-derived cards already carry an absolute permalink; legacy
+        // option entries ship a relative path. Don't double-wrap absolute URLs.
+        $url = $exp['url'] ?? '';
+        if ( $url === '' ) {
+            $url = home_url( '/contact/' );
+        } elseif ( strpos( $url, 'http' ) !== 0 ) {
+            $url = home_url( $url );
+        }
+
         $all_experiences[] = [
             'id'       => 'exp-' . sanitize_title( $exp['title'] ?? $i ),
             'label'    => $exp['label'] ?? '',
             'title'    => $exp['title'] ?? '',
             'desc'     => $exp['desc'] ?? '',
             'img'      => $img_url,
-            'url'      => $exp['url'] ? home_url( $exp['url'] ) : home_url( '/contact/' ),
+            'url'      => $url,
             'type'     => $exp['type'] ?? 'tailormade',
             'duration' => $exp['duration'] ?? 'bespoke',
             'source'   => 'experience',

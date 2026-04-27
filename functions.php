@@ -107,6 +107,62 @@ if ( ! function_exists( 'et_wishlist_enabled' ) ) {
     }
 }
 
+// ─── Helper: experience cards — single source of truth (Experience CPT) ──────
+// Returns the experience card array used by the homepage and Experiences page.
+// Prefers Experience CPT posts (canonical) so that editing a single Experience
+// from the admin updates BOTH places automatically. Falls back to the legacy
+// et_experiences option only when no CPT posts exist (e.g. on a fresh
+// install before the seeder has run).
+//
+// Card shape (matches the legacy et_experiences entry):
+//   [ 'title', 'label', 'desc', 'url', 'type', 'duration', 'image_id' ]
+//
+// Source of each field:
+//   title    -> post_title              (the CPT post title)
+//   label    -> _etm_eyebrow meta       (or post.post_excerpt subline)
+//   desc     -> post_excerpt            (the CPT short summary)
+//   url      -> get_permalink()         (the funnel page)
+//   type     -> _etm_legacy_type meta   (or 'bespoke' default)
+//   duration -> _etm_legacy_duration    (or 'bespoke' default)
+//   image_id -> get_post_thumbnail_id() (the featured image)
+if ( ! function_exists( 'et_get_experiences' ) ) {
+    function et_get_experiences(): array {
+        static $cache = null;
+        if ( $cache !== null ) return $cache;
+
+        if ( post_type_exists( 'experience' ) ) {
+            $posts = get_posts( [
+                'post_type'      => 'experience',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'orderby'        => [ 'menu_order' => 'ASC', 'date' => 'ASC' ],
+                'no_found_rows'  => true,
+                'suppress_filters' => false,
+            ] );
+            if ( ! empty( $posts ) ) {
+                $cards = [];
+                foreach ( $posts as $p ) {
+                    $cards[] = [
+                        'title'    => $p->post_title,
+                        'label'    => get_post_meta( $p->ID, '_etm_eyebrow', true ) ?: '',
+                        'desc'     => $p->post_excerpt ?: '',
+                        'url'      => get_permalink( $p->ID ),
+                        'type'     => get_post_meta( $p->ID, '_etm_legacy_type', true )     ?: 'bespoke',
+                        'duration' => get_post_meta( $p->ID, '_etm_legacy_duration', true ) ?: 'bespoke',
+                        'image_id' => (int) get_post_thumbnail_id( $p->ID ),
+                        'cpt_id'   => (int) $p->ID,
+                    ];
+                }
+                return $cache = $cards;
+            }
+        }
+
+        // Fallback: legacy admin option (no CPT posts published yet).
+        $legacy = get_option( 'et_experiences', [] );
+        return $cache = is_array( $legacy ) ? $legacy : [];
+    }
+}
+
 // ─── SEO: meta description + Open Graph + Twitter Card (Phase 8) ──────────────
 // Clean, single-source SEO injection in wp_head. Per-page values are derived
 // from post title/excerpt/featured image; site-level fallbacks come from

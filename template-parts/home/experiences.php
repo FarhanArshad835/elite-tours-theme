@@ -4,36 +4,16 @@ defined( 'ABSPATH' ) || exit;
 $base        = get_template_directory_uri() . '/assets/images/';
 $exp_heading = et_hp( 'exp_heading', "Every Journey Is Different. Here's Where Yours Might Begin." );
 
-// Read experiences from the Experiences admin panel (et_experiences option)
-$stored_experiences = get_option( 'et_experiences', [] );
-
-// Fallback to hardcoded defaults if no experiences saved yet
-if ( empty( $stored_experiences ) ) {
-    $fallback_images = [
-        $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg', $base . 'winding-road.jpg',
-        $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'gothic-castle.jpg',
-    ];
-    $stored_experiences = [
-        [ 'label' => 'Ancestry, Culture & Scenery', 'title' => 'Bespoke Private Tour of Ireland', 'desc' => 'A fully bespoke private tour of Ireland, crafted around your interests, ancestry, and pace.', 'url' => '/bespoke-tours/', 'type' => 'bespoke',    'duration' => 'bespoke', 'image_id' => 0 ],
-        [ 'label' => 'Ancestry & Roots',            'title' => 'Trace Your Irish Heritage',       'desc' => 'Trace your Irish heritage with depth, dignity, and personal connection.',                  'url' => '/bespoke-tours/', 'type' => 'bespoke',    'duration' => 'bespoke', 'image_id' => 0 ],
-        [ 'label' => 'Whiskey & Culture',           'title' => "Ireland's Craft Distilleries",    'desc' => "Ireland's craft distilleries and rich cultural story, privately curated.",                'url' => '/experiences/',   'type' => 'culinary',   'duration' => '6-10',    'image_id' => 0 ],
-        [ 'label' => 'Scenic & Coastal Ireland',    'title' => 'The Wild Atlantic',               'desc' => 'The Wild Atlantic, country roads, cliffs and castles, at your pace.',                      'url' => '/bespoke-tours/', 'type' => 'adventure',  'duration' => '11-15',   'image_id' => 0 ],
-        [ 'label' => 'Golf Tours',                  'title' => "Ireland's Iconic Links",          'desc' => "Ireland's most iconic links courses, seamlessly handled.",                                  'url' => '/golf-tours/',    'type' => 'golf',       'duration' => '6-10',    'image_id' => 0 ],
-        [ 'label' => 'Family Private Journey',      'title' => 'For Every Generation',            'desc' => 'A meaningful Irish experience for every generation in your family.',                        'url' => '/bespoke-tours/', 'type' => 'family',     'duration' => '11-15',   'image_id' => 0 ],
-        [ 'label' => 'Heritage & History',          'title' => 'Castles & Estate Stays',          'desc' => 'Castles, estates, and the stories of Ireland told through its landscape.',                  'url' => '/experiences/',   'type' => 'bespoke',    'duration' => 'bespoke', 'image_id' => 0 ],
-    ];
-}
+// Single source of truth: et_get_experiences() — derives cards directly from
+// Experience CPT posts so editing a post in the WP admin updates this grid
+// AND the /experiences/ page in lockstep. Legacy et_experiences option is
+// only used as a fallback when no CPT posts are published yet.
+$stored_experiences = et_get_experiences();
 
 $fallback_images = [
     $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg', $base . 'winding-road.jpg',
     $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'gothic-castle.jpg',
 ];
-
-// Map of card-title-slug → experience CPT post id (set by the v160 migration).
-// When present, cards route to their funnel page (/experiences/{slug}/) instead
-// of the legacy URL. Falls back to the legacy URL if the CPT post is missing.
-$cpt_map = get_option( 'et_experience_cpt_map', [] );
-if ( ! is_array( $cpt_map ) ) $cpt_map = [];
 
 $experiences = [];
 foreach ( $stored_experiences as $i => $exp ) {
@@ -42,19 +22,19 @@ foreach ( $stored_experiences as $i => $exp ) {
         ? wp_get_attachment_image_url( $img_id, 'large' )
         : ( $fallback_images[ $i % count( $fallback_images ) ] ?? $fallback_images[0] );
 
-    $title    = $exp['title'] ?? '';
-    $slug     = sanitize_title( $title );
-    $cpt_id   = ! empty( $cpt_map[ $slug ] ) ? (int) $cpt_map[ $slug ] : 0;
-    $card_url = ( $cpt_id && get_post_status( $cpt_id ) === 'publish' )
-        ? get_permalink( $cpt_id )
-        : ( $exp['url'] ? home_url( $exp['url'] ) : '#' );
+    // URL: cards from CPT already carry a permalink. Legacy fallback entries
+    // ship a relative path like '/bespoke-tours/' that needs home_url().
+    $url = $exp['url'] ?? '#';
+    if ( $url && strpos( $url, 'http' ) !== 0 ) {
+        $url = home_url( $url );
+    }
 
     $experiences[] = [
         'img'      => $img_url,
         'label'    => $exp['label'] ?? '',
-        'title'    => $title,
+        'title'    => $exp['title'] ?? '',
         'desc'     => $exp['desc'] ?? '',
-        'url'      => $card_url,
+        'url'      => $url,
         'type'     => $exp['type'] ?? 'bespoke',
         'duration' => $exp['duration'] ?? 'bespoke',
     ];
