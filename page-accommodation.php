@@ -44,8 +44,8 @@ function et_hotel_img_url( $hotel, $fallback ) {
     <div class="et-page-hero__overlay"></div>
     <div class="et-container">
         <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Where You Rest Matters as Much as Where You Go</h1>
-            <p class="et-page-hero__sub">Every property we recommend has been personally vetted by Ray. Handpicked for character, location, and the standard of welcome you deserve.</p>
+            <h1 class="et-page-hero__title">Where you stay,<br>chosen for how it feels.</h1>
+            <p class="et-page-hero__sub">Accommodation throughout your journey is carefully selected to reflect both the standard of experience and the character of Ireland itself. From Ashford Castle to handpicked Kinsale stays, each location is chosen for how it contributes to the journey — not just for its star rating.</p>
         </div>
     </div>
 </section>
@@ -56,9 +56,9 @@ function et_hotel_img_url( $hotel, $fallback ) {
         <div class="et-tile-grid">
             <?php
             $category_intros = [
-                [ 'key' => 'castle',   'label' => 'Castle & Estate Hotels',   'title' => 'Sleep Inside History',      'desc' => "Ireland's castle hotels offer a level of grandeur and warmth that is entirely unique to this country.", 'img' => $base . 'gothic-castle.jpg' ],
-                [ 'key' => 'boutique', 'label' => 'Boutique & Country House', 'title' => 'Intimacy Over Grandeur',    'desc' => 'Handpicked country houses where the welcome is as warm as the fire.',                                      'img' => $base . 'castle-hillside.jpg' ],
-                [ 'key' => 'coastal',  'label' => 'Luxury Coastal & Scenic',  'title' => 'Wake Up to the Atlantic',   'desc' => 'Properties that stay with you. Fall asleep to silence, wake up to the ocean.',                             'img' => $base . 'winding-road.jpg' ],
+                [ 'key' => 'castle',   'label' => 'Castle & Estate Hotels',   'title' => 'Sleep inside history.',      'desc' => 'Ashford, Dromoland, Ballynahinch, Lough Eske, Glenlo Abbey, Abbeyglen — and Private Estates by request. The flagship 5-star tier that anchors every premium itinerary.', 'img' => $base . 'gothic-castle.jpg' ],
+                [ 'key' => 'boutique', 'label' => 'Boutique & Country House', 'title' => 'Where authenticity balances luxury.',  'desc' => 'Handpicked iconic city stays (Shelbourne, Merrion, Merchant) and high-end character hotels (Hayfield Manor, Bushmills Inn, Harvey\'s Point) where the welcome is as warm as the fire.', 'img' => $base . 'castle-hillside.jpg' ],
+                [ 'key' => 'coastal',  'label' => 'Luxury Coastal & Scenic',  'title' => 'Wake up to the Atlantic.',   'desc' => 'Sheen Falls Lodge, Aghadoe Heights, Kinsale curated stays, Fishing Lodges — properties chosen for their setting as much as their service.',  'img' => $base . 'winding-road.jpg' ],
             ];
             foreach ( $category_intros as $cat ) : ?>
             <div class="et-tile et-reveal" style="height:400px;">
@@ -110,8 +110,8 @@ function et_hotel_img_url( $hotel, $fallback ) {
 <!-- Access Note -->
 <section class="et-section et-section--white">
     <div class="et-container">
-        <div class="et-content et-reveal" style="margin:0 auto;text-align:center;max-width:640px;">
-            <blockquote>We have built relationships with Ireland's finest hotels over many years. This means preferred rooms, priority availability, and a personal welcome, not just a reservation.</blockquote>
+        <div class="et-content et-reveal" style="margin:0 auto;text-align:center;max-width:680px;">
+            <blockquote>We have built relationships with Ireland's finest hotels over many years. This means preferred rooms, priority availability, and a personal welcome — not just a reservation. Many of the places we use are not widely known, and some are not publicly marketed in the traditional way.</blockquote>
         </div>
     </div>
 </section>
@@ -120,11 +120,11 @@ function et_hotel_img_url( $hotel, $fallback ) {
 <section class="et-section et-section--green">
     <div class="et-container">
         <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">Want Us to Handle Accommodation Too?</h2>
-            <p class="et-section__subtitle">All accommodation is included in your bespoke journey. We handle everything.</p>
+            <h2 class="et-section__title">All accommodation handled for you.</h2>
+            <p class="et-section__subtitle">Every stay across your Bespoke journey is selected, booked, and looked after by us — paired carefully so the rhythm of the trip flows from one to the next.</p>
         </div>
         <div style="text-align:center;" class="et-reveal">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Plan Your Journey</a>
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-btn et-btn--pill et-btn--pill-light et-btn--lg">Begin Your First Conversation</a>
         </div>
     </div>
 </section>
