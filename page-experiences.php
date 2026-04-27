@@ -56,43 +56,42 @@ if ( ! empty( $admin_experiences ) ) {
     }
 }
 
-// 2. Golf courses (always shown)
-$golf_courses = [
-    [ 'title' => 'Old Head of Kinsale',  'desc' => 'One of the most spectacular settings in world golf.',           'loc' => 'Co. Cork' ],
-    [ 'title' => 'Ballybunion Links',    'desc' => 'Championship links on the Wild Atlantic Way.',                   'loc' => 'Co. Kerry' ],
-    [ 'title' => 'Lahinch Golf Club',    'desc' => 'Links golf at its finest, overlooking the Atlantic.',            'loc' => 'Co. Clare' ],
-    [ 'title' => 'Royal County Down',    'desc' => 'Consistently ranked in the world\'s top 10.',                    'loc' => 'Co. Down' ],
-    [ 'title' => 'Waterville Golf Links','desc' => 'Remote, stunning, and unforgettable.',                           'loc' => 'Co. Kerry' ],
-];
+// 2. Golf courses — pulled from et_golf_courses (single source of truth, shared with /golf-tours/)
+$golf_courses = get_option( 'et_golf_courses', [] );
+if ( ! is_array( $golf_courses ) ) $golf_courses = [];
 foreach ( $golf_courses as $j => $gc ) {
+    $gc_img_id  = absint( $gc['image_id'] ?? 0 );
+    $gc_img_url = $gc_img_id
+        ? wp_get_attachment_image_url( $gc_img_id, 'large' )
+        : ( $base . 'golf-coastal.jpg' );
     $all_experiences[] = [
-        'id'       => 'golf-' . sanitize_title( $gc['title'] ),
-        'label'    => $gc['loc'],
-        'title'    => $gc['title'],
-        'desc'     => $gc['desc'],
-        'img'      => $base . 'golf-coastal.jpg',
-        'url'      => home_url( '/golf-tours/' ),
+        'id'       => 'golf-' . sanitize_title( $gc['name'] ?? $j ),
+        'label'    => $gc['location'] ?? '',
+        'title'    => $gc['name'] ?? '',
+        'desc'     => $gc['desc'] ?? '',
+        'img'      => $gc_img_url,
+        'url'      => ! empty( $gc['url'] ) ? esc_url( $gc['url'] ) : home_url( '/golf-tours/' ),
         'type'     => 'golf',
         'duration' => '6-10',
         'source'   => 'golf',
     ];
 }
 
-// 3. Accommodation properties
-$hotels = [
-    [ 'title' => 'Dromoland Castle',  'desc' => 'A 16th-century castle set on 450 acres of parkland.',      'loc' => 'Co. Clare' ],
-    [ 'title' => 'Adare Manor',       'desc' => 'A neo-Gothic masterpiece with world-class golf.',           'loc' => 'Co. Limerick' ],
-    [ 'title' => 'Ashford Castle',    'desc' => 'An 800-year-old castle on the shores of Lough Corrib.',     'loc' => 'Co. Mayo' ],
-    [ 'title' => 'Castlemartyr Resort','desc' => 'A restored 18th-century manor house in East Cork.',        'loc' => 'Co. Cork' ],
-];
+// 3. Accommodation — pulled from et_hotels (single source of truth, shared with /accommodation/)
+$hotels = get_option( 'et_hotels', [] );
+if ( ! is_array( $hotels ) ) $hotels = [];
 foreach ( $hotels as $h ) {
+    $h_img_id  = absint( $h['image_id'] ?? 0 );
+    $h_img_url = $h_img_id
+        ? wp_get_attachment_image_url( $h_img_id, 'large' )
+        : ( $base . 'gothic-castle.jpg' );
     $all_experiences[] = [
-        'id'       => 'hotel-' . sanitize_title( $h['title'] ),
-        'label'    => $h['loc'],
-        'title'    => $h['title'],
-        'desc'     => $h['desc'],
-        'img'      => $base . 'gothic-castle.jpg',
-        'url'      => home_url( '/accommodation/' ),
+        'id'       => 'hotel-' . sanitize_title( $h['name'] ?? '' ),
+        'label'    => $h['location'] ?? '',
+        'title'    => $h['name'] ?? '',
+        'desc'     => $h['desc'] ?? '',
+        'img'      => $h_img_url,
+        'url'      => ! empty( $h['url'] ) ? esc_url( $h['url'] ) : home_url( '/accommodation/' ),
         'type'     => 'accommodation',
         'duration' => 'bespoke',
         'source'   => 'accommodation',
@@ -102,13 +101,8 @@ foreach ( $hotels as $h ) {
 // If no admin experiences, add defaults
 if ( empty( $admin_experiences ) ) {
     $defaults = [
-        [ 'label' => 'Ancestry & Roots',        'title' => 'Trace Your Irish Heritage',    'desc' => 'Trace your Irish heritage with depth, dignity, and personal connection.',    'type' => 'tailormade', 'duration' => 'bespoke' ],
-        [ 'label' => 'Whiskey & Culture',        'title' => "Ireland's Craft Distilleries", 'desc' => "Ireland's craft distilleries and rich cultural story, privately curated.",  'type' => 'culinary',   'duration' => '6-10' ],
-        [ 'label' => 'Scenic & Coastal Ireland', 'title' => 'The Wild Atlantic',            'desc' => 'The Wild Atlantic Way, country roads, cliffs and castles, at your pace.',  'type' => 'adventure',  'duration' => '11-15' ],
-        [ 'label' => 'Family Private Journey',   'title' => 'For Every Generation',         'desc' => 'A meaningful Irish experience for every generation in your family.',        'type' => 'family',     'duration' => '11-15' ],
-        [ 'label' => 'Heritage & History',       'title' => 'Castles & Estate Stays',       'desc' => 'Castles, estates, and the stories of Ireland told through its landscape.',  'type' => 'tailormade', 'duration' => 'bespoke' ],
-        [ 'label' => 'Literary Ireland',         'title' => 'Yeats, Wilde & Beckett',       'desc' => 'The country of Yeats, Wilde, Beckett, explored personally.',                'type' => 'culinary',   'duration' => '6-10' ],
-        [ 'label' => 'Culinary Ireland',         'title' => 'Farm to Fork',                 'desc' => 'Farm-to-table, artisan producers, traditional Irish food.',                  'type' => 'culinary',   'duration' => '6-10' ],
+        [ 'label' => '11–15 Days · Fully Bespoke', 'title' => 'The Signature Ireland Journey',     'desc' => 'A privately curated journey through Ireland — Dublin & Ancient Ireland, the Atlantic Edge, and the Quiet North. Fully bespoke, hosted by Ray.', 'type' => 'bespoke',   'duration' => '11-15' ],
+        [ 'label' => '6–10 Days · Fully Bespoke',  'title' => 'The Essence of Ireland Experience', 'desc' => "A refined version of the full experience for those with less time. Ireland's very best, without unnecessary movement.",                          'type' => 'bespoke',   'duration' => '6-10' ],
     ];
     foreach ( $defaults as $k => $d ) {
         array_unshift( $all_experiences, [
@@ -194,7 +188,7 @@ $type_filters['accommodation'] = 'Accommodation';
         <div class="et-section__header et-section__header--center et-reveal">
             <p class="et-section__eyebrow">Browse Everything</p>
             <h2 class="et-section__title">Tour products, golf, accommodation.</h2>
-            <p class="et-section__subtitle"><?php echo count( $all_experiences ); ?> entries across Ireland — filter by what you\'re drawn to.</p>
+            <p class="et-section__subtitle"><?php echo count( $all_experiences ); ?> entries across Ireland — filter by what you&rsquo;re drawn to.</p>
         </div>
 
         <!-- Filters -->

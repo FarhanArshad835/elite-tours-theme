@@ -157,7 +157,7 @@
 .et-exp-funnel__blurb-content h3 { font-size: 22px; }
 .et-exp-funnel__blurb-content a  { color: var(--et-green); text-decoration: underline; }
 
-/* "Continue to → Bespoke Private Tour of Ireland" cross-funnel link */
+/* Cross-funnel "Continue to →" link between related experiences */
 .et-exp-funnel__linked {
     margin-top: 36px;
     padding: 22px 26px;

@@ -5,6 +5,9 @@
 defined( 'ABSPATH' ) || exit;
 get_header();
 $base = get_template_directory_uri() . '/assets/images/';
+
+$et_strings = get_option( 'et_page_strings', [] );
+if ( ! is_array( $et_strings ) ) $et_strings = [];
 ?>
 
 <!-- Hero -->
@@ -50,23 +53,27 @@ $base = get_template_directory_uri() . '/assets/images/';
         </div>
         <div class="et-tile-grid">
             <?php
-            $tiles = [
-                [ 'label' => 'Ancestry & Roots',   'title' => 'Find Where You Came From',          'desc' => 'Trace your Irish heritage. Walk the land your family walked. Discover records, townlands, and living connections to your past.', 'img' => $base . 'kylemore-abbey.jpg' ],
-                [ 'label' => 'Whiskey & Culture',   'title' => "Ireland's Story, Poured Into a Glass", 'desc' => "Private visits to Ireland's finest craft distilleries, paired with rich cultural storytelling.", 'img' => $base . 'irish-pub.jpg' ],
-                [ 'label' => 'Scenic & Coastal',    'title' => 'The Roads Less Taken',               'desc' => 'The Wild Atlantic Way, the Ring of Kerry, country roads and landscapes that stop you in your tracks.', 'img' => $base . 'winding-road.jpg' ],
-                [ 'label' => 'Heritage & History',   'title' => "Ireland's History, Brought to Life", 'desc' => 'Castles, monastic ruins, Georgian estates, and the stories behind them.', 'img' => $base . 'gothic-castle.jpg' ],
-                [ 'label' => 'Family Journeys',     'title' => 'Memorable for Every Generation',     'desc' => 'A meaningful, multi-generational Irish experience paced for every age in your group.', 'img' => $base . 'castle-hillside.jpg' ],
-                [ 'label' => 'Your Own Journey',     'title' => 'Something Completely Your Own',      'desc' => 'Have something specific in mind? Tell us. We will build it entirely from scratch, around you.', 'img' => $base . 'golf-coastal.jpg' ],
+            $tiles = get_option( 'et_bespoke_journey_types', [] );
+            if ( ! is_array( $tiles ) ) $tiles = [];
+            $tile_fallback_imgs = [
+                $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg', $base . 'winding-road.jpg',
+                $base . 'gothic-castle.jpg', $base . 'castle-hillside.jpg', $base . 'golf-coastal.jpg',
             ];
-            foreach ( $tiles as $t ) : ?>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="et-tile et-reveal">
-                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $t['img'] ); ?>')"></div>
+            foreach ( $tiles as $i => $t ) :
+                $img_id  = absint( $t['image_id'] ?? 0 );
+                $img_url = $img_id
+                    ? wp_get_attachment_image_url( $img_id, 'large' )
+                    : $tile_fallback_imgs[ $i % count( $tile_fallback_imgs ) ];
+                $href = ! empty( $t['url'] ) ? esc_url( $t['url'] ) : esc_url( home_url( '/contact/' ) );
+            ?>
+            <a href="<?php echo esc_url( $href ); ?>" class="et-tile et-reveal">
+                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $img_url ); ?>')"></div>
                 <div class="et-tile__overlay"></div>
-                <?php echo et_heart( 'bespoke-' . sanitize_title( $t['title'] ), $t['title'], $t['desc'], $t['img'], home_url( '/contact/' ), 'Bespoke' ); ?>
+                <?php echo et_heart( 'bespoke-' . sanitize_title( $t['title'] ?? 'tile' ), $t['title'] ?? '', $t['desc'] ?? '', $img_url, $href, 'Bespoke' ); ?>
                 <div class="et-tile__content">
-                    <span class="et-tile__label"><?php echo esc_html( $t['label'] ); ?></span>
-                    <h3 class="et-tile__title"><?php echo esc_html( $t['title'] ); ?></h3>
-                    <p class="et-tile__desc"><?php echo esc_html( $t['desc'] ); ?></p>
+                    <span class="et-tile__label"><?php echo esc_html( $t['label'] ?? '' ); ?></span>
+                    <h3 class="et-tile__title"><?php echo esc_html( $t['title'] ?? '' ); ?></h3>
+                    <p class="et-tile__desc"><?php echo esc_html( $t['desc'] ?? '' ); ?></p>
                     <span class="et-tile__cta">Learn More &rsaquo;</span>
                 </div>
             </a>
@@ -81,18 +88,17 @@ $base = get_template_directory_uri() . '/assets/images/';
         <div class="et-section__header et-section__header--center et-reveal">
             <h2 class="et-section__title">How Long Would You Like?</h2>
         </div>
-        <div class="et-info-grid" style="grid-template-columns: repeat(3,1fr);">
-            <?php
-            $durations = [
-                [ 'num' => '6-10', 'title' => 'Days', 'desc' => 'A focused, deeply personal Ireland experience. Two to three regions, unhurried pace, time to truly settle in.' ],
-                [ 'num' => '11-15', 'title' => 'Days', 'desc' => 'A comprehensive journey, west coast to east coast, with time to breathe in every region.' ],
-                [ 'num' => '?', 'title' => 'Bespoke', 'desc' => "We'll design whatever length works best for your group. Tell us your dates and we'll build around them." ],
-            ];
-            foreach ( $durations as $d ) : ?>
+        <?php
+        $durations = get_option( 'et_bespoke_durations', [] );
+        if ( ! is_array( $durations ) ) $durations = [];
+        $dur_count = max( 1, count( $durations ) );
+        ?>
+        <div class="et-info-grid" style="grid-template-columns: repeat(<?php echo (int) min( 4, $dur_count ); ?>,1fr);">
+            <?php foreach ( $durations as $d ) : ?>
             <div class="et-info-card et-reveal">
-                <div class="et-info-card__num"><?php echo esc_html( $d['num'] ); ?></div>
-                <div class="et-info-card__title"><?php echo esc_html( $d['title'] ); ?></div>
-                <div class="et-info-card__desc"><?php echo esc_html( $d['desc'] ); ?></div>
+                <div class="et-info-card__num"><?php echo esc_html( $d['num'] ?? '' ); ?></div>
+                <div class="et-info-card__title"><?php echo esc_html( $d['title'] ?? '' ); ?></div>
+                <div class="et-info-card__desc"><?php echo esc_html( $d['desc'] ?? '' ); ?></div>
             </div>
             <?php endforeach; ?>
         </div>
@@ -140,7 +146,10 @@ $base = get_template_directory_uri() . '/assets/images/';
             </div>
         </div>
         <?php endforeach; ?>
-        <p style="margin-top:24px;font-style:italic;color:var(--et-grey);font-size:14px;">These are starting points. Your journey will be designed around you.</p>
+        <?php $bespoke_disclaimer = $et_strings['bespoke_itinerary_disclaimer'] ?? 'These are starting points. Your journey will be designed around you.'; ?>
+        <?php if ( $bespoke_disclaimer ) : ?>
+        <p style="margin-top:24px;font-style:italic;color:var(--et-grey);font-size:14px;"><?php echo esc_html( $bespoke_disclaimer ); ?></p>
+        <?php endif; ?>
     </div>
 </section>
 
@@ -152,17 +161,13 @@ $base = get_template_directory_uri() . '/assets/images/';
         </div>
         <div class="et-info-grid">
             <?php
-            $included = [
-                [ 'num' => '01', 'title' => 'Private Chauffeur', 'desc' => 'Door-to-door throughout your journey. Premium vehicles. No shared transfers.' ],
-                [ 'num' => '02', 'title' => 'Custom Itinerary', 'desc' => 'Designed from scratch after your consultation. Built for you, nobody else.' ],
-                [ 'num' => '03', 'title' => 'All Logistics', 'desc' => 'Accommodation, reservations, access, timing. All managed. You think about nothing.' ],
-                [ 'num' => '04', 'title' => "Ray's Personal Standard", 'desc' => 'Every journey is shaped and overseen by Ray Mulally personally.' ],
-            ];
+            $included = get_option( 'et_bespoke_includes', [] );
+            if ( ! is_array( $included ) ) $included = [];
             foreach ( $included as $inc ) : ?>
             <div class="et-info-card et-reveal">
-                <div class="et-info-card__num"><?php echo esc_html( $inc['num'] ); ?></div>
-                <div class="et-info-card__title"><?php echo esc_html( $inc['title'] ); ?></div>
-                <div class="et-info-card__desc"><?php echo esc_html( $inc['desc'] ); ?></div>
+                <div class="et-info-card__num"><?php echo esc_html( $inc['num'] ?? '' ); ?></div>
+                <div class="et-info-card__title"><?php echo esc_html( $inc['title'] ?? '' ); ?></div>
+                <div class="et-info-card__desc"><?php echo esc_html( $inc['desc'] ?? '' ); ?></div>
             </div>
             <?php endforeach; ?>
         </div>

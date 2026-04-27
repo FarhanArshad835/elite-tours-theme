@@ -84,7 +84,10 @@ $email = et_site( 'contact_email', 'elitetoursireland@gmail.com' );
                             <label class="et-form__label">Interests (select all that apply)</label>
                             <div class="et-form__checks">
                                 <?php
-                                $interests = [ 'Ancestry', 'Heritage & History', 'Whiskey & Culture', 'Golf', 'Scenic Ireland', 'Family Journey', 'Something Else' ];
+                                $interests = get_option( 'et_contact_interests', [] );
+                                if ( ! is_array( $interests ) || empty( $interests ) ) {
+                                    $interests = [ 'Ancestry', 'Heritage & History', 'Whiskey & Culture', 'Golf', 'Scenic Ireland', 'Family Journey', 'Something Else' ];
+                                }
                                 foreach ( $interests as $int ) : ?>
                                 <label class="et-form__check">
                                     <input type="checkbox" name="interests[]" value="<?php echo esc_attr( $int ); ?>">

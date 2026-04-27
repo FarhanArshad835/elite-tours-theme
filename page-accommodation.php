@@ -19,11 +19,22 @@ if ( empty( $admin_hotels ) ) {
     ];
 }
 
+// Category labels — derived from intros (admin-managed) so headings match the
+// labels above each tier on the page. Falls back to defaults if nothing seeded.
+$intros_raw = get_option( 'et_accommodation_category_intros', [] );
+if ( ! is_array( $intros_raw ) ) $intros_raw = [];
+
 $category_labels = [
     'castle'   => 'Castle & Estate',
     'boutique' => 'Boutique & Country House',
     'coastal'  => 'Luxury Coastal & Scenic',
 ];
+foreach ( $intros_raw as $intro ) {
+    $k = $intro['key'] ?? '';
+    if ( isset( $category_labels[ $k ] ) && ! empty( $intro['label'] ) ) {
+        $category_labels[ $k ] = $intro['label'];
+    }
+}
 
 // Group by category
 $grouped = [ 'castle' => [], 'boutique' => [], 'coastal' => [] ];
@@ -55,19 +66,25 @@ function et_hotel_img_url( $hotel, $fallback ) {
     <div class="et-container">
         <div class="et-tile-grid">
             <?php
-            $category_intros = [
-                [ 'key' => 'castle',   'label' => 'Castle & Estate Hotels',   'title' => 'Sleep inside history.',      'desc' => 'Ashford, Dromoland, Ballynahinch, Lough Eske, Glenlo Abbey, Abbeyglen — and Private Estates by request. The flagship 5-star tier that anchors every premium itinerary.', 'img' => $base . 'gothic-castle.jpg' ],
-                [ 'key' => 'boutique', 'label' => 'Boutique & Country House', 'title' => 'Where authenticity balances luxury.',  'desc' => 'Handpicked iconic city stays (Shelbourne, Merrion, Merchant) and high-end character hotels (Hayfield Manor, Bushmills Inn, Harvey\'s Point) where the welcome is as warm as the fire.', 'img' => $base . 'castle-hillside.jpg' ],
-                [ 'key' => 'coastal',  'label' => 'Luxury Coastal & Scenic',  'title' => 'Wake up to the Atlantic.',   'desc' => 'Sheen Falls Lodge, Aghadoe Heights, Kinsale curated stays, Fishing Lodges — properties chosen for their setting as much as their service.',  'img' => $base . 'winding-road.jpg' ],
+            $intro_fallback_imgs = [
+                'castle'   => $base . 'gothic-castle.jpg',
+                'boutique' => $base . 'castle-hillside.jpg',
+                'coastal'  => $base . 'winding-road.jpg',
             ];
-            foreach ( $category_intros as $cat ) : ?>
+            foreach ( $intros_raw as $cat ) :
+                $key = $cat['key'] ?? '';
+                $img_id  = absint( $cat['image_id'] ?? 0 );
+                $img_url = $img_id
+                    ? wp_get_attachment_image_url( $img_id, 'large' )
+                    : ( $intro_fallback_imgs[ $key ] ?? ( $base . 'gothic-castle.jpg' ) );
+            ?>
             <div class="et-tile et-reveal" style="height:400px;">
-                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $cat['img'] ); ?>')"></div>
+                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $img_url ); ?>')"></div>
                 <div class="et-tile__overlay"></div>
                 <div class="et-tile__content">
-                    <span class="et-tile__label"><?php echo esc_html( $cat['label'] ); ?></span>
-                    <h3 class="et-tile__title"><?php echo esc_html( $cat['title'] ); ?></h3>
-                    <p class="et-tile__desc"><?php echo esc_html( $cat['desc'] ); ?></p>
+                    <span class="et-tile__label"><?php echo esc_html( $cat['label'] ?? '' ); ?></span>
+                    <h3 class="et-tile__title"><?php echo esc_html( $cat['title'] ?? '' ); ?></h3>
+                    <p class="et-tile__desc"><?php echo esc_html( $cat['desc'] ?? '' ); ?></p>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -108,13 +125,20 @@ function et_hotel_img_url( $hotel, $fallback ) {
 <?php endforeach; ?>
 
 <!-- Access Note -->
+<?php
+$et_strings = get_option( 'et_page_strings', [] );
+if ( ! is_array( $et_strings ) ) $et_strings = [];
+$accommodation_quote = $et_strings['accommodation_trust_quote'] ?? "We have built relationships with Ireland's finest hotels over many years. This means preferred rooms, priority availability, and a personal welcome — not just a reservation. Many of the places we use are not widely known, and some are not publicly marketed in the traditional way.";
+?>
+<?php if ( $accommodation_quote ) : ?>
 <section class="et-section et-section--white">
     <div class="et-container">
         <div class="et-content et-reveal" style="margin:0 auto;text-align:center;max-width:680px;">
-            <blockquote>We have built relationships with Ireland's finest hotels over many years. This means preferred rooms, priority availability, and a personal welcome — not just a reservation. Many of the places we use are not widely known, and some are not publicly marketed in the traditional way.</blockquote>
+            <blockquote><?php echo esc_html( $accommodation_quote ); ?></blockquote>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- CTA -->
 <section class="et-section et-section--green">

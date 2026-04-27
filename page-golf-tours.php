@@ -5,6 +5,9 @@
 defined( 'ABSPATH' ) || exit;
 get_header();
 $base = get_template_directory_uri() . '/assets/images/';
+
+$et_strings = get_option( 'et_page_strings', [] );
+if ( ! is_array( $et_strings ) ) $et_strings = [];
 ?>
 
 <!-- Hero -->
@@ -49,20 +52,16 @@ $base = get_template_directory_uri() . '/assets/images/';
             <h2 class="et-section__title">What Every Elite Golf Journey Includes</h2>
         </div>
         <?php
-        $pillars = [
-            [ 'num' => '01', 'title' => 'Golf-Led Personalisation', 'desc' => 'Built around you, not a pre-set route. Playing level, bucket list courses vs hidden gems, preferred pace, group dynamic. All considered before a single tee time is booked.' ],
-            [ 'num' => '02', 'title' => "Ray's Personal Hosting", 'desc' => 'Every golf journey is personally overseen by Ray. Someone who knows the game, knows the country, and knows how to host properly. Present without intruding.' ],
-            [ 'num' => '03', 'title' => 'Seamless Logistics', 'desc' => 'Tee time scheduling, private chauffeur between courses, club transport and handling, pre/post round timing. You never think about where to be or when to leave.' ],
-            [ 'num' => '04', 'title' => 'Priority Course Access', 'desc' => "Ireland's top courses are seasonal and highly booked. We know when and how to secure the rounds that matter, through established relationships and strategic booking windows." ],
-            [ 'num' => '05', 'title' => 'Curation Beyond Golf', 'desc' => 'Handpicked luxury accommodation near courses. Whiskey tastings. Coastal drives. Private dining. Post-round pub evenings. The full Ireland experience, built around the game.' ],
-        ];
+        $pillars = get_option( 'et_golf_pillars', [] );
+        if ( ! is_array( $pillars ) ) $pillars = [];
+        $pillar_count = max( 1, count( $pillars ) );
         ?>
-        <div class="et-info-grid" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="et-info-grid" style="grid-template-columns: repeat(<?php echo (int) min( 5, $pillar_count ); ?>, 1fr);">
             <?php foreach ( $pillars as $p ) : ?>
             <div class="et-info-card et-reveal">
-                <div class="et-info-card__num"><?php echo esc_html( $p['num'] ); ?></div>
-                <div class="et-info-card__title"><?php echo esc_html( $p['title'] ); ?></div>
-                <div class="et-info-card__desc"><?php echo esc_html( $p['desc'] ); ?></div>
+                <div class="et-info-card__num"><?php echo esc_html( $p['num'] ?? '' ); ?></div>
+                <div class="et-info-card__title"><?php echo esc_html( $p['title'] ?? '' ); ?></div>
+                <div class="et-info-card__desc"><?php echo esc_html( $p['desc'] ?? '' ); ?></div>
             </div>
             <?php endforeach; ?>
         </div>
@@ -77,33 +76,35 @@ $base = get_template_directory_uri() . '/assets/images/';
         </div>
         <div class="et-tile-grid">
             <?php
-            $courses = [
-                [ 'name' => 'Old Head of Kinsale',  'loc' => 'Co. Cork',    'desc' => 'A peninsula jutting into the Atlantic — one of the most spectacular settings in world golf.',                       'img' => $base . 'golf-coastal.jpg' ],
-                [ 'name' => 'Lahinch Golf Club',    'loc' => 'Co. Clare',   'desc' => 'Links golf at its finest, overlooking the Atlantic. One of Ireland\'s most beloved courses.',                          'img' => $base . 'castle-hillside.jpg' ],
-                [ 'name' => 'Doonbeg (Trump International)','loc' => 'Co. Clare', 'desc' => 'A Greg Norman links design carved into Atlantic dunes — modern drama on the Wild Atlantic Way.',              'img' => $base . 'winding-road.jpg' ],
-                [ 'name' => 'Royal County Down',    'loc' => 'Co. Down',    'desc' => 'Consistently in the world\'s top 10. A links masterpiece beneath the Mourne Mountains.',                              'img' => $base . 'gothic-castle.jpg' ],
-                [ 'name' => 'Royal Portrush',       'loc' => 'Co. Antrim',  'desc' => 'Open Championship venue. Drama, dunes, and the North Coast at its best.',                                              'img' => $base . 'kylemore-abbey.jpg' ],
-                [ 'name' => 'Adare Manor',          'loc' => 'Co. Limerick','desc' => 'Ryder Cup 2027 host venue. A neo-Gothic estate paired with a championship parkland course.',                          'img' => $base . 'gothic-castle.jpg' ],
-                [ 'name' => 'The K Club',           'loc' => 'Co. Kildare', 'desc' => 'Twice Ryder Cup host. Refined parkland golf, an easy add-on from Dublin.',                                             'img' => $base . 'castle-hillside.jpg' ],
-                [ 'name' => 'Ballybunion Links',    'loc' => 'Co. Kerry',   'desc' => 'Championship links on the Wild Atlantic Way. A bucket-list course for every serious golfer.',                          'img' => $base . 'winding-road.jpg' ],
-                [ 'name' => 'Tralee Golf Club',     'loc' => 'Co. Kerry',   'desc' => 'Arnold Palmer\'s first European links design — coastal, elevated, unforgettable.',                                     'img' => $base . 'irish-pub.jpg' ],
-                [ 'name' => 'Waterville Golf Links','loc' => 'Co. Kerry',   'desc' => 'Remote, stunning, and unforgettable — bucket-list links on the Ring of Kerry.',                                        'img' => $base . 'kylemore-abbey.jpg' ],
-                [ 'name' => 'Portmarnock',          'loc' => 'Co. Dublin',  'desc' => 'A legendary championship links course north of Dublin. The capital\'s flagship.',                                     'img' => $base . 'castle-hillside.jpg' ],
+            $courses = get_option( 'et_golf_courses', [] );
+            if ( ! is_array( $courses ) ) $courses = [];
+            $course_fallback_imgs = [
+                $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'winding-road.jpg',
+                $base . 'gothic-castle.jpg', $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg',
             ];
-            foreach ( $courses as $c ) : ?>
+            foreach ( $courses as $i => $c ) :
+                $img_id  = absint( $c['image_id'] ?? 0 );
+                $img_url = $img_id
+                    ? wp_get_attachment_image_url( $img_id, 'large' )
+                    : $course_fallback_imgs[ $i % count( $course_fallback_imgs ) ];
+                $href = ! empty( $c['url'] ) ? esc_url( $c['url'] ) : esc_url( home_url( '/golf-tours/' ) );
+            ?>
             <div class="et-tile et-reveal">
-                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $c['img'] ); ?>')"></div>
+                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $img_url ); ?>')"></div>
                 <div class="et-tile__overlay"></div>
-                <?php echo et_heart( 'golf-' . sanitize_title( $c['name'] ), $c['name'], $c['desc'], $c['img'], home_url( '/golf-tours/' ), 'Golf' ); ?>
+                <?php echo et_heart( 'golf-' . sanitize_title( $c['name'] ?? 'course' ), $c['name'] ?? '', $c['desc'] ?? '', $img_url, $href, 'Golf' ); ?>
                 <div class="et-tile__content">
-                    <span class="et-tile__label"><?php echo esc_html( $c['loc'] ); ?></span>
-                    <h3 class="et-tile__title"><?php echo esc_html( $c['name'] ); ?></h3>
-                    <p class="et-tile__desc"><?php echo esc_html( $c['desc'] ); ?></p>
+                    <span class="et-tile__label"><?php echo esc_html( $c['location'] ?? '' ); ?></span>
+                    <h3 class="et-tile__title"><?php echo esc_html( $c['name'] ?? '' ); ?></h3>
+                    <p class="et-tile__desc"><?php echo esc_html( $c['desc'] ?? '' ); ?></p>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
-        <p style="margin-top:32px;text-align:center;font-style:italic;color:var(--et-grey);font-size:14px;">Availability at Ireland's top courses is limited, especially in peak season. We secure access through established relationships. Speak to us early.</p>
+        <?php $golf_avail_note = $et_strings['golf_availability_note'] ?? "Availability at Ireland's top courses is limited, especially in peak season. We secure access through established relationships. Speak to us early."; ?>
+        <?php if ( $golf_avail_note ) : ?>
+        <p style="margin-top:32px;text-align:center;font-style:italic;color:var(--et-grey);font-size:14px;"><?php echo esc_html( $golf_avail_note ); ?></p>
+        <?php endif; ?>
     </div>
 </section>
 
@@ -147,7 +148,10 @@ $base = get_template_directory_uri() . '/assets/images/';
             </div>
         </div>
         <?php endforeach; ?>
-        <p style="margin-top:24px;font-style:italic;color:var(--et-grey);font-size:14px;">All itineraries designed around the group. These are starting points only.</p>
+        <?php $golf_disclaimer = $et_strings['golf_itinerary_disclaimer'] ?? 'All itineraries designed around the group. These are starting points only.'; ?>
+        <?php if ( $golf_disclaimer ) : ?>
+        <p style="margin-top:24px;font-style:italic;color:var(--et-grey);font-size:14px;"><?php echo esc_html( $golf_disclaimer ); ?></p>
+        <?php endif; ?>
     </div>
 </section>
 
