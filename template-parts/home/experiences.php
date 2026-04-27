@@ -14,12 +14,13 @@ if ( empty( $stored_experiences ) ) {
         $base . 'golf-coastal.jpg', $base . 'castle-hillside.jpg', $base . 'gothic-castle.jpg',
     ];
     $stored_experiences = [
-        [ 'label' => 'Ancestry & Roots',        'title' => 'Trace Your Irish Heritage',    'desc' => 'Trace your Irish heritage with depth, dignity, and personal connection.',    'url' => '/bespoke-tours/', 'type' => 'tailormade',  'duration' => 'bespoke', 'image_id' => 0 ],
-        [ 'label' => 'Whiskey & Culture',        'title' => "Ireland's Craft Distilleries", 'desc' => "Ireland's craft distilleries and rich cultural story, privately curated.",  'url' => '/experiences/',    'type' => 'culinary',    'duration' => '6-10',    'image_id' => 0 ],
-        [ 'label' => 'Scenic & Coastal Ireland', 'title' => 'The Wild Atlantic',            'desc' => 'The Wild Atlantic, country roads, cliffs and castles, at your pace.',      'url' => '/bespoke-tours/', 'type' => 'adventure',   'duration' => '11-15',   'image_id' => 0 ],
-        [ 'label' => 'Golf Tours',               'title' => "Ireland's Iconic Links",       'desc' => "Ireland's most iconic links courses, seamlessly handled.",                  'url' => '/golf-tours/',    'type' => 'golf',        'duration' => '6-10',    'image_id' => 0 ],
-        [ 'label' => 'Family Private Journey',   'title' => 'For Every Generation',         'desc' => 'A meaningful Irish experience for every generation in your family.',        'url' => '/bespoke-tours/', 'type' => 'family',      'duration' => '11-15',   'image_id' => 0 ],
-        [ 'label' => 'Heritage & History',       'title' => 'Castles & Estate Stays',       'desc' => 'Castles, estates, and the stories of Ireland told through its landscape.',  'url' => '/experiences/',    'type' => 'tailormade',  'duration' => 'bespoke', 'image_id' => 0 ],
+        [ 'label' => 'Ancestry, Culture & Scenery', 'title' => 'Bespoke Private Tour of Ireland', 'desc' => 'A fully bespoke private tour of Ireland, crafted around your interests, ancestry, and pace.', 'url' => '/bespoke-tours/', 'type' => 'bespoke',    'duration' => 'bespoke', 'image_id' => 0 ],
+        [ 'label' => 'Ancestry & Roots',            'title' => 'Trace Your Irish Heritage',       'desc' => 'Trace your Irish heritage with depth, dignity, and personal connection.',                  'url' => '/bespoke-tours/', 'type' => 'bespoke',    'duration' => 'bespoke', 'image_id' => 0 ],
+        [ 'label' => 'Whiskey & Culture',           'title' => "Ireland's Craft Distilleries",    'desc' => "Ireland's craft distilleries and rich cultural story, privately curated.",                'url' => '/experiences/',   'type' => 'culinary',   'duration' => '6-10',    'image_id' => 0 ],
+        [ 'label' => 'Scenic & Coastal Ireland',    'title' => 'The Wild Atlantic',               'desc' => 'The Wild Atlantic, country roads, cliffs and castles, at your pace.',                      'url' => '/bespoke-tours/', 'type' => 'adventure',  'duration' => '11-15',   'image_id' => 0 ],
+        [ 'label' => 'Golf Tours',                  'title' => "Ireland's Iconic Links",          'desc' => "Ireland's most iconic links courses, seamlessly handled.",                                  'url' => '/golf-tours/',    'type' => 'golf',       'duration' => '6-10',    'image_id' => 0 ],
+        [ 'label' => 'Family Private Journey',      'title' => 'For Every Generation',            'desc' => 'A meaningful Irish experience for every generation in your family.',                        'url' => '/bespoke-tours/', 'type' => 'family',     'duration' => '11-15',   'image_id' => 0 ],
+        [ 'label' => 'Heritage & History',          'title' => 'Castles & Estate Stays',          'desc' => 'Castles, estates, and the stories of Ireland told through its landscape.',                  'url' => '/experiences/',   'type' => 'bespoke',    'duration' => 'bespoke', 'image_id' => 0 ],
     ];
 }
 
@@ -41,7 +42,7 @@ foreach ( $stored_experiences as $i => $exp ) {
         'title'    => $exp['title'] ?? '',
         'desc'     => $exp['desc'] ?? '',
         'url'      => $exp['url'] ? home_url( $exp['url'] ) : '#',
-        'type'     => $exp['type'] ?? 'tailormade',
+        'type'     => $exp['type'] ?? 'bespoke',
         'duration' => $exp['duration'] ?? 'bespoke',
     ];
 }
@@ -51,7 +52,7 @@ $taxonomies = get_option( 'et_experience_taxonomies', [] );
 
 $type_filters = [ 'all' => 'All Experiences' ];
 $saved_types  = ! empty( $taxonomies['types'] ) ? $taxonomies['types']
-    : [ 'tailormade' => 'Tailormade', 'golf' => 'Golf', 'culinary' => 'Culinary', 'adventure' => 'Adventure', 'family' => 'Family' ];
+    : [ 'bespoke' => 'Bespoke', 'golf' => 'Golf', 'culinary' => 'Culinary', 'adventure' => 'Adventure', 'family' => 'Family' ];
 foreach ( $saved_types as $k => $v ) { $type_filters[ $k ] = $v; }
 
 $duration_filters = [ 'all' => 'All' ];
