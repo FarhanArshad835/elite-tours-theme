@@ -1,0 +1,307 @@
+/* ============================================================
+   ELITE TOURS — Per-Experience Funnel Page Styles
+   Layout: hero → highlights → blurb → contact form
+   ============================================================ */
+
+.et-exp-funnel { background: var(--et-off-white); }
+
+/* ── 1. Hero ──────────────────────────────────────────────── */
+.et-exp-funnel__hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--et-white);
+    padding-top: var(--et-header-h);
+}
+.et-exp-funnel__hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 35%;
+    z-index: 0;
+}
+.et-exp-funnel__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.15) 35%,
+        rgba(0,0,0,0.25) 60%,
+        rgba(0,0,0,0.78) 100%);
+    z-index: 0;
+}
+.et-exp-funnel__hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-block: 90px 72px;
+    max-width: 760px;
+}
+.et-exp-funnel__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    font-family: var(--et-font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--et-off-white);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+}
+.et-exp-funnel__eyebrow::before {
+    content: "";
+    width: 32px;
+    height: 2px;
+    background: var(--et-gold);
+}
+.et-exp-funnel__title {
+    font-family: var(--et-font-heading);
+    font-size: clamp(36px, 5.4vw, 68px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+}
+.et-exp-funnel__deck {
+    font-size: clamp(15px, 1.4vw, 18px);
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.82);
+    max-width: 560px;
+}
+
+/* ── Section title (used by Highlights + Contact) ─────────── */
+.et-exp-funnel__section-title {
+    font-family: var(--et-font-heading);
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 400;
+    color: var(--et-black);
+    text-align: center;
+    margin-bottom: 48px;
+    letter-spacing: -0.01em;
+}
+
+/* ── 2. Highlights ────────────────────────────────────────── */
+.et-exp-funnel__highlights {
+    padding-block: 90px;
+    background: var(--et-white);
+}
+.et-exp-funnel__highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.et-exp-funnel__highlight {
+    padding: 32px 28px;
+    background: var(--et-off-white);
+    border: 1px solid rgba(26,79,49,0.08);
+    border-radius: var(--et-radius);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.et-exp-funnel__highlight:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(26,79,49,0.08);
+}
+.et-exp-funnel__highlight-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+    border-radius: 999px;
+    background: var(--et-green);
+    color: var(--et-gold);
+}
+.et-exp-funnel__highlight-title {
+    font-family: var(--et-font-heading);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--et-black);
+    margin-bottom: 8px;
+    line-height: 1.25;
+}
+.et-exp-funnel__highlight-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--et-grey);
+    margin: 0;
+}
+
+/* ── 3. Blurb ─────────────────────────────────────────────── */
+.et-exp-funnel__blurb {
+    padding-block: 90px;
+    background: var(--et-off-white);
+}
+.et-exp-funnel__blurb-inner { max-width: 760px; margin: 0 auto; }
+.et-exp-funnel__blurb-content {
+    font-size: 17px;
+    line-height: 1.75;
+    color: #2a2a2a;
+}
+.et-exp-funnel__blurb-content p { margin: 0 0 1.1em; }
+.et-exp-funnel__blurb-content h2,
+.et-exp-funnel__blurb-content h3 {
+    font-family: var(--et-font-heading);
+    font-weight: 400;
+    color: var(--et-black);
+    margin: 1.6em 0 0.6em;
+    letter-spacing: -0.01em;
+}
+.et-exp-funnel__blurb-content h2 { font-size: 28px; }
+.et-exp-funnel__blurb-content h3 { font-size: 22px; }
+.et-exp-funnel__blurb-content a  { color: var(--et-green); text-decoration: underline; }
+
+/* "Continue to → Bespoke Private Tour of Ireland" cross-funnel link */
+.et-exp-funnel__linked {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: var(--et-white);
+    border-left: 3px solid var(--et-gold);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+.et-exp-funnel__linked-label {
+    font-family: var(--et-font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--et-grey);
+}
+.et-exp-funnel__linked-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--et-font-heading);
+    font-size: 18px;
+    color: var(--et-green);
+    text-decoration: none;
+}
+.et-exp-funnel__linked-link:hover { color: var(--et-green-dark); }
+
+.et-exp-funnel__blurb-cta { margin-top: 36px; }
+
+/* ── 4. Contact Form ──────────────────────────────────────── */
+.et-exp-funnel__contact {
+    padding-block: 100px 110px;
+    background: var(--et-green);
+    color: var(--et-white);
+}
+.et-exp-funnel__contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.et-exp-funnel__contact-text { padding-top: 8px; }
+.et-exp-funnel__contact-heading {
+    font-family: var(--et-font-heading);
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 400;
+    line-height: 1.12;
+    color: var(--et-white);
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+}
+.et-exp-funnel__contact-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.78);
+    margin: 0;
+}
+
+/* Form */
+.et-funnel-form {
+    background: var(--et-white);
+    padding: 36px;
+    border-radius: 8px;
+    color: var(--et-black);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+}
+.et-funnel-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.et-funnel-form__field {
+    display: block;
+    margin-bottom: 16px;
+}
+.et-funnel-form__row .et-funnel-form__field { margin-bottom: 16px; }
+.et-funnel-form__label {
+    display: block;
+    font-family: var(--et-font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--et-grey);
+    margin-bottom: 6px;
+}
+.et-funnel-form__optional {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: #999;
+}
+.et-funnel-form input[type="text"],
+.et-funnel-form input[type="email"],
+.et-funnel-form input[type="tel"],
+.et-funnel-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    font-family: var(--et-font-body);
+    font-size: 15px;
+    color: var(--et-black);
+    background: var(--et-white);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.et-funnel-form input:focus,
+.et-funnel-form textarea:focus {
+    outline: none;
+    border-color: var(--et-green);
+    box-shadow: 0 0 0 3px rgba(26,79,49,0.12);
+}
+.et-funnel-form textarea { resize: vertical; min-height: 110px; }
+.et-funnel-form__submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+}
+.et-funnel-form__submit:disabled { opacity: 0.7; cursor: progress; }
+.et-funnel-form__feedback {
+    margin: 12px 0 0;
+    font-size: 14px;
+    text-align: center;
+    min-height: 1.4em;
+}
+.et-funnel-form__feedback.is-success { color: #1e7e34; }
+.et-funnel-form__feedback.is-error   { color: #c62828; }
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media ( max-width: 880px ) {
+    .et-exp-funnel__hero { min-height: 56vh; }
+    .et-exp-funnel__hero-inner { padding-block: 60px 48px; }
+
+    .et-exp-funnel__highlights,
+    .et-exp-funnel__blurb { padding-block: 64px; }
+
+    .et-exp-funnel__contact { padding-block: 64px 72px; }
+    .et-exp-funnel__contact-inner { grid-template-columns: 1fr; gap: 32px; }
+
+    .et-funnel-form { padding: 24px; }
+    .et-funnel-form__row { grid-template-columns: 1fr; gap: 0; }
+}

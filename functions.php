@@ -54,6 +54,16 @@ add_action( 'wp_enqueue_scripts', function () {
         '1.0.0',
         true
     );
+
+    // Funnel page styles — only on single-experience pages
+    if ( is_singular( 'experience' ) ) {
+        wp_enqueue_style(
+            'elite-tours-funnel',
+            get_template_directory_uri() . '/assets/css/funnel.css',
+            [ 'elite-tours-main' ],
+            '1.0.0'
+        );
+    }
 } );
 
 // ─── Helper: get plugin option ───────────────────────────────────────────────
