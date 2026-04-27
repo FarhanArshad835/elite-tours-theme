@@ -115,13 +115,19 @@ $base        = get_template_directory_uri();
             </button>
             <div class="et-footer__trust-bar" id="et-trust-scroll">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/failte-ireland.png' ); ?>"
-                     alt="Fáilte Ireland" loading="lazy" class="et-footer__trust-logo">
+                     alt="Fáilte Ireland" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--failte">
+                <img src="<?php echo esc_url( $base . '/assets/images/trust/wild-atlantic-way.png' ); ?>"
+                     alt="Wild Atlantic Way" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--waw">
+                <img src="<?php echo esc_url( $base . '/assets/images/trust/discover-ireland.png' ); ?>"
+                     alt="Discover Ireland" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--discover">
+                <img src="<?php echo esc_url( $base . '/assets/images/trust/hidden-heartlands.png' ); ?>"
+                     alt="Ireland's Hidden Heartlands" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--heartlands">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/asta.png' ); ?>"
-                     alt="ASTA" loading="lazy" class="et-footer__trust-logo">
+                     alt="ASTA" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--asta">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/iagto.jpg' ); ?>"
-                     alt="IAGTO" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--colour">
+                     alt="Member of IAGTO — The Global Golf Tourism Organisation" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--iagto">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>"
-                     alt="TripAdvisor" loading="lazy" class="et-footer__trust-logo">
+                     alt="TripAdvisor" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--ta">
             </div>
             <button type="button" class="et-footer__trust-arrow et-footer__trust-arrow--right" aria-label="Scroll right">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>

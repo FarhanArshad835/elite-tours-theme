@@ -42,6 +42,14 @@
     transform: translateY(-3px);
     background: rgba(255,255,255,0.12);
 }
+.et-testimonial__stars {
+    font-size: 16px;
+    color: #34E0A1;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+}
 .et-testimonial__quote-mark {
     font-family: var(--et-font-heading);
     font-size: 64px;
@@ -378,21 +386,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 36px;
     flex: 1;
+    flex-wrap: wrap;
+    row-gap: 18px;
 }
 .et-footer__trust-arrow { display: none; }
 .et-footer__trust-logo {
-    height: 28px;
     width: auto;
     object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.55;
-    transition: opacity var(--et-transition);
+    opacity: 1;
+    transition: transform var(--et-transition);
     flex-shrink: 0;
 }
-.et-footer__trust-logo:hover { opacity: 0.85; }
-.et-footer__trust-logo--colour { filter: none; }
+.et-footer__trust-logo:hover { transform: translateY(-1px); }
+
+/* Per-logo sizing — each badge is normalised to roughly the same optical weight,
+   regardless of its native aspect ratio. */
+.et-footer__trust-logo--failte    { height: 44px; }
+.et-footer__trust-logo--waw       { height: 40px; }
+.et-footer__trust-logo--discover  { height: 26px; max-width: 150px; }
+.et-footer__trust-logo--heartlands{ height: 38px; }
+.et-footer__trust-logo--asta      { height: 56px; }
+.et-footer__trust-logo--ta        { height: 22px; filter: brightness(0) invert(1); }
+.et-footer__trust-logo--iagto {
+    height: 54px;
+    background: #ffffff;
+    padding: 5px 9px;
+    border-radius: 6px;
+}
 
 .et-footer__legal { padding-block: 20px; }
 .et-footer__legal .et-container {
@@ -569,13 +591,20 @@
     .et-footer__trust-bar {
         overflow-x: auto;
         justify-content: flex-start;
-        gap: 32px;
+        gap: 28px;
+        flex-wrap: nowrap;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
     }
     .et-footer__trust-bar::-webkit-scrollbar { display: none; }
-    .et-footer__trust-logo { height: 24px; }
+    .et-footer__trust-logo--failte    { height: 32px; }
+    .et-footer__trust-logo--waw       { height: 28px; }
+    .et-footer__trust-logo--discover  { height: 20px; max-width: 110px; }
+    .et-footer__trust-logo--heartlands{ height: 28px; }
+    .et-footer__trust-logo--asta      { height: 40px; }
+    .et-footer__trust-logo--ta        { height: 18px; }
+    .et-footer__trust-logo--iagto     { height: 40px; padding: 4px 7px; }
     .et-footer__legal .et-container { flex-direction: column; gap: 8px; text-align: center; }
     .et-footer__legal-text { font-size: 13px; }
     .et-footer__legal-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
