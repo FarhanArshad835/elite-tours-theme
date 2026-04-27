@@ -37,6 +37,7 @@ $testimonials = [
         <div class="et-testimonials__grid">
             <?php foreach ( $testimonials as $t ) : ?>
             <div class="et-testimonial">
+                <div class="et-testimonial__stars" aria-label="5 out of 5 stars">★★★★★</div>
                 <div class="et-testimonial__quote-mark">"</div>
                 <blockquote class="et-testimonial__body">
                     <?php echo esc_html( $t['quote'] ); ?>

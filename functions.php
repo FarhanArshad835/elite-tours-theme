@@ -58,10 +58,16 @@ add_action( 'wp_enqueue_scripts', function () {
     // Funnel page styles — only on single-experience pages
     if ( is_singular( 'experience' ) ) {
         wp_enqueue_style(
-            'elite-tours-funnel',
-            get_template_directory_uri() . '/assets/css/funnel.css',
-            [ 'elite-tours-main' ],
-            '1.0.0'
+            'elite-tours-fonts-funnel',
+            'https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap',
+            [],
+            null
+        );
+        wp_enqueue_style(
+            'elite-tours-exp-funnel',
+            get_template_directory_uri() . '/assets/css/exp-funnel.css',
+            [ 'elite-tours-main', 'elite-tours-fonts-funnel' ],
+            '2.0.0'
         );
     }
 } );
