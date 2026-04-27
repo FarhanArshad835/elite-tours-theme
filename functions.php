@@ -107,6 +107,76 @@ if ( ! function_exists( 'et_wishlist_enabled' ) ) {
     }
 }
 
+// ─── SEO: meta description + Open Graph + Twitter Card (Phase 8) ──────────────
+// Clean, single-source SEO injection in wp_head. Per-page values are derived
+// from post title/excerpt/featured image; site-level fallbacks come from
+// the homepage settings (et_homepage_settings). Designed to coexist with
+// SEO plugins — defers (priority 5) so a plugin like Yoast can override.
+add_action( 'wp_head', function () {
+    $is_singular = is_singular();
+    $is_home     = is_front_page() || is_home();
+    $site_name   = get_bloginfo( 'name' );
+
+    // --- Title (used in og/twitter; <title> is handled by WP title-tag) ---
+    $title = $is_singular
+        ? wp_strip_all_tags( get_the_title() ) . ' · ' . $site_name
+        : ( $is_home ? $site_name . ' · Privately hosted journeys through Ireland' : wp_get_document_title() );
+
+    // --- Description ---
+    $description = '';
+    if ( $is_singular ) {
+        if ( has_excerpt() ) {
+            $description = wp_strip_all_tags( get_the_excerpt() );
+        } else {
+            $description = wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) );
+            $description = trim( preg_replace( '/\s+/', ' ', $description ) );
+        }
+    }
+    if ( $description === '' ) {
+        // Site-level fallback: homepage hero subhead.
+        $description = (string) et_hp( 'hero_subheading', 'Privately hosted journeys through Ireland — designed around you, delivered with a level of care that turns travel into something far more meaningful.' );
+    }
+    $description = mb_substr( $description, 0, 200 );
+    if ( mb_strlen( $description ) === 200 ) $description .= '…';
+
+    // --- Image: featured image > homepage hero > theme default ---
+    $image_url = '';
+    if ( $is_singular && has_post_thumbnail() ) {
+        $image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+    }
+    if ( ! $image_url ) {
+        $hero_id = et_hp_int( 'hero_image_id', 0 );
+        if ( $hero_id ) $image_url = wp_get_attachment_image_url( $hero_id, 'full' );
+    }
+    if ( ! $image_url ) {
+        $image_url = get_template_directory_uri() . '/assets/images/hero-default.jpg';
+    }
+
+    // --- URL ---
+    $url = $is_singular ? get_permalink() : home_url( add_query_arg( null, null ) );
+
+    // --- Type ---
+    $og_type = $is_singular ? 'article' : 'website';
+
+    ?>
+    <!-- Elite Tours SEO meta -->
+    <meta name="description" content="<?php echo esc_attr( $description ); ?>">
+    <meta property="og:title" content="<?php echo esc_attr( $title ); ?>">
+    <meta property="og:description" content="<?php echo esc_attr( $description ); ?>">
+    <meta property="og:image" content="<?php echo esc_url( $image_url ); ?>">
+    <meta property="og:url" content="<?php echo esc_url( $url ); ?>">
+    <meta property="og:type" content="<?php echo esc_attr( $og_type ); ?>">
+    <meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>">
+    <meta property="og:locale" content="en_IE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>">
+    <meta name="twitter:description" content="<?php echo esc_attr( $description ); ?>">
+    <meta name="twitter:image" content="<?php echo esc_url( $image_url ); ?>">
+    <link rel="canonical" href="<?php echo esc_url( $url ); ?>">
+    <!-- /Elite Tours SEO meta -->
+    <?php
+}, 5 );
+
 // ─── Helper: wishlist heart button ──────────────────────────────────────────
 if ( ! function_exists( 'et_heart' ) ) {
     function et_heart( string $id, string $title = '', string $desc = '', string $img = '', string $url = '', string $type = '' ): string {
