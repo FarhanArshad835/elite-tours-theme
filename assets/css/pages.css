@@ -543,10 +543,20 @@
 }
 
 @media (max-width: 768px) {
-    .et-page-hero { padding: 140px 0 60px; }
-    .et-page-hero__title { font-size: 32px; }
+    .et-page-hero { padding: 110px 0 50px; min-height: 0; }
+    .et-page-hero--compact { padding: 100px 0 40px; min-height: 0; }
+    .et-page-hero__title { font-size: 30px; line-height: 1.15; }
+    /* Override inline style="height:480px" on the homepage Bespoke Journeys cards */
+    .et-tile--lg[style*="480px"] { height: 280px !important; }
+    .et-tile--lg .et-tile__title[style] { font-size: 22px !important; }
+    .et-page-hero__sub { font-size: 14px; line-height: 1.55; }
+    .et-page-hero__eyebrow { font-size: 10px; }
+    .et-page-hero__cta { width: 100%; justify-content: center; }
     .et-section { padding-block: 64px; }
     .et-section__header { margin-bottom: 32px; }
+    .et-section__title { font-size: 28px; line-height: 1.2; }
+    .et-section__subtitle { font-size: 14px; line-height: 1.55; }
+    .et-section__eyebrow { font-size: 10px; }
     .et-two-col { grid-template-columns: 1fr; gap: 32px; }
     .et-two-col--reverse { direction: ltr; }
     .et-tile-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -563,10 +573,14 @@
     .et-contact-grid { grid-template-columns: 1fr; gap: 16px; }
     .et-compare th,
     .et-compare td { padding: 10px 14px; font-size: 13px; }
+    .et-compare { font-size: 13px; display: block; overflow-x: auto; }
 }
 
 @media (max-width: 480px) {
     .et-tile-grid { grid-template-columns: 1fr; }
     .et-tile { height: 200px; }
     .et-info-grid { grid-template-columns: 1fr; }
+    .et-page-hero { padding: 100px 0 40px; }
+    .et-page-hero__title { font-size: 26px; }
+    .et-section__title { font-size: 24px; }
 }

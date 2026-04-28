@@ -898,18 +898,48 @@
     .et-exp__cta-portrait { height: 480px; }
 }
 @media (max-width: 720px) {
-    .et-exp__hero { min-height: 640px; }
+    /* Hero: switch from absolute-positioned overlay to a normal flow column.
+       This kills the breadcrumb / meta / content overlap that happens on
+       narrow viewports. */
+    .et-exp__hero {
+        min-height: 0;
+        height: auto;
+        padding: 96px 24px 56px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+    }
+    .et-exp__hero-img,
+    .et-exp__hero-overlay {
+        position: absolute;
+    }
     .et-exp__hero-meta {
-        top: 88px; left: 24px; right: 24px;
+        position: relative;
+        top: auto; left: auto; right: auto;
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 10px;
     }
     .et-exp__hero-content {
-        left: 24px; right: 24px; bottom: 56px;
-        gap: 32px;
+        position: relative;
+        left: auto; right: auto; bottom: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
     }
-    .et-exp__hero-deck { font-size: 19px; }
+    .et-exp__hero-title { font-size: clamp(40px, 11vw, 56px) !important; }
+    .et-exp__hero-deck { font-size: 17px; line-height: 1.5; }
+    .et-exp__hero-aside {
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.28);
+        padding: 24px 0 0;
+    }
+    .et-exp__hero-aside-text { font-size: 16px; max-width: none; }
+    .et-exp__hero-aside-facts { gap: 18px; flex-wrap: wrap; }
+    .et-exp__hero-cta { gap: 12px; }
+    .et-exp__hero-cta .et-exp__btn { width: 100%; justify-content: center; }
+    .et-exp__hero-scroll { display: none; }
+
     .et-exp__highlights,
     .et-exp__story,
     .et-exp__pillars,
