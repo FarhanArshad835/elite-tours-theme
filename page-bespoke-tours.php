@@ -136,54 +136,6 @@ if ( count( $bespoke_variants ) >= 1 ) :
     </div>
 </section>
 
-<!-- Sample Itineraries -->
-<section class="et-section et-section--offwhite">
-    <div class="et-container">
-        <div class="et-section__header et-reveal">
-            <h2 class="et-section__title">Here Is Where Other Journeys Have Begun</h2>
-            <p class="et-section__subtitle" style="font-style:italic;">These are examples only. Every journey we design is unique.</p>
-        </div>
-        <?php
-        // Pull bespoke itineraries from admin (filter by type = bespoke)
-        $all_itineraries = get_option( 'et_itineraries', [] );
-        $itineraries = array_filter( $all_itineraries, function( $it ) {
-            return ( $it['type'] ?? 'bespoke' ) === 'bespoke';
-        } );
-
-        // Fallback defaults if no admin itineraries
-        if ( empty( $itineraries ) ) {
-            $itineraries = [
-                [ 'name' => 'The Ancestral Journey', 'meta' => '8 Days', 'route' => 'Dublin → County Clare → County Mayo → Connemara → Galway → Departure', 'highlights' => [ 'Ancestry records visit with local expert', 'Private family townland tour', 'Cliffs of Moher (private morning)', 'Ashford Castle area', 'Traditional Irish evening with live music', 'Connemara lakeside drive' ] ],
-                [ 'name' => 'The Grand Tour of Ireland', 'meta' => '12 Days', 'route' => 'Dublin → Wicklow → Kilkenny → Cork → Kerry → Clare → Galway → Connemara → Departure', 'highlights' => [ 'Powerscourt Estate', 'Rock of Cashel', 'Kilkenny Castle', 'Midleton Distillery', 'Ring of Kerry', 'Dingle Peninsula', 'Cliffs of Moher', 'Aran Islands' ] ],
-                [ 'name' => 'Whiskey & The West', 'meta' => '7 Days', 'route' => 'Shannon → Midleton → Cork City → Kerry → Dingle → Connemara → Departure', 'highlights' => [ 'Jameson Distillery Midleton (private)', 'Dingle Distillery', 'Skellig Coast', 'Dingle Peninsula drive', 'Artisan food and pub experiences', 'Connemara' ] ],
-            ];
-        }
-        foreach ( $itineraries as $it ) : ?>
-        <div class="et-itinerary et-reveal">
-            <div class="et-itinerary__header" onclick="this.closest('.et-itinerary').classList.toggle('is-open')">
-                <div>
-                    <div class="et-itinerary__name"><?php echo esc_html( $it['name'] ); ?></div>
-                    <div class="et-itinerary__meta"><?php echo esc_html( $it['meta'] ); ?></div>
-                </div>
-                <span class="et-itinerary__arrow">&#9662;</span>
-            </div>
-            <div class="et-itinerary__body">
-                <p class="et-itinerary__route"><?php echo wp_kses_post( $it['route'] ); ?></p>
-                <ul class="et-itinerary__highlights">
-                    <?php foreach ( $it['highlights'] as $h ) : ?>
-                    <li><?php echo esc_html( $h ); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <?php $bespoke_disclaimer = $et_strings['bespoke_itinerary_disclaimer'] ?? 'These are starting points. Your journey will be designed around you.'; ?>
-        <?php if ( $bespoke_disclaimer ) : ?>
-        <p style="margin-top:24px;font-style:italic;color:var(--et-grey);font-size:14px;"><?php echo esc_html( $bespoke_disclaimer ); ?></p>
-        <?php endif; ?>
-    </div>
-</section>
-
 <!-- What's Included -->
 <section class="et-section et-section--white">
     <div class="et-container">

@@ -105,53 +105,6 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
     </div>
 </section>
 
-<!-- Sample Golf Journeys -->
-<section class="et-section et-section--offwhite">
-    <div class="et-container">
-        <div class="et-section__header et-reveal">
-            <h2 class="et-section__title">Where Other Golf Journeys Have Begun</h2>
-        </div>
-        <?php
-        // Pull golf itineraries from admin (filter by type = golf)
-        $all_itineraries = get_option( 'et_itineraries', [] );
-        $journeys = array_filter( $all_itineraries, function( $it ) {
-            return ( $it['type'] ?? '' ) === 'golf';
-        } );
-
-        // Fallback defaults if no admin golf itineraries
-        if ( empty( $journeys ) ) {
-            $journeys = [
-                [ 'name' => 'The Classic Links', 'meta' => '7 Days / 5 Rounds', 'route' => 'Shannon → Lahinch → Ballybunion → Waterville → Old Head → Shannon', 'highlights' => [ '5-star accommodation', 'Private chauffeur throughout', 'Whiskey experience included', '5 championship rounds' ] ],
-                [ 'name' => 'The Ultimate Golf Journey', 'meta' => '10 Days / 7 Rounds', 'route' => 'Dublin → Royal County Down → Portmarnock → Lahinch → Ballybunion → Waterville → Old Head → Shannon', 'highlights' => [ 'Full curation, 7 rounds', 'Luxury accommodation', 'Cultural experiences between rounds', 'Private dining' ] ],
-                [ 'name' => 'Father & Son Ireland', 'meta' => '7 Days', 'route' => 'Custom route built around shared bucket-list courses', 'highlights' => [ 'Courses selected together', 'Relaxed pace', 'Shared memories', 'Post-round pub evenings' ] ],
-            ];
-        }
-        foreach ( $journeys as $j ) : ?>
-        <div class="et-itinerary et-reveal">
-            <div class="et-itinerary__header" onclick="this.closest('.et-itinerary').classList.toggle('is-open')">
-                <div>
-                    <div class="et-itinerary__name"><?php echo esc_html( $j['name'] ); ?></div>
-                    <div class="et-itinerary__meta"><?php echo esc_html( $j['meta'] ); ?></div>
-                </div>
-                <span class="et-itinerary__arrow">&#9662;</span>
-            </div>
-            <div class="et-itinerary__body">
-                <p class="et-itinerary__route"><?php echo wp_kses_post( $j['route'] ); ?></p>
-                <ul class="et-itinerary__highlights">
-                    <?php foreach ( $j['highlights'] as $h ) : ?>
-                    <li><?php echo esc_html( $h ); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <?php $golf_disclaimer = $et_strings['golf_itinerary_disclaimer'] ?? 'All itineraries designed around the group. These are starting points only.'; ?>
-        <?php if ( $golf_disclaimer ) : ?>
-        <p style="margin-top:24px;font-style:italic;color:var(--et-grey);font-size:14px;"><?php echo esc_html( $golf_disclaimer ); ?></p>
-        <?php endif; ?>
-    </div>
-</section>
-
 <!-- Bottom CTA (CMS-driven via et_page_ctas['golf-tours']) -->
 <?php etm_render_page_cta( 'golf-tours', [
     'title'    => "Let's plan your golf journey.",
