@@ -1250,27 +1250,19 @@ input, textarea, select {
         transform: translateX(-100%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 999;
-        box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        /* No box-shadow here — at translateX(-100%) the shadow leaks 30px
+           into the viewport from the left edge, showing as a vertical
+           black bar even when the drawer is "closed". */
     }
-    .et-nav.is-open { transform: translateX(0); }
+    .et-nav.is-open {
+        transform: translateX(0);
+        box-shadow: 4px 0 30px rgba(0,0,0,0.3);  /* shadow only when open */
+    }
     .et-nav__list { flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; }
     .et-nav__link { padding: 12px 0; font-size: 16px; width: 100%; }
 
-    /* Phone — collapse to tap-to-call icon (most useful action on a phone) */
-    .et-header__phone {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        padding: 0;
-        font-size: 0;        /* hide the phone-number text, keep <svg> */
-        gap: 0;
-        border-radius: 8px;
-    }
-    .et-header__phone svg { width: 20px; height: 20px; opacity: 1; }
-    .et-header__phone:hover { background: rgba(255,255,255,0.08); }
-    .et-header.is-scrolled .et-header__phone:hover { background: rgba(0,0,0,0.05); }
+    /* Phone link — hidden on tablet+mobile (original behaviour) */
+    .et-header__phone { display: none; }
 
     /* Logo image — scale down so it doesn't crowd the header */
     .et-header__logo img { height: 40px; }
@@ -1300,9 +1292,6 @@ input, textarea, select {
 /* ── Mobile (max 768px) ─────────────────────────────────────── */
 @media (max-width: 768px) {
     :root { --et-header-h: 64px; }
-
-    /* Honour iOS notch — push header content below the safe area */
-    .et-header { padding-top: env(safe-area-inset-top); }
 
     /* Tighter container padding on small phones — gives 16px each side */
     .et-header__inner { padding-inline: 16px; gap: 8px; }
