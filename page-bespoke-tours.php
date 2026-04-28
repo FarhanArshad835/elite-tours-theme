@@ -76,43 +76,6 @@ if ( count( $bespoke_variants ) >= 1 ) :
 </section>
 <?php endif; ?>
 
-<!-- Journey Types Grid -->
-<section class="et-section et-section--white">
-    <div class="et-container">
-        <div class="et-section__header et-section__header--center et-reveal">
-            <h2 class="et-section__title">Where Would You Like to Begin?</h2>
-        </div>
-        <div class="et-tile-grid">
-            <?php
-            $tiles = get_option( 'et_bespoke_journey_types', [] );
-            if ( ! is_array( $tiles ) ) $tiles = [];
-            $tile_fallback_imgs = [
-                $base . 'kylemore-abbey.jpg', $base . 'irish-pub.jpg', $base . 'winding-road.jpg',
-                $base . 'gothic-castle.jpg', $base . 'castle-hillside.jpg', $base . 'golf-coastal.jpg',
-            ];
-            foreach ( $tiles as $i => $t ) :
-                $img_id  = absint( $t['image_id'] ?? 0 );
-                $img_url = $img_id
-                    ? wp_get_attachment_image_url( $img_id, 'large' )
-                    : $tile_fallback_imgs[ $i % count( $tile_fallback_imgs ) ];
-                $href = ! empty( $t['url'] ) ? esc_url( $t['url'] ) : esc_url( home_url( '/contact/' ) );
-            ?>
-            <a href="<?php echo esc_url( $href ); ?>" class="et-tile et-reveal">
-                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $img_url ); ?>')"></div>
-                <div class="et-tile__overlay"></div>
-                <?php echo et_heart( 'bespoke-' . sanitize_title( $t['title'] ?? 'tile' ), $t['title'] ?? '', $t['desc'] ?? '', $img_url, $href, 'Bespoke' ); ?>
-                <div class="et-tile__content">
-                    <span class="et-tile__label"><?php echo esc_html( $t['label'] ?? '' ); ?></span>
-                    <h3 class="et-tile__title"><?php echo esc_html( $t['title'] ?? '' ); ?></h3>
-                    <p class="et-tile__desc"><?php echo esc_html( $t['desc'] ?? '' ); ?></p>
-                    <span class="et-tile__cta">Learn More &rsaquo;</span>
-                </div>
-            </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
 <!-- Duration Breakdown -->
 <section class="et-section et-section--white">
     <div class="et-container">
