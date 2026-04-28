@@ -15,35 +15,37 @@ add_action( 'after_setup_theme', function () {
 
 // ─── Enqueue Assets ─────────────────────────────────────────────────────────
 add_action( 'wp_enqueue_scripts', function () {
+    // Cache-bust off the theme's Version: header so every commit forces a refresh.
+    $ver = wp_get_theme()->get( 'Version' );
     wp_enqueue_style(
         'elite-tours-main',
         get_template_directory_uri() . '/assets/css/main.css',
         [],
-        '1.2.0'
+        $ver
     );
     wp_enqueue_style(
         'elite-tours-sections',
         get_template_directory_uri() . '/assets/css/sections-extra.css',
         [ 'elite-tours-main' ],
-        '1.3.0'
+        $ver
     );
     wp_enqueue_style(
         'elite-tours-pages',
         get_template_directory_uri() . '/assets/css/pages.css',
         [ 'elite-tours-main' ],
-        '1.3.0'
+        $ver
     );
     wp_enqueue_style(
         'elite-tours-wishlist',
         get_template_directory_uri() . '/assets/css/wishlist.css',
         [ 'elite-tours-main' ],
-        '1.3.0'
+        $ver
     );
     wp_enqueue_script(
         'elite-tours-wishlist',
         get_template_directory_uri() . '/assets/js/wishlist.js',
         [],
-        '1.3.0',
+        $ver,
         true
     );
 
@@ -51,7 +53,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'elite-tours-main',
         get_template_directory_uri() . '/assets/js/main.js',
         [],
-        '1.0.0',
+        $ver,
         true
     );
 
@@ -67,7 +69,7 @@ add_action( 'wp_enqueue_scripts', function () {
             'elite-tours-exp-funnel',
             get_template_directory_uri() . '/assets/css/exp-funnel.css',
             [ 'elite-tours-main', 'elite-tours-fonts-funnel' ],
-            '2.0.0'
+            $ver
         );
     }
 } );
