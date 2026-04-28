@@ -270,10 +270,13 @@
     margin-bottom: 20px;
 }
 .et-footer__logo {
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
+    /* Logo is already styled (green box + white text); no inversion needed.
+       brightness(0) invert(1) was masking the actual logo as a flat white shape. */
     margin-bottom: 0;
     display: block;
+    height: auto;
+    max-height: 56px;
+    width: auto;
 }
 .et-footer__logo-text {
     display: flex;
