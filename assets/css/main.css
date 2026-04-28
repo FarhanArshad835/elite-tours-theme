@@ -61,32 +61,28 @@ img, video {
     height: auto;
 }
 
-/* iOS Safari overflow guard: nothing in flow should exceed viewport width.
-   On iOS Safari, certain elements (e.g. wide flex children, items with
-   white-space:nowrap) can push the body wider than the viewport, causing
-   horizontal scroll and content to clip past the right edge. */
+/* iOS Safari overflow guard: nothing in flow should exceed viewport width. */
 @media (max-width: 1024px) {
+    html, body {
+        overflow-x: clip;  /* better than hidden — doesn't create new scroll context */
+    }
     section, header, footer, main, article {
-        max-width: 100%;
-        overflow-x: hidden;
+        max-width: 100vw;
     }
     .et-container {
-        max-width: 100% !important;
+        max-width: 100vw !important;
+        width: 100%;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
     }
-    /* Anything inside main flow should not exceed parent width */
-    .et-section,
-    .et-page-hero,
-    .et-hero,
-    .et-intro,
-    .et-offers,
-    .et-process,
-    .et-experiences,
-    .et-testimonials,
-    .et-founder,
-    .et-footer,
-    .et-bespoke-journeys {
+    /* Force every direct child of et-container to respect that padding */
+    .et-container > * {
         max-width: 100%;
-        overflow-x: hidden;
+    }
+    /* Images, videos, iframes never wider than parent */
+    img, video, iframe {
+        max-width: 100% !important;
+        height: auto;
     }
 }
 
