@@ -9,22 +9,12 @@ $phone_clean = preg_replace( '/[^+0-9]/', '', $phone );
 $email = et_site( 'contact_email', 'elitetoursireland@gmail.com' );
 ?>
 
-<!-- Hero — gradient wrapper kept hardcoded; title/subtitle read from et_page_heroes['contact'] -->
-<?php
-$contact_heroes = get_option( 'et_page_heroes', [] );
-$contact_hero   = is_array( $contact_heroes ) && isset( $contact_heroes['contact'] ) ? $contact_heroes['contact'] : [];
-$contact_title  = $contact_hero['title']    ?? 'Start Your Journey Here';
-$contact_sub    = $contact_hero['subtitle'] ?? "There are no fixed packages. No automated quote tools. Just a real conversation about who you are and what you'd love to experience in Ireland.";
-?>
-<section class="et-page-hero">
-    <div class="et-page-hero__overlay" style="background:linear-gradient(135deg, var(--et-green) 0%, var(--et-green-dark) 100%);"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title"><?php echo wp_kses( $contact_title, [ 'br' => [], 'em' => [], 'strong' => [] ] ); ?></h1>
-            <p class="et-page-hero__sub"><?php echo esc_html( $contact_sub ); ?></p>
-        </div>
-    </div>
-</section>
+<?php $base = get_template_directory_uri() . '/assets/images/'; ?>
+<?php etm_render_page_hero( 'contact', [
+    'title'          => 'Start Your Journey Here',
+    'subtitle'       => "There are no fixed packages. No automated quote tools. Just a real conversation about who you are and what you'd love to experience in Ireland.",
+    'image_filename' => 'cliffs-overcast.jpg',
+], $base ); ?>
 
 <!-- Form + Contact -->
 <section class="et-section et-section--white">

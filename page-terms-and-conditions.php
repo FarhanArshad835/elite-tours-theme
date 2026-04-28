@@ -13,17 +13,14 @@ $site_email = (function () {
     $opts = get_option( 'et_site_settings', [] );
     return ! empty( $opts['contact_email'] ) ? $opts['contact_email'] : 'concierge@elitetours.ie';
 })();
+$base = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<section class="et-page-hero et-page-hero--compact" style="min-height:340px;">
-    <div class="et-page-hero__bg" style="background:linear-gradient(135deg,#1a4f31 0%,#0d2818 100%);"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Terms &amp; Conditions</h1>
-            <p class="et-page-hero__sub">The terms governing your booking with Elite Tours Ireland.</p>
-        </div>
-    </div>
-</section>
+<?php etm_render_page_hero( 'terms-and-conditions', [
+    'title'          => 'Terms &amp; Conditions',
+    'subtitle'       => 'The terms governing your booking with Elite Tours Ireland.',
+    'image_filename' => 'cloud-sea-figure.jpg',
+], $base, 'et-page-hero--compact' ); ?>
 
 <section class="et-section et-section--white">
     <div class="et-container">

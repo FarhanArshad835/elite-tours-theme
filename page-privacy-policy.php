@@ -16,17 +16,14 @@ $site_address = (function () {
     $opts = get_option( 'et_site_settings', [] );
     return ! empty( $opts['address'] ) ? $opts['address'] : '[REVIEW] Elite Tours Ireland, Co. Mayo, Ireland';
 })();
+$base = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<section class="et-page-hero et-page-hero--compact" style="min-height:340px;">
-    <div class="et-page-hero__bg" style="background:linear-gradient(135deg,#1a4f31 0%,#0d2818 100%);"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Privacy Policy</h1>
-            <p class="et-page-hero__sub">How we collect, use, and protect your personal data.</p>
-        </div>
-    </div>
-</section>
+<?php etm_render_page_hero( 'privacy-policy', [
+    'title'          => 'Privacy Policy',
+    'subtitle'       => 'How we collect, use, and protect your personal data.',
+    'image_filename' => 'cloud-sea-figure.jpg',
+], $base, 'et-page-hero--compact' ); ?>
 
 <section class="et-section et-section--white">
     <div class="et-container">

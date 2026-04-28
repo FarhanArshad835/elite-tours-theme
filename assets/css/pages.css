@@ -10,17 +10,21 @@
     color: var(--et-white);
     overflow: hidden;
 }
+.et-page-hero--compact {
+    padding: 140px 0 60px;
+    min-height: 340px;
+}
 .et-page-hero__bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    opacity: 0.25;
+    opacity: 1;
 }
 .et-page-hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(26,79,49,0.85) 0%, rgba(18,51,32,0.95) 100%);
+    background: linear-gradient(to bottom, rgba(13,40,24,0.55) 0%, rgba(13,40,24,0.75) 100%);
 }
 .et-page-hero__content {
     position: relative;

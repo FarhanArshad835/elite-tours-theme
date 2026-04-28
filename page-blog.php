@@ -11,18 +11,14 @@ $blog_query = new WP_Query( [
     'posts_per_page' => 9,
     'paged'          => $paged,
 ] );
+$base = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<!-- Hero -->
-<section class="et-page-hero">
-    <div class="et-page-hero__overlay" style="background:linear-gradient(135deg, var(--et-green) 0%, var(--et-green-dark) 100%);"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content et-reveal">
-            <h1 class="et-page-hero__title">Insights from Ireland</h1>
-            <p class="et-page-hero__sub">Stories, guides, and insider knowledge from our journeys across the country.</p>
-        </div>
-    </div>
-</section>
+<?php etm_render_page_hero( 'blog', [
+    'title'          => 'Insights from Ireland',
+    'subtitle'       => 'Stories, guides, and insider knowledge from our journeys across the country.',
+    'image_filename' => 'notebook-desk.jpg',
+], $base ); ?>
 
 <!-- Blog Grid -->
 <section class="et-section et-section--white">

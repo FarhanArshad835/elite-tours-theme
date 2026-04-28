@@ -11,17 +11,14 @@ if ( ! et_wishlist_enabled() ) {
 }
 
 get_header();
+$base = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<section class="et-page-hero" style="padding:140px 0 60px;">
-    <div class="et-page-hero__overlay" style="background:linear-gradient(135deg, var(--et-green) 0%, var(--et-green-dark) 100%);"></div>
-    <div class="et-container">
-        <div class="et-page-hero__content">
-            <h1 class="et-page-hero__title">Your Wishlist</h1>
-            <p class="et-page-hero__sub">Experiences and journeys you've saved. Share this with us when you're ready to plan.</p>
-        </div>
-    </div>
-</section>
+<?php etm_render_page_hero( 'wishlist', [
+    'title'          => 'Your Wishlist',
+    'subtitle'       => "Experiences and journeys you've saved. Share this with us when you're ready to plan.",
+    'image_filename' => 'cliffs-dramatic.jpg',
+], $base, 'et-page-hero--compact' ); ?>
 
 <section class="et-section et-section--white">
     <div class="et-container">
