@@ -17,7 +17,16 @@ $heading2 = $f['pillars_heading_part2'] ?? '';
 $sub      = $f['pillars_subheading'] ?? '';
 $intro    = $f['pillars_intro']    ?? '';
 
-$romans = [ 'I', 'II', 'III', 'IV', 'V' ];
+if ( ! function_exists( 'et_to_roman' ) ) {
+    function et_to_roman( int $n ): string {
+        $map = [ 'M'=>1000,'CM'=>900,'D'=>500,'CD'=>400,'C'=>100,'XC'=>90,'L'=>50,'XL'=>40,'X'=>10,'IX'=>9,'V'=>5,'IV'=>4,'I'=>1 ];
+        $r = '';
+        foreach ( $map as $sym => $val ) {
+            while ( $n >= $val ) { $r .= $sym; $n -= $val; }
+        }
+        return $r;
+    }
+}
 ?>
 <section class="et-exp__pillars">
     <div class="et-exp__pillars-inner">
@@ -50,7 +59,7 @@ $romans = [ 'I', 'II', 'III', 'IV', 'V' ];
                 $img_id = (int) ( $p['image_id'] ?? 0 );
                 $img_url = $img_id ? wp_get_attachment_image_url( $img_id, 'large' ) : '';
                 if ( ! $name && ! $title ) continue;
-                $r = $romans[ $i ] ?? (string) ( $i + 1 );
+                $r = et_to_roman( $i + 1 );
             ?>
                 <div>
                     <?php if ( $img_url ) : ?>

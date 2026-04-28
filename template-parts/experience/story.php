@@ -11,7 +11,7 @@ $f = $args['funnel'] ?? [];
 $image_main_id   = (int) ( $f['story_image_main']   ?? 0 );
 $image_accent_id = (int) ( $f['story_image_accent'] ?? 0 );
 $image_main_url  = $image_main_id   ? wp_get_attachment_image_url( $image_main_id,   'large' ) : '';
-$image_accent_url= $image_accent_id ? wp_get_attachment_image_url( $image_accent_id, 'medium' ) : '';
+$image_accent_url= $image_accent_id ? wp_get_attachment_image_url( $image_accent_id, 'large' ) : '';
 
 // At minimum we need the lede paragraph for this section to render.
 $lede = $f['story_lede'] ?? '';

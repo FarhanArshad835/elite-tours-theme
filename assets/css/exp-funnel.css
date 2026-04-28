@@ -895,6 +895,11 @@
     }
     .et-exp__highlight-img { height: 280px; }
     .et-exp__story-img-main { height: 480px; }
+    /* Hide the accent overlay image once layout collapses to 1-col — it has
+       nothing to overlay anymore and just looks like a blurry duplicate. */
+    .et-exp__story-img-accent { display: none; }
+    .et-exp__story-plate { display: none; }
+    .et-exp__story-images { padding-left: 0; }
     .et-exp__cta-portrait { height: 480px; }
 }
 @media (max-width: 720px) {
