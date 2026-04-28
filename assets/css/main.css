@@ -392,20 +392,39 @@ input, textarea, select {
 .et-hamburger {
     display: none;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 5px;
-    width: 36px;
-    height: 36px;
-    padding: 4px;
+    width: 44px;                          /* 44×44 — Apple HIG minimum touch target */
+    height: 44px;
+    padding: 0;
     flex-shrink: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s;
 }
+.et-hamburger:hover { background: rgba(255,255,255,0.08); }
+.et-hamburger:focus-visible {
+    outline: 2px solid var(--et-gold);
+    outline-offset: 2px;
+}
+.et-header.is-scrolled .et-hamburger:hover { background: rgba(0,0,0,0.05); }
+
 .et-hamburger__bar {
     display: block;
     width: 22px;
     height: 2px;
     background: var(--et-white);
     border-radius: 2px;
-    transition: transform var(--et-transition), opacity var(--et-transition);
+    /* Tiny shadow keeps bars readable over light hero areas before is-scrolled
+       kicks in. Imperceptible over dark heros, gives ~1px contrast over white. */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    transition: transform var(--et-transition), opacity var(--et-transition), background var(--et-transition);
 }
 
 /* Hamburger open state */
@@ -418,6 +437,27 @@ input, textarea, select {
 }
 .et-hamburger[aria-expanded="true"] .et-hamburger__bar:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Header tap-highlight + focus-visible — mobile UX polish ─── */
+.et-header a,
+.et-header button {
+    -webkit-tap-highlight-color: transparent;
+}
+.et-nav__link:focus-visible,
+.et-header__phone:focus-visible,
+.et-nav-wishlist:focus-visible,
+.et-header__logo:focus-visible {
+    outline: 2px solid var(--et-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Reduced-motion: keep functionality, drop animation */
+@media (prefers-reduced-motion: reduce) {
+    .et-nav,
+    .et-hamburger__bar,
+    .et-header { transition-duration: 0.01ms !important; }
 }
 
 /* ============================================================
@@ -1196,21 +1236,44 @@ input, textarea, select {
         top: var(--et-header-h);
         left: 0;
         width: 100%;
+        max-width: 100vw;                              /* never overflow viewport */
         height: calc(100vh - var(--et-header-h));
-        height: calc(100svh - var(--et-header-h));
+        height: calc(100svh - var(--et-header-h));     /* iOS dynamic viewport */
         background: var(--et-green-dark);
         flex-direction: column;
         justify-content: flex-start;
         padding: 32px var(--et-container-pad);
+        padding-bottom: calc(32px + env(safe-area-inset-bottom));  /* iOS home-indicator */
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;             /* iOS momentum scroll */
+        overscroll-behavior: contain;                  /* don't chain to body */
         transform: translateX(-100%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 999;
+        box-shadow: 0 0 30px rgba(0,0,0,0.3);
     }
     .et-nav.is-open { transform: translateX(0); }
     .et-nav__list { flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; }
     .et-nav__link { padding: 12px 0; font-size: 16px; width: 100%; }
-    .et-header__phone { display: none; }
+
+    /* Phone — collapse to tap-to-call icon (most useful action on a phone) */
+    .et-header__phone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 0;        /* hide the phone-number text, keep <svg> */
+        gap: 0;
+        border-radius: 8px;
+    }
+    .et-header__phone svg { width: 20px; height: 20px; opacity: 1; }
+    .et-header__phone:hover { background: rgba(255,255,255,0.08); }
+    .et-header.is-scrolled .et-header__phone:hover { background: rgba(0,0,0,0.05); }
+
+    /* Logo image — scale down so it doesn't crowd the header */
+    .et-header__logo img { height: 40px; }
     /* Trust bar: hide last item + its divider, collapse to 4 items */
     /* Trust bar — keep flex, hide last item on tablet */
     .et-trust-bar { gap: 28px; }
@@ -1238,6 +1301,12 @@ input, textarea, select {
 @media (max-width: 768px) {
     :root { --et-header-h: 64px; }
 
+    /* Honour iOS notch — push header content below the safe area */
+    .et-header { padding-top: env(safe-area-inset-top); }
+
+    /* Tighter container padding on small phones — gives 16px each side */
+    .et-header__inner { padding-inline: 16px; gap: 8px; }
+
     .et-nav__item { width: 100%; }
     .et-nav__link {
         font-size: 18px;
@@ -1254,6 +1323,12 @@ input, textarea, select {
 
     /* Hide desktop CTA in mobile nav */
     .et-header__actions .et-btn { display: none; }
+
+    /* Header actions row — tighter spacing on phones */
+    .et-header__actions { gap: 4px; }
+
+    /* Smaller logo on phones */
+    .et-header__logo img { height: 36px; }
 
     /* Hero */
     .et-hero__content { padding-bottom: 48px; }
