@@ -340,7 +340,7 @@
     border: 1px solid #d0d0d0;
     border-radius: var(--et-radius);
     font-family: var(--et-font-body);
-    font-size: 14px;
+    font-size: 16px;  /* iOS Safari auto-zooms inputs <16px on focus; keep ≥16 */
     transition: border-color 0.3s;
 }
 .et-form__input:focus,

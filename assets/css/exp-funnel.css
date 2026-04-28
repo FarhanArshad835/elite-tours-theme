@@ -104,10 +104,14 @@
    ============================================================ */
 .et-exp__hero {
     position: relative;
-    height: 100vh;
+    height: 100vh;     /* fallback */
+    height: 100svh;    /* iOS Safari */
     min-height: 760px;
     overflow: hidden;
     color: #fff;
+}
+@supports (height: 100dvh) {
+    .et-exp__hero { height: 100dvh; }
 }
 .et-exp__hero-img {
     position: absolute; inset: 0;

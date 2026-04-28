@@ -40,8 +40,9 @@ body {
     color: var(--et-grey-dark);
     background: var(--et-white);
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
-    max-width: 100vw;
+    max-width: 100%;
 }
 img, video { display: block; max-width: 100%; height: auto; }
 
@@ -332,11 +333,15 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .et-hero {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100vh;             /* fallback for older browsers */
+    height: 100svh;            /* iOS Safari: small viewport (URL bar visible) */
     min-height: 640px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+@supports (height: 100dvh) {
+    .et-hero { height: 100dvh; }
 }
 
 /* ── Background ─────────────────────────────────────────────── */
@@ -1099,6 +1104,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
         left: 0;
         width: 100%;
         height: calc(100vh - var(--et-header-h));
+        height: calc(100svh - var(--et-header-h));
         background: var(--et-green-dark);
         flex-direction: column;
         justify-content: flex-start;
