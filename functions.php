@@ -126,9 +126,22 @@ if ( ! function_exists( 'et_wishlist_enabled' ) ) {
 //   duration -> _etm_legacy_duration    (or 'bespoke' default)
 //   image_id -> get_post_thumbnail_id() (the featured image)
 if ( ! function_exists( 'et_get_experiences' ) ) {
-    function et_get_experiences(): array {
-        static $cache = null;
-        if ( $cache !== null ) return $cache;
+    /**
+     * @param bool $include_bespoke_variants  When false (default) the Bespoke
+     *   product variants (Signature Ireland Journey, Essence of Ireland) are
+     *   excluded — they're surfaced on /bespoke-tours/ as duration choices,
+     *   not as peers of thematic experiences (Heritage, Distilleries, …).
+     *   Pass true to get every published Experience CPT post (used by the
+     *   "Two ways to travel" block on the Bespoke Tours page itself).
+     */
+    function et_get_experiences( bool $include_bespoke_variants = false ): array {
+        static $cache = [];
+        $key = $include_bespoke_variants ? 'all' : 'thematic';
+        if ( isset( $cache[ $key ] ) ) return $cache[ $key ];
+
+        // Slugs of the two Bespoke product variants. Hidden from the
+        // /experiences/ grid + homepage grid by default.
+        $bespoke_variant_slugs = [ 'signature-ireland-journey', 'essence-of-ireland' ];
 
         if ( post_type_exists( 'experience' ) ) {
             $posts = get_posts( [
@@ -142,6 +155,9 @@ if ( ! function_exists( 'et_get_experiences' ) ) {
             if ( ! empty( $posts ) ) {
                 $cards = [];
                 foreach ( $posts as $p ) {
+                    if ( ! $include_bespoke_variants && in_array( $p->post_name, $bespoke_variant_slugs, true ) ) {
+                        continue;
+                    }
                     $cards[] = [
                         'title'    => $p->post_title,
                         'label'    => get_post_meta( $p->ID, '_etm_eyebrow', true ) ?: '',
@@ -151,15 +167,31 @@ if ( ! function_exists( 'et_get_experiences' ) ) {
                         'duration' => get_post_meta( $p->ID, '_etm_legacy_duration', true ) ?: 'bespoke',
                         'image_id' => (int) get_post_thumbnail_id( $p->ID ),
                         'cpt_id'   => (int) $p->ID,
+                        'slug'     => $p->post_name,
                     ];
                 }
-                return $cache = $cards;
+                return $cache[ $key ] = $cards;
             }
         }
 
         // Fallback: legacy admin option (no CPT posts published yet).
         $legacy = get_option( 'et_experiences', [] );
-        return $cache = is_array( $legacy ) ? $legacy : [];
+        return $cache[ $key ] = is_array( $legacy ) ? $legacy : [];
+    }
+}
+
+// ─── Helper: just the Bespoke product variants (Signature + Essence) ─────────
+if ( ! function_exists( 'et_get_bespoke_variants' ) ) {
+    function et_get_bespoke_variants(): array {
+        $all  = et_get_experiences( true );
+        $want = [ 'signature-ireland-journey', 'essence-of-ireland' ];
+        $out  = [];
+        foreach ( $want as $slug ) {
+            foreach ( $all as $card ) {
+                if ( ( $card['slug'] ?? '' ) === $slug ) { $out[] = $card; break; }
+            }
+        }
+        return $out;
     }
 }
 

@@ -38,8 +38,46 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
     </div>
 </section>
 
-<!-- Journey Types Grid -->
+<!-- Two Ways to Travel — Signature + Essence (the two Bespoke duration variants
+     from the client PDFs). Each card links to its full detail page. -->
+<?php
+$bespoke_variants = function_exists( 'et_get_bespoke_variants' ) ? et_get_bespoke_variants() : [];
+if ( count( $bespoke_variants ) >= 1 ) :
+?>
 <section class="et-section et-section--offwhite">
+    <div class="et-container">
+        <div class="et-section__header et-section__header--center et-reveal">
+            <p class="et-section__eyebrow">Two ways to travel</p>
+            <h2 class="et-section__title">Choose your length.</h2>
+            <p class="et-section__subtitle">Same level of care, same private hosting, same end-to-end design — across either eleven to fifteen days, or six to ten. We help you pick the shape that fits the time you have.</p>
+        </div>
+        <div class="et-tile-grid">
+            <?php foreach ( $bespoke_variants as $v ) :
+                $img_id  = absint( $v['image_id'] ?? 0 );
+                $img_url = $img_id
+                    ? wp_get_attachment_image_url( $img_id, 'large' )
+                    : ( $base . 'winding-road.jpg' );
+                $title_clean = preg_replace( '/\.$/u', '', $v['title'] ?? '' ); // drop trailing period for card display
+            ?>
+            <a href="<?php echo esc_url( $v['url'] ); ?>" class="et-tile et-tile--lg et-reveal" style="height:480px;">
+                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $img_url ); ?>')"></div>
+                <div class="et-tile__overlay"></div>
+                <?php echo et_heart( 'bespoke-variant-' . sanitize_title( $v['slug'] ?? 'variant' ), $title_clean, $v['desc'] ?? '', $img_url, $v['url'], 'Bespoke' ); ?>
+                <div class="et-tile__content">
+                    <span class="et-tile__label"><?php echo esc_html( $v['label'] ?? '' ); ?></span>
+                    <h3 class="et-tile__title" style="font-size:32px;line-height:1.15;"><?php echo esc_html( $title_clean ); ?></h3>
+                    <p class="et-tile__desc"><?php echo esc_html( $v['desc'] ?? '' ); ?></p>
+                    <span class="et-tile__cta">Read the journey &rsaquo;</span>
+                </div>
+            </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- Journey Types Grid -->
+<section class="et-section et-section--white">
     <div class="et-container">
         <div class="et-section__header et-section__header--center et-reveal">
             <h2 class="et-section__title">Where Would You Like to Begin?</h2>
