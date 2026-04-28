@@ -80,4 +80,52 @@
         else if ( mql.addListener ) mql.addListener( onMqlChange ); /* Safari < 14 */
     }
 
+    // ── Carousel: prev/next buttons sync with scroll position ─
+    // Picks up any element with data-carousel-prev / data-carousel-next
+    // pointing at the carousel container's id. Smooth-scrolls one card
+    // width per click; updates disabled state at scroll boundaries.
+    const wireCarouselButton = ( btn, dir ) => {
+        const targetId = btn.getAttribute( dir === -1 ? 'data-carousel-prev' : 'data-carousel-next' );
+        const track    = targetId ? document.getElementById( targetId ) : null;
+        if ( ! track ) return;
+
+        const cardStep = () => {
+            const card = track.querySelector( '.et-exp-card, .et-tile, .et-key-card' );
+            if ( ! card ) return track.clientWidth;
+            const rect = card.getBoundingClientRect();
+            const styles = getComputedStyle( track );
+            const gap    = parseFloat( styles.columnGap || styles.gap || '24' ) || 0;
+            return rect.width + gap;
+        };
+
+        btn.addEventListener( 'click', () => {
+            track.scrollBy( { left: dir * cardStep(), behavior: 'smooth' } );
+        } );
+    };
+    document.querySelectorAll( '[data-carousel-prev]' ).forEach( b => wireCarouselButton( b, -1 ) );
+    document.querySelectorAll( '[data-carousel-next]' ).forEach( b => wireCarouselButton( b,  1 ) );
+
+    // Update prev/next disabled state as the user scrolls or resizes
+    const carouselTracks = new Map(); // track id → { prev, next }
+    document.querySelectorAll( '[data-carousel-prev], [data-carousel-next]' ).forEach( btn => {
+        const id  = btn.getAttribute( 'data-carousel-prev' ) || btn.getAttribute( 'data-carousel-next' );
+        const dir = btn.hasAttribute( 'data-carousel-prev' ) ? 'prev' : 'next';
+        if ( ! id ) return;
+        const entry = carouselTracks.get( id ) || {};
+        entry[ dir ] = btn;
+        carouselTracks.set( id, entry );
+    } );
+    carouselTracks.forEach( ( ctrls, id ) => {
+        const track = document.getElementById( id );
+        if ( ! track ) return;
+        const sync = () => {
+            const max = track.scrollWidth - track.clientWidth - 1;
+            if ( ctrls.prev ) ctrls.prev.disabled = track.scrollLeft <= 1;
+            if ( ctrls.next ) ctrls.next.disabled = track.scrollLeft >= max;
+        };
+        track.addEventListener( 'scroll', sync, { passive: true } );
+        window.addEventListener( 'resize',  sync );
+        sync();
+    } );
+
 } )();

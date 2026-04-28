@@ -66,6 +66,27 @@ h1, h2, h3, h4, h5, h6, p, a {
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+
+/* iOS Safari hero / section titles: extra-defensive overflow guard. These
+   titles use clamp() font-sizes + negative letter-spacing, and content
+   sometimes lacks spaces (e.g. "Ireland,through" or "Ireland.Very" when a
+   <br> sits between two sentences). On narrow viewports those tokens push
+   the container past 100vw on iOS even with overflow-x:clip on body.
+   `overflow-wrap: anywhere` lets the browser break at any character as a
+   last resort — readable text stays unbroken; only true overflow forces a
+   break. Added max-width:100% so the element itself can never exceed its
+   parent's content box. */
+.et-page-hero__title,
+.et-page-hero__sub,
+.et-section__title,
+.et-section__subtitle,
+.et-hero__headline,
+.et-hero__subheading,
+.et-experiences__heading {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;          /* webkit fallback */
+}
 img, video {
     display: block;
     max-width: 100%;
@@ -1099,6 +1120,78 @@ input, textarea, select {
     gap: 24px;
 }
 
+/* ── Carousel mode — horizontal scroll-snap variant ─────────── */
+.et-experiences__header--with-controls {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    text-align: left;
+}
+.et-experiences__header--with-controls .et-experiences__heading { margin: 0; }
+
+.et-carousel-controls {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+.et-carousel-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--et-light-grey, #d4d4d4);
+    background: var(--et-white);
+    color: var(--et-green);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, opacity 0.2s, transform 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+    padding: 0;
+}
+.et-carousel-btn:hover:not(:disabled) {
+    background: var(--et-green);
+    color: var(--et-white);
+    border-color: var(--et-green);
+}
+.et-carousel-btn:active:not(:disabled) { transform: scale(0.95); }
+.et-carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.et-carousel-btn:focus-visible {
+    outline: 2px solid var(--et-gold);
+    outline-offset: 2px;
+}
+
+.et-experiences__grid--carousel {
+    display: flex !important;        /* override the base grid rule */
+    grid-template-columns: none;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    /* Bleed the scroll track to the container edges so the next/prev
+       card can peek beyond the viewport edge. Padding restores the
+       in-flow gutter for the snap stop. */
+    margin-inline: calc(var(--et-container-pad, 24px) * -1);
+    padding: 4px var(--et-container-pad, 24px) 24px;
+    /* Hide native scrollbar — touch + buttons are the input modes */
+    scrollbar-width: none;
+}
+.et-experiences__grid--carousel::-webkit-scrollbar { display: none; }
+.et-experiences__grid--carousel:focus-visible { outline: 2px solid var(--et-gold); outline-offset: -2px; border-radius: 4px; }
+
+.et-experiences__grid--carousel .et-exp-card {
+    flex: 0 0 calc((100% - 48px) / 3);   /* 3 visible at desktop, gap 24×2 */
+    scroll-snap-align: start;
+    height: 400px;                       /* match base */
+}
+
 /* ── Experience filter tabs ──────────────────────────────────── */
 .et-experiences__filters {
     display: flex;
@@ -1295,6 +1388,7 @@ input, textarea, select {
 
     /* Experiences */
     .et-experiences__grid { grid-template-columns: repeat(2, 1fr); }
+    .et-experiences__grid--carousel .et-exp-card { flex: 0 0 calc((100% - 24px) / 2); }  /* tablet: 2 visible */
 
     /* Intro badge — keep inside bounds */
     .et-intro__badge { left: 12px; }
@@ -1430,6 +1524,27 @@ input, textarea, select {
     .et-exp-card__title { font-size: 13px; margin-bottom: 0; }
     .et-exp-card__desc { display: none !important; }
     .et-exp-card__cta { display: none; }
+
+    /* Carousel mode on mobile — swipe is the input, hide arrow controls.
+       Cards become tall and editorial-grade since only one is visible at
+       a time, so they get back the description + CTA the grid mode hides. */
+    .et-experiences__header--with-controls {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 14px;
+    }
+    .et-carousel-controls { display: none; }
+    .et-experiences__grid--carousel .et-exp-card {
+        flex: 0 0 80%;             /* one visible + ~10% peek of next on each side */
+        height: 360px;
+        border-radius: 8px;
+    }
+    .et-experiences__grid--carousel .et-exp-card__content { padding: 22px; }
+    .et-experiences__grid--carousel .et-exp-card__label   { font-size: 10px; margin-bottom: 8px; }
+    .et-experiences__grid--carousel .et-exp-card__title   { font-size: 20px; margin-bottom: 8px; }
+    .et-experiences__grid--carousel .et-exp-card__desc    { display: block !important; font-size: 13px; }
+    .et-experiences__grid--carousel .et-exp-card__cta     { display: inline-flex; }
 }
 
 /* ── Small phones (max 480px) ──────────────────────────────── */

@@ -48,11 +48,23 @@ foreach ( $key_experiences as $i => $ke ) {
 <section class="et-experiences" id="et-experiences">
     <div class="et-container">
 
-        <div class="et-experiences__header">
+        <div class="et-experiences__header et-experiences__header--with-controls">
             <h2 class="et-experiences__heading"><?php echo wp_kses( $exp_heading, [ 'br' => [] ] ); ?></h2>
+
+            <?php if ( count( $experiences ) > 1 ) : ?>
+            <div class="et-carousel-controls" aria-label="Carousel navigation">
+                <button type="button" class="et-carousel-btn et-carousel-btn--prev" data-carousel-prev="et-exp-grid" aria-label="Previous experience" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>
+                <button type="button" class="et-carousel-btn et-carousel-btn--next" data-carousel-next="et-exp-grid" aria-label="Next experience">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+            <?php endif; ?>
         </div>
 
-        <div class="et-experiences__grid" id="et-exp-grid">
+        <div class="et-experiences__grid et-experiences__grid--carousel" id="et-exp-grid"
+             role="region" aria-label="Featured experiences carousel" tabindex="0">
             <?php foreach ( $experiences as $exp ) : ?>
             <a href="<?php echo esc_url( $exp['url'] ); ?>" class="et-exp-card">
                 <div class="et-exp-card__img" style="background-image: url('<?php echo esc_url( $exp['img'] ); ?>')"></div>
