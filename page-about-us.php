@@ -35,7 +35,7 @@ if ( ! is_array( $strings ) ) $strings = [];
         <div class="et-two-col">
             <div class="et-reveal">
                 <div class="et-section__header">
-                    <h2 class="et-section__title">Most people visit Ireland.<br>Very few experience it properly.</h2>
+                    <h2 class="et-section__title">Most people visit Ireland. <br>Very few experience it properly.</h2>
                 </div>
                 <div class="et-content">
                     <?php
