@@ -42,9 +42,24 @@ body {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
+    width: 100%;
     max-width: 100%;
+    /* iOS: prevent body scroll-chaining elastic-bouncing the page sideways */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
-img, video { display: block; max-width: 100%; height: auto; }
+/* iOS Safari: long URLs/words can push past container width and force the
+   whole body wider than the viewport. Force long strings to break only when
+   they would actually overflow — not aggressive hyphenation. */
+h1, h2, h3, h4, h5, h6, p, a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+img, video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
 
 /* ── Scroll reveal ────────────────────────────────────────── */
 .et-reveal {
@@ -61,7 +76,19 @@ img, video { display: block; max-width: 100%; height: auto; }
 .et-reveal--delay-3 { transition-delay: 0.3s; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
-button { cursor: pointer; border: none; background: none; font: inherit; }
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font: inherit;
+    -webkit-appearance: none;  /* iOS strips default rounded button styling */
+    appearance: none;
+}
+/* iOS Safari: strip default rounded native styling so our CSS wins. */
+input, textarea, select {
+    -webkit-appearance: none;
+    appearance: none;
+}
 
 /* ── Container ─────────────────────────────────────────────── */
 .et-container {
@@ -69,6 +96,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     max-width: var(--et-container);
     margin-inline: auto;
     padding-inline: var(--et-container-pad);
+    /* iOS: respect notch in landscape on iPhone X+ */
+    padding-left: max(var(--et-container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--et-container-pad), env(safe-area-inset-right));
 }
 
 /* ── Buttons ───────────────────────────────────────────────── */

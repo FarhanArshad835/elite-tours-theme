@@ -707,12 +707,14 @@
     border: 1px solid var(--line);
     padding: 16px 18px;
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 16px;  /* iOS Safari auto-zooms <16px on focus */
     background: #fff;
     outline: none;
     color: var(--ink);
     border-radius: 0;
     width: 100%;
+    -webkit-appearance: none;  /* iOS strips default rounded styling */
+    appearance: none;
 }
 .et-exp__cta-form input:focus,
 .et-exp__cta-form textarea:focus {

@@ -9,6 +9,7 @@
 .et-exp-funnel__hero {
     position: relative;
     min-height: 70vh;
+    min-height: 70svh;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -293,7 +294,7 @@
 
 /* ── Mobile ───────────────────────────────────────────────── */
 @media ( max-width: 880px ) {
-    .et-exp-funnel__hero { min-height: 56vh; }
+    .et-exp-funnel__hero { min-height: 56vh; min-height: 56svh; }
     .et-exp-funnel__hero-inner { padding-block: 60px 48px; }
 
     .et-exp-funnel__highlights,
