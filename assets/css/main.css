@@ -90,6 +90,21 @@ img, video {
     }
 }
 
+/* Mobile: long-text buttons (e.g. "The Elite Tours Story & About Us") would
+   overflow the container as inline-flex. Make all primary/secondary buttons
+   full-width with centered content + wrapping text on narrow phones. */
+@media (max-width: 600px) {
+    .et-btn--primary,
+    .et-btn--secondary,
+    .et-btn--lg {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+        max-width: 100%;
+    }
+}
+
 /* ── Scroll reveal ────────────────────────────────────────── */
 .et-reveal {
     opacity: 0;
