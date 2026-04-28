@@ -13,6 +13,19 @@ add_action( 'after_setup_theme', function () {
     ] );
 } );
 
+// ─── Hide WP Admin Toolbar on the Front-End ────────────────────────────────
+// Logged-in users still get the toolbar inside /wp-admin/, just not when
+// viewing the public site. Stops the black 32px (46px on mobile) bar from
+// pushing the fixed header down and overlapping hero content.
+add_filter( 'show_admin_bar', '__return_false' );
+
+// Belt-and-braces — also strip the html { margin-top: ...!important } that
+// WP injects for logged-in users via the _admin_bar_bump_cb action. Without
+// this, even with the bar hidden some browsers / cached pages can leave a
+// blank strip at the top.
+remove_action( 'wp_head',         '_admin_bar_bump_cb' );
+remove_action( 'admin_print_styles', '_admin_bar_bump_cb' );
+
 // ─── Enqueue Assets ─────────────────────────────────────────────────────────
 add_action( 'wp_enqueue_scripts', function () {
     // Cache-bust off the theme's Version: header so every commit forces a refresh.

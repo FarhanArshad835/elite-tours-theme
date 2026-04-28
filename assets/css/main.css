@@ -28,6 +28,17 @@
 
 /* ── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Defensive: hide the WP admin toolbar on the front-end and undo the
+   margin-top WordPress injects for logged-in users. Functions.php
+   already filters show_admin_bar off, but a stray cookie / cache /
+   plugin can still leak the markup. !important is appropriate here
+   because WordPress writes the margin rule with !important itself. */
+html { margin-top: 0 !important; }
+@media screen and (max-width: 782px) {
+    html { margin-top: 0 !important; }
+}
+#wpadminbar { display: none !important; }
 html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
