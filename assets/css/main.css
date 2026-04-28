@@ -61,28 +61,51 @@ img, video {
     height: auto;
 }
 
-/* iOS Safari overflow guard: nothing in flow should exceed viewport width. */
+/* iOS Safari overflow guard: hard-clip the body at viewport width on
+   mobile/tablet to absolutely prevent right-edge clipping. */
 @media (max-width: 1024px) {
-    html, body {
-        overflow-x: clip;  /* better than hidden — doesn't create new scroll context */
-    }
-    section, header, footer, main, article {
+    html {
+        overflow-x: clip;
         max-width: 100vw;
     }
+    body {
+        overflow-x: clip;
+        max-width: 100vw;
+        width: 100vw;
+        position: relative;
+    }
+    /* Every section/wrapper: force inside the viewport */
+    section, header, footer, main, article, aside,
+    .et-section, .et-page-hero, .et-hero, .et-intro, .et-offers,
+    .et-process, .et-experiences, .et-testimonials, .et-founder,
+    .et-footer, .et-bespoke-journeys, .et-exp-funnel, .et-exp__hero {
+        max-width: 100vw;
+        overflow-x: clip;
+    }
+    /* Container: hard-cap at 100vw, explicit symmetric padding */
     .et-container {
         max-width: 100vw !important;
         width: 100%;
+        margin-left: auto !important;
+        margin-right: auto !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
+        box-sizing: border-box !important;
     }
-    /* Force every direct child of et-container to respect that padding */
-    .et-container > * {
+    /* Direct children of containers cannot exceed parent */
+    .et-container > *,
+    section > *,
+    .et-section > * {
         max-width: 100%;
     }
-    /* Images, videos, iframes never wider than parent */
-    img, video, iframe {
+    /* Media + form controls bound to parent */
+    img, video, iframe, picture, svg, canvas {
         max-width: 100% !important;
         height: auto;
+    }
+    /* Anything with explicit inline width="..." attribute capped */
+    [width] {
+        max-width: 100% !important;
     }
 }
 
