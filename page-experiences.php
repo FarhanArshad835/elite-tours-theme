@@ -16,7 +16,8 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 $base = get_template_directory_uri() . '/assets/images/';
 
-$regions = get_option( 'et_regions', [] );
+$regions          = get_option( 'et_regions', [] );
+$key_experiences  = get_option( 'et_key_experiences', [] );
 ?>
 
 <!-- Hero (CMS-driven via et_page_heroes['experiences']) -->
@@ -66,6 +67,48 @@ $regions = get_option( 'et_regions', [] );
             </a>
             <?php endforeach; ?>
         </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php if ( ! empty( $key_experiences ) && is_array( $key_experiences ) ) : ?>
+<!-- Featured Experiences — the 22 client-named "key experiences to build into the
+     website" from Full list of experiences.txt. Renders as a small-card grid
+     beneath the regions. Each card: image + name + region tag + short blurb.
+     Edit via Elite Tours → Key Experiences. -->
+<section class="et-section et-section--offwhite">
+    <div class="et-container">
+        <div class="et-section__header et-section__header--center et-reveal">
+            <p class="et-section__eyebrow">Featured experiences</p>
+            <h2 class="et-section__title">The named moments.</h2>
+            <p class="et-section__subtitle">Specific stops and signature moments inside those eleven regions — the ones we tell people about by name. None are a fixed inclusion; each is offered if it fits the journey we are designing for you.</p>
+        </div>
+        <div class="et-key-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;">
+            <?php foreach ( $key_experiences as $ke ) :
+                $ke_img_id  = absint( $ke['image_id'] ?? 0 );
+                $ke_img_url = $ke_img_id
+                    ? wp_get_attachment_image_url( $ke_img_id, 'medium_large' )
+                    : ( ! empty( $ke['image_filename'] ) ? $base . $ke['image_filename'] : $base . 'kylemore-abbey.jpg' );
+                $ke_url = ! empty( $ke['url'] ) ? ( strpos( $ke['url'], 'http' ) === 0 ? $ke['url'] : home_url( $ke['url'] ) ) : '';
+                $card_tag = $ke_url ? 'a' : 'div';
+            ?>
+            <<?php echo $card_tag; ?>
+                <?php if ( $ke_url ) : ?>href="<?php echo esc_url( $ke_url ); ?>"<?php endif; ?>
+                class="et-key-card et-reveal"
+                style="display:block;position:relative;overflow:hidden;border-radius:6px;text-decoration:none;color:#fff;background:#1a4f31;aspect-ratio:4/5;">
+                <div class="et-key-card__img" style="position:absolute;inset:0;background-image:url('<?php echo esc_url( $ke_img_url ); ?>');background-size:cover;background-position:center;transition:transform 0.4s ease;"></div>
+                <div class="et-key-card__overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.78) 0%,rgba(0,0,0,0.32) 50%,rgba(0,0,0,0.05) 100%);"></div>
+                <div class="et-key-card__content" style="position:absolute;inset:auto 0 0 0;padding:18px 20px;">
+                    <span style="display:inline-block;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#cdb989;font-family:var(--et-font-body);margin-bottom:6px;"><?php echo esc_html( $ke['region'] ?? '' ); ?></span>
+                    <h3 style="font-family:var(--et-font-heading);font-size:20px;line-height:1.2;font-weight:400;margin:0 0 6px 0;color:#fff;"><?php echo esc_html( $ke['name'] ?? '' ); ?></h3>
+                    <?php if ( ! empty( $ke['desc'] ) ) : ?>
+                    <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.85);margin:0;font-family:var(--et-font-body);"><?php echo esc_html( $ke['desc'] ); ?></p>
+                    <?php endif; ?>
+                </div>
+            </<?php echo $card_tag; ?>>
+            <?php endforeach; ?>
+        </div>
+        <style>.et-key-card:hover .et-key-card__img { transform: scale(1.04); }</style>
     </div>
 </section>
 <?php endif; ?>
