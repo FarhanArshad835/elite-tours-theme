@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 7: Similar Experiences
+ * Experience Funnel, Section 7: Similar Experiences
  * 3-card cross-sell on cream. Pulls related experience CPT posts.
  * If the admin has manually selected related posts, those win.
  * Otherwise, the latest 3 other experiences are shown.

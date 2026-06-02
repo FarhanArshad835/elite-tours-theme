@@ -16,7 +16,7 @@ $base        = get_template_directory_uri();
         <div class="et-container">
             <div class="et-footer__grid">
 
-                <!-- Col 1: Brand — logo left, social right (like Oroko) -->
+                <!-- Col 1: Brand, logo left, social right (like Oroko) -->
                 <div class="et-footer__col et-footer__col--brand">
                     <div class="et-footer__brand-row">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="et-footer__logo-link" aria-label="Elite Tours Ireland">
@@ -125,7 +125,7 @@ $base        = get_template_directory_uri();
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/asta.png' ); ?>"
                      alt="ASTA" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--asta">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/iagto.jpg' ); ?>"
-                     alt="Member of IAGTO — The Global Golf Tourism Organisation" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--iagto">
+                     alt="Member of IAGTO, The Global Golf Tourism Organisation" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--iagto">
                 <img src="<?php echo esc_url( $base . '/assets/images/trust/tripadvisor.svg' ); ?>"
                      alt="TripAdvisor" loading="lazy" class="et-footer__trust-logo et-footer__trust-logo--ta">
             </div>
@@ -194,7 +194,7 @@ $base        = get_template_directory_uri();
         reveals.forEach(function(el) { obs.observe(el); });
     }
 
-    // Nav — transparent on hero, solid on scroll
+    // Nav, transparent on hero, solid on scroll
     var header = document.querySelector('.et-header');
     if (header) {
         var scrolled = false;

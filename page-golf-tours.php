@@ -13,7 +13,7 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
 <!-- Hero (CMS-driven via et_page_heroes['golf-tours']) -->
 <?php etm_render_page_hero( 'golf-tours', [
     'title'          => "Play Ireland's<br>greatest courses.",
-    'subtitle'       => "Old Head, Lahinch, Doonbeg, Royal County Down, Adare Manor — fully managed, privately hosted, with Ray's standard of care across every round, transfer, and evening.",
+    'subtitle'       => "Old Head, Lahinch, Doonbeg, Royal County Down, Adare Manor, fully managed, privately hosted, with Ray's standard of care across every round, transfer, and evening.",
     'cta_text'       => 'Begin Your First Conversation',
     'cta_url'        => '/contact/',
     'image_filename' => 'golf-coastal.jpg',
@@ -108,7 +108,7 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
 <!-- Bottom CTA (CMS-driven via et_page_ctas['golf-tours']) -->
 <?php etm_render_page_cta( 'golf-tours', [
     'title'    => "Let's plan your golf journey.",
-    'subtitle' => "Ireland's top courses book out early, especially in peak season — and Ryder Cup-host venues like Adare Manor and Royal County Down even earlier. The earlier you speak to us, the better we can secure the rounds that matter most.",
+    'subtitle' => "Ireland's top courses book out early, especially in peak season, and Ryder Cup-host venues like Adare Manor and Royal County Down even earlier. The earlier you speak to us, the better we can secure the rounds that matter most.",
     'cta_text' => 'Begin Your First Conversation',
     'cta_url'  => '/contact/',
 ] ); ?>

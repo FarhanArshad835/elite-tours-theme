@@ -2,7 +2,7 @@
 /**
  * Template Name: Privacy Policy
  *
- * Phase 8 — pre-launch placeholder. Client must have a solicitor review and
+ * Phase 8, pre-launch placeholder. Client must have a solicitor review and
  * adjust before going public. Fields marked [REVIEW] need confirmation.
  */
 defined( 'ABSPATH' ) || exit;
@@ -46,7 +46,7 @@ $base = get_template_directory_uri() . '/assets/images/';
             <ul>
                 <li><strong>Contact details:</strong> name, email address, phone number, postal address.</li>
                 <li><strong>Travel details:</strong> party size, travel dates, accommodation preferences, dietary requirements, mobility needs, ancestry information you choose to share for heritage research.</li>
-                <li><strong>Payment details:</strong> billing address and payment information, processed by our regulated payment provider — we do not store full card numbers on our own systems.</li>
+                <li><strong>Payment details:</strong> billing address and payment information, processed by our regulated payment provider, we do not store full card numbers on our own systems.</li>
                 <li><strong>Website usage:</strong> IP address, browser type, pages visited, and similar standard analytics, collected via cookies and server logs.</li>
             </ul>
 
@@ -63,10 +63,10 @@ $base = get_template_directory_uri() . '/assets/images/';
             <h2>4. Legal basis for processing</h2>
             <p>We process your personal data on the following legal bases under the General Data Protection Regulation (GDPR):</p>
             <ul>
-                <li><strong>Performance of a contract</strong> — to deliver the tour or service you have booked.</li>
-                <li><strong>Legitimate interest</strong> — to operate and improve our business.</li>
-                <li><strong>Consent</strong> — for any marketing communications you have specifically opted into.</li>
-                <li><strong>Legal obligation</strong> — for tax, financial, and other regulatory record-keeping.</li>
+                <li><strong>Performance of a contract</strong>, to deliver the tour or service you have booked.</li>
+                <li><strong>Legitimate interest</strong>, to operate and improve our business.</li>
+                <li><strong>Consent</strong>, for any marketing communications you have specifically opted into.</li>
+                <li><strong>Legal obligation</strong>, for tax, financial, and other regulatory record-keeping.</li>
             </ul>
 
             <h2>5. Who we share your data with</h2>

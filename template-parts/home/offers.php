@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 $base_uri = get_template_directory_uri() . '/assets/images/';
 
-// Card 1 — Bespoke
+// Card 1, Bespoke
 $o1_label    = et_hp( 'offer_1_label',    'Bespoke Private Tours' );
 $o1_heading  = et_hp( 'offer_1_heading',  'Ireland,<br>Built Around You.' );
 $o1_desc     = et_hp( 'offer_1_desc',     'Deeply personal, privately guided journeys. Ancestry, culture, heritage, whiskey, scenic routes. No fixed itineraries. Everything designed from scratch, around the people taking it.' );
@@ -14,7 +14,7 @@ $o1_img_url  = $o1_img_id
     ? wp_get_attachment_image_url( $o1_img_id, 'large' )
     : $base_uri . 'castle-silhouette.jpg';
 
-// Card 2 — Golf
+// Card 2, Golf
 $o2_label    = et_hp( 'offer_2_label',    'Golf Tours' );
 $o2_heading  = et_hp( 'offer_2_heading',  "Play Ireland's Greatest Courses." );
 $o2_desc     = et_hp( 'offer_2_desc',     "Fully managed golf journeys across Ireland's most iconic links, with priority access, private chauffeur, and Ray's personal hosting standard throughout." );
@@ -30,7 +30,7 @@ $o2_img_url  = $o2_img_id
     <div class="et-container">
     <div class="et-offers__grid">
 
-        <!-- Card A — Bespoke Private Tours -->
+        <!-- Card A, Bespoke Private Tours -->
         <div class="et-offer-card" style="--et-offer-bg: url('<?php echo esc_url( $o1_img_url ); ?>')">
             <div class="et-offer-card__overlay"></div>
             <div class="et-offer-card__content">
@@ -44,7 +44,7 @@ $o2_img_url  = $o2_img_id
             </div>
         </div>
 
-        <!-- Card B — Golf Tours -->
+        <!-- Card B, Golf Tours -->
         <div class="et-offer-card" style="--et-offer-bg: url('<?php echo esc_url( $o2_img_url ); ?>')">
             <div class="et-offer-card__overlay"></div>
             <div class="et-offer-card__content">

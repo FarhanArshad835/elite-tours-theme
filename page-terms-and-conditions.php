@@ -2,7 +2,7 @@
 /**
  * Template Name: Terms & Conditions
  *
- * Phase 8 — pre-launch placeholder. Client must have a solicitor review and
+ * Phase 8, pre-launch placeholder. Client must have a solicitor review and
  * adjust before going public, particularly the booking, cancellation,
  * liability, and force-majeure clauses which are travel-specific.
  */
@@ -53,8 +53,8 @@ $base = get_template_directory_uri() . '/assets/images/';
             <p>If you need to cancel, the following charges apply, calculated against the total tour price:</p>
             <ul>
                 <li>More than 90 days before tour start: deposit only.</li>
-                <li>60–90 days before: 50% of total tour price.</li>
-                <li>30–60 days before: 75% of total tour price.</li>
+                <li>60-90 days before: 50% of total tour price.</li>
+                <li>30-60 days before: 75% of total tour price.</li>
                 <li>Less than 30 days before: 100% of total tour price.</li>
             </ul>
             <p>Some third-party bookings (hotels, golf courses, special-access experiences) may be subject to stricter cancellation conditions which we will disclose at the time of booking. We strongly recommend comprehensive travel insurance.</p>
@@ -83,7 +83,7 @@ $base = get_template_directory_uri() . '/assets/images/';
             </ul>
 
             <h2>11. Intellectual property</h2>
-            <p>All content on this website — text, photography, design, and trademarks — is the property of Elite Tours Ireland or used with permission. Personal, non-commercial use is permitted; reuse of any material in any form requires our prior written consent.</p>
+            <p>All content on this website, text, photography, design, and trademarks, is the property of Elite Tours Ireland or used with permission. Personal, non-commercial use is permitted; reuse of any material in any form requires our prior written consent.</p>
 
             <h2>12. Privacy</h2>
             <p>Our handling of your personal data is governed by our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>.</p>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 4: Pillars (Three Threads)
+ * Experience Funnel, Section 4: Pillars (Three Threads)
  * 3-column grid. Each pillar: image + Roman numeral + eyebrow + title + body.
  */
 defined( 'ABSPATH' ) || exit;

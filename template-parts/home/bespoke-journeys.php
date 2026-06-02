@@ -1,9 +1,9 @@
 <?php
 /**
- * Homepage section — Bespoke Journeys (the 2 client-defined Bespoke product
- * variants from the PDFs: Signature 11–15 days, Essence 6–10 days).
+ * Homepage section, Bespoke Journeys (the 2 client-defined Bespoke product
+ * variants from the PDFs: Signature 11-15 days, Essence 6-10 days).
  *
- * Per the ET Website Brief 2026 — Section 7 "Journey Types / Breakdown" —
+ * Per the ET Website Brief 2026, Section 7 "Journey Types / Breakdown",
  * the homepage should surface the duration-based Bespoke choices as a
  * primary navigation step into the funnel. Cards are derived from the
  * Experience CPT (Sample Itineraries) via et_get_bespoke_variants() so
@@ -16,7 +16,7 @@ $variants = function_exists( 'et_get_bespoke_variants' ) ? et_get_bespoke_varian
 if ( empty( $variants ) ) return;
 
 $heading  = et_hp( 'bespoke_journeys_heading',  'Two Ways to Travel.' );
-$subhead  = et_hp( 'bespoke_journeys_subhead',  'Same level of care, same private hosting, same end-to-end design — across either eleven to fifteen days, or six to ten. Choose your length and we build the rest around you.' );
+$subhead  = et_hp( 'bespoke_journeys_subhead',  'Same level of care, same private hosting, same end-to-end design, across either eleven to fifteen days, or six to ten. Choose your length and we build the rest around you.' );
 $eyebrow  = et_hp( 'bespoke_journeys_eyebrow',  'Bespoke Journeys' );
 ?>
 

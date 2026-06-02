@@ -13,7 +13,7 @@ $image_url     = $image_id
     ? wp_get_attachment_image_url( (int) $image_id, 'full' )
     : get_template_directory_uri() . '/assets/images/hero-default.jpg';
 
-// Trust bar — pull editable sub-labels and logo IDs from plugin settings
+// Trust bar, pull editable sub-labels and logo IDs from plugin settings
 $trust_failte_sub  = et_option( 'trust_failte_sub',  'Approved Partner' );
 $trust_failte_logo = et_option( 'trust_failte_logo_id', '' );
 $trust_asta_sub    = et_option( 'trust_asta_sub',    'Member' );
@@ -76,7 +76,7 @@ $iagto_url  = $trust_iagto_logo
                 </p>
 
                 <?php if ( $proof_text ) : ?>
-                <!-- TripAdvisor proof badge — above CTAs for conversion lift -->
+                <!-- TripAdvisor proof badge, above CTAs for conversion lift -->
                 <div class="et-hero__proof" aria-label="5-star rated">
                     <span class="et-hero__proof-stars" aria-hidden="true">★★★★★</span>
                     <span class="et-hero__proof-text"><?php echo esc_html( $proof_text ); ?></span>

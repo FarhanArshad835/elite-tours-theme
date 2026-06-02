@@ -19,7 +19,7 @@ add_action( 'after_setup_theme', function () {
 // pushing the fixed header down and overlapping hero content.
 add_filter( 'show_admin_bar', '__return_false' );
 
-// Belt-and-braces — also strip the html { margin-top: ...!important } that
+// Belt-and-braces, also strip the html { margin-top: ...!important } that
 // WP injects for logged-in users via the _admin_bar_bump_cb action. Without
 // this, even with the bar hidden some browsers / cached pages can leave a
 // blank strip at the top.
@@ -70,7 +70,7 @@ add_action( 'wp_enqueue_scripts', function () {
         true
     );
 
-    // Funnel page styles — only on single-experience pages
+    // Funnel page styles, only on single-experience pages
     if ( is_singular( 'experience' ) ) {
         wp_enqueue_style(
             'elite-tours-fonts-funnel',
@@ -122,7 +122,7 @@ if ( ! function_exists( 'et_wishlist_enabled' ) ) {
     }
 }
 
-// ─── Helper: experience cards — single source of truth (Experience CPT) ──────
+// ─── Helper: experience cards, single source of truth (Experience CPT) ──────
 // Returns the experience card array used by the homepage and Experiences page.
 // Prefers Experience CPT posts (canonical) so that editing a single Experience
 // from the admin updates BOTH places automatically. Falls back to the legacy
@@ -144,7 +144,7 @@ if ( ! function_exists( 'et_get_experiences' ) ) {
     /**
      * @param bool $include_bespoke_variants  When false (default) the Bespoke
      *   product variants (Signature Ireland Journey, Essence of Ireland) are
-     *   excluded — they're surfaced on /bespoke-tours/ as duration choices,
+     *   excluded, they're surfaced on /bespoke-tours/ as duration choices,
      *   not as peers of thematic experiences (Heritage, Distilleries, …).
      *   Pass true to get every published Experience CPT post (used by the
      *   "Two ways to travel" block on the Bespoke Tours page itself).
@@ -214,7 +214,7 @@ if ( ! function_exists( 'et_get_bespoke_variants' ) ) {
 // Clean, single-source SEO injection in wp_head. Per-page values are derived
 // from post title/excerpt/featured image; site-level fallbacks come from
 // the homepage settings (et_homepage_settings). Designed to coexist with
-// SEO plugins — defers (priority 5) so a plugin like Yoast can override.
+// SEO plugins, defers (priority 5) so a plugin like Yoast can override.
 add_action( 'wp_head', function () {
     $is_singular = is_singular();
     $is_home     = is_front_page() || is_home();
@@ -237,7 +237,7 @@ add_action( 'wp_head', function () {
     }
     if ( $description === '' ) {
         // Site-level fallback: homepage hero subhead.
-        $description = (string) et_hp( 'hero_subheading', 'Privately hosted journeys through Ireland — designed around you, delivered with a level of care that turns travel into something far more meaningful.' );
+        $description = (string) et_hp( 'hero_subheading', 'Privately hosted journeys through Ireland, designed around you, delivered with a level of care that turns travel into something far more meaningful.' );
     }
     $description = mb_substr( $description, 0, 200 );
     if ( mb_strlen( $description ) === 200 ) $description .= '…';
@@ -297,7 +297,7 @@ if ( ! function_exists( 'et_heart' ) ) {
     }
 }
 
-// ─── Helper: get plugin option (raw — for HTML content) ──────────────────────
+// ─── Helper: get plugin option (raw, for HTML content) ──────────────────────
 if ( ! function_exists( 'et_option_raw' ) ) {
     function et_option_raw( string $key, string $fallback = '' ): string {
         $options = get_option( 'et_homepage_settings', [] );
@@ -337,7 +337,7 @@ add_filter( 'theme_row_meta', function ( array $meta, string $stylesheet ): arra
 }, 10, 2 );
 
 // ─── Disable maintenance mode during plugin/theme updates ───────────────────
-// WP Pusher deploys take 5-10 min — this keeps the site live during updates
+// WP Pusher deploys take 5-10 min, this keeps the site live during updates
 add_filter( 'enable_maintenance_mode', '__return_false' );
 
 // ─── Elementor Integration ───────────────────────────────────────────────────
@@ -382,7 +382,7 @@ add_filter( 'et_use_custom_header', function () {
         if ( $conditions && method_exists( $conditions, 'get_conditions_manager' ) ) {
             $location = $conditions->get_conditions_manager()->get_documents_for_location( 'header' );
             if ( ! empty( $location ) ) {
-                return false; // Elementor Pro has a header — skip custom header
+                return false; // Elementor Pro has a header, skip custom header
             }
         }
     }

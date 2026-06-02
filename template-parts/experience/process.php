@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 5: Process (Method)
+ * Experience Funnel, Section 5: Process (Method)
  * Two-column on dark evergreen.
  * Left: bordered card listing 4 process steps (with double-border decoration).
  * Right: large heading + body + 2-image grid + From/Length/Group facts.

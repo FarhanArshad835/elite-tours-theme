@@ -19,7 +19,7 @@ if ( empty( $admin_hotels ) ) {
     ];
 }
 
-// Category labels — derived from intros (admin-managed) so headings match the
+// Category labels, derived from intros (admin-managed) so headings match the
 // labels above each tier on the page. Falls back to defaults if nothing seeded.
 $intros_raw = get_option( 'et_accommodation_category_intros', [] );
 if ( ! is_array( $intros_raw ) ) $intros_raw = [];
@@ -52,7 +52,7 @@ function et_hotel_img_url( $hotel, $fallback ) {
 <!-- Hero (CMS-driven via et_page_heroes['accommodation']) -->
 <?php etm_render_page_hero( 'accommodation', [
     'title'          => 'Where you stay,<br>chosen for how it feels.',
-    'subtitle'       => 'Accommodation throughout your journey is carefully selected to reflect both the standard of experience and the character of Ireland itself. From Ashford Castle to handpicked Kinsale stays, each location is chosen for how it contributes to the journey — not just for its star rating.',
+    'subtitle'       => 'Accommodation throughout your journey is carefully selected to reflect both the standard of experience and the character of Ireland itself. From Ashford Castle to handpicked Kinsale stays, each location is chosen for how it contributes to the journey, not just for its star rating.',
     'image_filename' => 'gothic-castle.jpg',
 ], $base ); ?>
 
@@ -123,7 +123,7 @@ function et_hotel_img_url( $hotel, $fallback ) {
 <?php
 $et_strings = get_option( 'et_page_strings', [] );
 if ( ! is_array( $et_strings ) ) $et_strings = [];
-$accommodation_quote = $et_strings['accommodation_trust_quote'] ?? "We have built relationships with Ireland's finest hotels over many years. This means preferred rooms, priority availability, and a personal welcome — not just a reservation. Many of the places we use are not widely known, and some are not publicly marketed in the traditional way.";
+$accommodation_quote = $et_strings['accommodation_trust_quote'] ?? "We have built relationships with Ireland's finest hotels over many years. This means preferred rooms, priority availability, and a personal welcome, not just a reservation. Many of the places we use are not widely known, and some are not publicly marketed in the traditional way.";
 ?>
 <?php if ( $accommodation_quote ) : ?>
 <section class="et-section et-section--white">
@@ -138,7 +138,7 @@ $accommodation_quote = $et_strings['accommodation_trust_quote'] ?? "We have buil
 <!-- Bottom CTA (CMS-driven via et_page_ctas['accommodation']) -->
 <?php etm_render_page_cta( 'accommodation', [
     'title'    => 'All accommodation handled for you.',
-    'subtitle' => 'Every stay across your Bespoke journey is selected, booked, and looked after by us — paired carefully so the rhythm of the trip flows from one to the next.',
+    'subtitle' => 'Every stay across your Bespoke journey is selected, booked, and looked after by us, paired carefully so the rhythm of the trip flows from one to the next.',
     'cta_text' => 'Begin Your First Conversation',
     'cta_url'  => '/contact/',
 ] ); ?>

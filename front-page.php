@@ -2,10 +2,10 @@
 defined( 'ABSPATH' ) || exit;
 get_header();
 
-// Hero is always first — fixed, never hidden or reordered
+// Hero is always first, fixed, never hidden or reordered
 get_template_part( 'template-parts/home/hero' );
 
-// Dynamic sections — order and visibility driven by admin panel
+// Dynamic sections, order and visibility driven by admin panel
 $default_order = [ 'intro', 'offers', 'bespoke-journeys', 'process', 'experiences', 'testimonials', 'founder-cta' ];
 $stored_order  = et_hp( 'section_order', '' );
 $order         = $stored_order ? json_decode( $stored_order, true ) : $default_order;
@@ -14,7 +14,7 @@ if ( ! is_array( $order ) ) {
 }
 
 foreach ( $order as $slug ) {
-    // Sanitise slug — only allow known sections
+    // Sanitise slug, only allow known sections
     if ( ! in_array( $slug, $default_order, true ) ) {
         continue;
     }

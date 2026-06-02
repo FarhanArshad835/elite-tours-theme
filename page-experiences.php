@@ -3,12 +3,12 @@
  * Template Name: Experiences
  *
  * Page structure:
- *   1. Hero — CMS-driven via et_page_heroes['experiences']
- *   2. Regions of Ireland — 11 region tiles from et_regions (admin: Regions)
- *   3. Bottom CTA — CMS-driven via et_page_ctas['experiences']
+ *   1. Hero, CMS-driven via et_page_heroes['experiences']
+ *   2. Regions of Ireland, 11 region tiles from et_regions (admin: Regions)
+ *   3. Bottom CTA, CMS-driven via et_page_ctas['experiences']
  *
  * The previous "Browse Everything" mixed grid (tour products + golf + hotels)
- * was removed — those are already on their own dedicated pages
+ * was removed, those are already on their own dedicated pages
  * (/bespoke-tours/, /golf-tours/, /accommodation/), and showing them here
  * mixed with placeholder fallback images was visually noisy.
  */
@@ -23,7 +23,7 @@ $key_experiences  = get_option( 'et_key_experiences', [] );
 <!-- Hero (CMS-driven via et_page_heroes['experiences']) -->
 <?php etm_render_page_hero( 'experiences', [
     'title'          => 'Ireland in Eleven Regions.<br>One Carefully Designed Journey.',
-    'subtitle'       => "From Dublin's foundations to the Causeway Coast, each region of Ireland brings its own character — its own people, landscapes, and stories. Below is the country we travel.",
+    'subtitle'       => "From Dublin's foundations to the Causeway Coast, each region of Ireland brings its own character, its own people, landscapes, and stories. Below is the country we travel.",
     'image_filename' => 'irish-pub.jpg',
 ], $base ); ?>
 
@@ -72,7 +72,7 @@ $key_experiences  = get_option( 'et_key_experiences', [] );
 <?php endif; ?>
 
 <?php if ( ! empty( $key_experiences ) && is_array( $key_experiences ) ) : ?>
-<!-- Featured Experiences — the 22 client-named "key experiences to build into the
+<!-- Featured Experiences, the 22 client-named "key experiences to build into the
      website" from Full list of experiences.txt. Renders as a small-card grid
      beneath the regions. Each card: image + name + region tag + short blurb.
      Edit via Elite Tours → Key Experiences. -->
@@ -81,7 +81,7 @@ $key_experiences  = get_option( 'et_key_experiences', [] );
         <div class="et-section__header et-section__header--center et-reveal">
             <p class="et-section__eyebrow">Featured experiences</p>
             <h2 class="et-section__title">The named moments.</h2>
-            <p class="et-section__subtitle">Specific stops and signature moments inside those eleven regions — the ones we tell people about by name. None are a fixed inclusion; each is offered if it fits the journey we are designing for you.</p>
+            <p class="et-section__subtitle">Specific stops and signature moments inside those eleven regions, the ones we tell people about by name. None are a fixed inclusion; each is offered if it fits the journey we are designing for you.</p>
         </div>
         <div class="et-key-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;">
             <?php foreach ( $key_experiences as $ke ) :

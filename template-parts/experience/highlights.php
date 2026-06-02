@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 2: Highlights (V2 — image cards, 4-col)
+ * Experience Funnel, Section 2: Highlights (V2, image cards, 4-col)
  * Header row: section heading on left, intro paragraph on right.
  * Below: 4 cards each with an image, top-border + number + "No. NN", title, body.
  */

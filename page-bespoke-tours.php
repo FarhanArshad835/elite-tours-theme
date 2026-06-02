@@ -38,7 +38,7 @@ if ( ! is_array( $et_strings ) ) $et_strings = [];
     </div>
 </section>
 
-<!-- Two Ways to Travel — Signature + Essence (the two Bespoke duration variants
+<!-- Two Ways to Travel, Signature + Essence (the two Bespoke duration variants
      from the client PDFs). Each card links to its full detail page. -->
 <?php
 $bespoke_variants = function_exists( 'et_get_bespoke_variants' ) ? et_get_bespoke_variants() : [];
@@ -49,7 +49,7 @@ if ( count( $bespoke_variants ) >= 1 ) :
         <div class="et-section__header et-section__header--center et-reveal">
             <p class="et-section__eyebrow">Two ways to travel</p>
             <h2 class="et-section__title">Choose your length.</h2>
-            <p class="et-section__subtitle">Same level of care, same private hosting, same end-to-end design — across either eleven to fifteen days, or six to ten. We help you pick the shape that fits the time you have.</p>
+            <p class="et-section__subtitle">Same level of care, same private hosting, same end-to-end design, across either eleven to fifteen days, or six to ten. We help you pick the shape that fits the time you have.</p>
         </div>
         <div class="et-tile-grid">
             <?php foreach ( $bespoke_variants as $v ) :

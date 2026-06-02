@@ -7,7 +7,7 @@
  *   - Replaced the old Core Values list with The DNA of Elite Tours (five
  *     pillars from the brief: Hosted / Insider / Emotion-led / Ray-is-the-product
  *     / Controlled Luxury).
- *   - Added a Signature Moments section — six moment categories with
+ *   - Added a Signature Moments section, six moment categories with
  *     specific named locations, the marketing-gold from the brief.
  *   - Differentiator table tightened with the "done properly" anti-tourism
  *     positioning.
@@ -25,7 +25,7 @@ if ( ! is_array( $strings ) ) $strings = [];
 <!-- Hero (CMS-driven via et_page_heroes['about-us']) -->
 <?php etm_render_page_hero( 'about-us', [
     'title'          => 'Ireland, through Ray.',
-    'subtitle'       => 'Elite Tours is not a tour company. It is a privately hosted experience of Ireland — built on more than fifty years of relationships across the country, and led personally by Ray himself.',
+    'subtitle'       => 'Elite Tours is not a tour company. It is a privately hosted experience of Ireland, built on more than fifty years of relationships across the country, and led personally by Ray himself.',
     'image_filename' => 'kylemore-abbey.jpg',
 ], $base ); ?>
 
@@ -39,10 +39,10 @@ if ( ! is_array( $strings ) ) $strings = [];
                 </div>
                 <div class="et-content">
                     <?php
-                    // Origin story — paragraphs split by blank line. Convert *…* to <em> for the closing line.
+                    // Origin story, paragraphs split by blank line. Convert *…* to <em> for the closing line.
                     $origin = trim( (string) ( $strings['about_origin_story'] ?? '' ) );
                     if ( $origin === '' ) {
-                        $origin = "For many visitors, a trip to Ireland is one of the most meaningful journeys of their lives — a connection to ancestry, a long-held dream, a trip planned for years. Yet so often, the experience falls short. Rushed itineraries. Group buses. The Guinness Storehouse. Volume over meaning.\n\nElite Tours was built to be the alternative. Founded by Raphael Mulally — Ray — on decades of experience and a deep pride in the country, every journey is shaped by a single belief: clients deserve more than a tour. They deserve to feel completely looked after, understood, and genuinely connected to Ireland itself.\n\nWe are not a big operation. We don't want to be. We are a small, carefully run company that delivers an exceptional level of personal service, because that is the only way we know how to work — and the only way Ireland is properly understood.\n\n*The Ireland most people never see. Done properly.*";
+                        $origin = "For many visitors, a trip to Ireland is one of the most meaningful journeys of their lives, a connection to ancestry, a long-held dream, a trip planned for years. Yet so often, the experience falls short. Rushed itineraries. Group buses. The Guinness Storehouse. Volume over meaning.\n\nElite Tours was built to be the alternative. Founded by Raphael Mulally, Ray, on decades of experience and a deep pride in the country, every journey is shaped by a single belief: clients deserve more than a tour. They deserve to feel completely looked after, understood, and genuinely connected to Ireland itself.\n\nWe are not a big operation. We don't want to be. We are a small, carefully run company that delivers an exceptional level of personal service, because that is the only way we know how to work, and the only way Ireland is properly understood.\n\n*The Ireland most people never see. Done properly.*";
                     }
                     $paragraphs = preg_split( '/\n\s*\n/', $origin );
                     foreach ( $paragraphs as $p ) {
@@ -68,7 +68,7 @@ if ( ! is_array( $strings ) ) $strings = [];
     </div>
 </section>
 
-<!-- Founder Feature — Ray IS the Product (CMS-driven via et_page_strings.about_founder_*) -->
+<!-- Founder Feature, Ray IS the Product (CMS-driven via et_page_strings.about_founder_*) -->
 <section class="et-section et-section--offwhite">
     <div class="et-container">
         <div class="et-founder-feature et-reveal">
@@ -79,7 +79,7 @@ if ( ! is_array( $strings ) ) $strings = [];
                     <p class="et-section__subtitle"><?php echo esc_html( $strings['about_founder_subtitle'] ?? 'Founder, host & the Irish connection' ); ?></p>
                 </div>
                 <div class="et-content">
-                    <?php etm_render_paragraphs( $strings['about_founder_body'] ?? "The product is not the route, the hotels, or the itinerary. It is Ray's perspective, his relationships, his storytelling, and his instinct — built across more than fifty years on these roads.\n\nRay knows everyone. Shop owners, local guides, the publican who'll open for a private after-hours visit, the cousin still on the family land. He is — to use his own word — a chameleon: equally at home pouring whiskey in a Donegal bar and seating clients at a long Dublin lunch. Clients are not processed; they are personally hosted, from the first conversation to the last goodbye.\n\nEvery Bespoke is designed by Ray himself. He still drives. He still tells the stories. He still sings, when the moment calls for it. **No Ray, no Elite Tours.** That has been the deal from the beginning, and it is what makes this company impossible to copy." ); ?>
+                    <?php etm_render_paragraphs( $strings['about_founder_body'] ?? "The product is not the route, the hotels, or the itinerary. It is Ray's perspective, his relationships, his storytelling, and his instinct, built across more than fifty years on these roads.\n\nRay knows everyone. Shop owners, local guides, the publican who'll open for a private after-hours visit, the cousin still on the family land. He is, to use his own word, a chameleon: equally at home pouring whiskey in a Donegal bar and seating clients at a long Dublin lunch. Clients are not processed; they are personally hosted, from the first conversation to the last goodbye.\n\nEvery Bespoke is designed by Ray himself. He still drives. He still tells the stories. He still sings, when the moment calls for it. **No Ray, no Elite Tours.** That has been the deal from the beginning, and it is what makes this company impossible to copy." ); ?>
                 </div>
                 <?php $founder_quote = $strings['about_founder_quote'] ?? "I've spent decades helping people experience Ireland in a truly personal way. The most memorable moments are usually the ones you never see coming."; ?>
                 <?php $founder_attr = $strings['about_founder_quote_attribution'] ?? 'Raphael Mulally · Founder, Elite Tours Ireland'; ?>
@@ -96,7 +96,7 @@ if ( ! is_array( $strings ) ) $strings = [];
     </div>
 </section>
 
-<!-- The DNA of Elite Tours — five pillars from the brief -->
+<!-- The DNA of Elite Tours, five pillars from the brief -->
 <section class="et-section et-section--white">
     <div class="et-container">
         <div class="et-section__header et-section__header--center et-reveal">
@@ -117,13 +117,13 @@ if ( ! is_array( $strings ) ) $strings = [];
     </div>
 </section>
 
-<!-- Signature Moments — the marketing gold -->
+<!-- Signature Moments, the marketing gold -->
 <section class="et-section et-section--offwhite">
     <div class="et-container">
         <div class="et-section__header et-section__header--center et-reveal">
             <p class="et-section__eyebrow">Signature Moments</p>
             <h2 class="et-section__title">The moments most people miss.</h2>
-            <p class="et-section__subtitle">Some moments will never appear on an itinerary. They are not listed, not planned in advance, and not shared publicly — these are the ones we live for.</p>
+            <p class="et-section__subtitle">Some moments will never appear on an itinerary. They are not listed, not planned in advance, and not shared publicly, these are the ones we live for.</p>
         </div>
         <div class="et-values-grid">
             <?php
@@ -139,7 +139,7 @@ if ( ! is_array( $strings ) ) $strings = [];
     </div>
 </section>
 
-<!-- Differentiator Table — the "instead of this / we offer this" punch -->
+<!-- Differentiator Table, the "instead of this / we offer this" punch -->
 <section class="et-section et-section--white">
     <div class="et-container">
         <div class="et-section__header et-section__header--center et-reveal">
@@ -182,7 +182,7 @@ if ( ! is_array( $strings ) ) $strings = [];
 <!-- Bottom CTA (CMS-driven via et_page_ctas['about-us']) -->
 <?php etm_render_page_cta( 'about-us', [
     'title'    => 'Every journey begins with a conversation.',
-    'subtitle' => "Tell us a name, a region, a curiosity, a feeling — we'll write back within a working day.",
+    'subtitle' => "Tell us a name, a region, a curiosity, a feeling, we'll write back within a working day.",
     'cta_text' => 'Begin Your First Conversation',
     'cta_url'  => '/contact/',
 ] ); ?>

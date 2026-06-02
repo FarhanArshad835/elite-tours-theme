@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 6: CTA (the conversion)
+ * Experience Funnel, Section 6: CTA (the conversion)
  * Two-column on white.
  * Left: heading + body + 4-field form + phone/email contact line.
  * Right: founder portrait with overlapping cream quote card.
@@ -127,11 +127,11 @@ $quote_attr = $f['cta_quote_attribution'] ?? '';
         .then( res => {
             if ( res.success ) {
                 form.reset();
-                feedback.textContent = res.data || 'Thanks — we\'ll be in touch shortly.';
+                feedback.textContent = res.data || 'Thanks, we\'ll be in touch shortly.';
                 feedback.className   = 'et-exp__cta-form-feedback is-success';
                 if ( txt ) txt.textContent = 'Sent';
             } else {
-                feedback.textContent = ( res.data && res.data.message ) || res.data || 'Sorry — something went wrong. Please try again.';
+                feedback.textContent = ( res.data && res.data.message ) || res.data || 'Sorry, something went wrong. Please try again.';
                 feedback.className   = 'et-exp__cta-form-feedback is-error';
                 if ( txt ) txt.textContent = 'Speak to a Designer';
                 submit.disabled = false;

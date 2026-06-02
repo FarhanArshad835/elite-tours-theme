@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 1: Hero
+ * Experience Funnel, Section 1: Hero
  * Full-bleed cinematic. Breadcrumb top-left, meta top-right.
  * Asymmetric bottom grid: title + CTAs left, narrative + facts right.
  */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience Funnel — Section 3: Story
+ * Experience Funnel, Section 3: Story
  * Image stack on left (with rotated "Plate" caption), narrative on right.
  * Ends with two "your people" cards.
  */
