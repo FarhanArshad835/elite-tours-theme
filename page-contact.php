@@ -27,7 +27,15 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
                     <h2 class="et-section__title">Tell Us About Your Journey</h2>
                     <p class="et-section__subtitle">Fill in the form below and we'll be in touch personally, usually within 24 hours.</p>
                 </div>
-                <form class="et-form" method="post" action="#">
+                <form class="et-form" id="et-contact-form" novalidate>
+                    <?php wp_nonce_field( 'etm_funnel', '_wpnonce' ); ?>
+                    <input type="hidden" name="action"         value="etm_funnel_submit">
+                    <input type="hidden" name="experience"     value="Contact Page">
+                    <input type="hidden" name="experience_url" value="<?php echo esc_url( home_url( '/contact/' ) ); ?>">
+                    <div style="position:absolute;left:-9999px;height:0;overflow:hidden;" aria-hidden="true">
+                        <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                    </div>
+
                     <div class="et-form__row">
                         <div class="et-form__field">
                             <label class="et-form__label">First Name</label>
@@ -96,12 +104,62 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
                     <div class="et-form__row">
                         <div class="et-form__field et-form__field--full">
                             <label class="et-form__label">Tell us more about what you're looking for</label>
-                            <textarea name="message" class="et-form__textarea" placeholder="Anything you'd like us to know..."></textarea>
+                            <textarea name="message" class="et-form__textarea" placeholder="Anything you'd like us to know..." required></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="et-btn et-btn--primary et-btn--lg" style="width:100%;justify-content:center;">Send Your Enquiry</button>
+                    <button type="submit" class="et-btn et-btn--primary et-btn--lg" id="et-contact-submit" style="width:100%;justify-content:center;">
+                        <span class="et-contact-form__submit-text">Send Your Enquiry</span>
+                    </button>
+                    <p class="et-form__feedback" id="et-contact-feedback" role="status" style="margin-top:16px;text-align:center;font-size:14px;"></p>
                     <p class="et-form__note">We respond personally to every enquiry. No automated replies. Your details are never shared.</p>
                 </form>
+
+                <script>
+                ( function () {
+                    const form = document.getElementById( 'et-contact-form' );
+                    if ( ! form ) return;
+                    const feedback = document.getElementById( 'et-contact-feedback' );
+                    const submit   = document.getElementById( 'et-contact-submit' );
+                    const txt      = form.querySelector( '.et-contact-form__submit-text' );
+                    const ajaxUrl  = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
+
+                    form.addEventListener( 'submit', function ( e ) {
+                        e.preventDefault();
+                        if ( ! form.checkValidity() ) { form.reportValidity(); return; }
+
+                        feedback.textContent = '';
+                        feedback.style.color = '';
+                        submit.disabled      = true;
+                        if ( txt ) txt.textContent = 'Sending...';
+
+                        fetch( ajaxUrl, {
+                            method:      'POST',
+                            credentials: 'same-origin',
+                            body:        new FormData( form ),
+                        } )
+                        .then( r => r.json() )
+                        .then( res => {
+                            if ( res.success ) {
+                                form.reset();
+                                feedback.textContent = res.data || 'Thanks, we\'ll be in touch shortly.';
+                                feedback.style.color = 'var(--et-green)';
+                                if ( txt ) txt.textContent = 'Sent';
+                            } else {
+                                feedback.textContent = ( res.data && res.data.message ) || res.data || 'Sorry, something went wrong. Please try again.';
+                                feedback.style.color = '#b00020';
+                                if ( txt ) txt.textContent = 'Send Your Enquiry';
+                                submit.disabled = false;
+                            }
+                        } )
+                        .catch( () => {
+                            feedback.textContent = 'Network error. Please try again or email us directly.';
+                            feedback.style.color = '#b00020';
+                            if ( txt ) txt.textContent = 'Send Your Enquiry';
+                            submit.disabled = false;
+                        } );
+                    } );
+                } )();
+                </script>
             </div>
 
             <!-- Contact Info Sidebar -->
