@@ -37,25 +37,18 @@ $key_experiences  = get_option( 'et_key_experiences', [] );
             <p class="et-section__subtitle">Each Bespoke Journey is built from a careful selection of these. Some travellers spend a full week in one region; others move through five or six. We help you choose.</p>
         </div>
         <div class="et-region-grid">
-            <?php
-            $region_romans = [ 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII' ];
-            foreach ( $regions as $idx => $region ) :
+            <?php foreach ( $regions as $region ) :
                 $r_img_id  = absint( $region['image_id'] ?? 0 );
                 $r_img_url = $r_img_id
                     ? wp_get_attachment_image_url( $r_img_id, 'large' )
                     : ( ! empty( $region['image_filename'] ) ? $base . $region['image_filename'] : $base . 'kylemore-abbey.jpg' );
                 $highlights = is_array( $region['highlights'] ?? null ) ? array_filter( $region['highlights'] ) : [];
-                $r_roman    = $region_romans[ $idx ] ?? (string) ( $idx + 1 );
             ?>
             <div class="et-region-card et-reveal" data-type="region" id="region-<?php echo esc_attr( $region['slug'] ?? '' ); ?>">
                 <div class="et-region-card__media">
                     <div class="et-region-card__img" style="background-image:url('<?php echo esc_url( $r_img_url ); ?>')"></div>
-                    <span class="et-region-card__num"><?php echo esc_html( $r_roman ); ?></span>
                 </div>
                 <div class="et-region-card__body">
-                    <?php if ( ! empty( $region['eyebrow'] ) ) : ?>
-                    <span class="et-region-card__badge"><?php echo esc_html( $region['eyebrow'] ); ?></span>
-                    <?php endif; ?>
                     <h3 class="et-region-card__title"><?php echo esc_html( $region['title'] ?? '' ); ?></h3>
                     <?php if ( ! empty( $region['blurb'] ) ) : ?>
                     <p class="et-region-card__desc"><?php echo esc_html( $region['blurb'] ); ?></p>
