@@ -36,35 +36,42 @@ $key_experiences  = get_option( 'et_key_experiences', [] );
             <h2 class="et-section__title">The country, in eleven movements.</h2>
             <p class="et-section__subtitle">Each Bespoke Journey is built from a careful selection of these. Some travellers spend a full week in one region; others move through five or six. We help you choose.</p>
         </div>
-        <div class="et-tile-grid">
-            <?php foreach ( $regions as $region ) :
+        <div class="et-region-grid">
+            <?php
+            $region_romans = [ 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII' ];
+            foreach ( $regions as $idx => $region ) :
                 $r_img_id  = absint( $region['image_id'] ?? 0 );
                 $r_img_url = $r_img_id
                     ? wp_get_attachment_image_url( $r_img_id, 'large' )
                     : ( ! empty( $region['image_filename'] ) ? $base . $region['image_filename'] : $base . 'kylemore-abbey.jpg' );
-                $r_url = ! empty( $region['tour_link_url'] ) ? home_url( $region['tour_link_url'] ) : home_url( '/contact/' );
                 $highlights = is_array( $region['highlights'] ?? null ) ? array_filter( $region['highlights'] ) : [];
+                $r_roman    = $region_romans[ $idx ] ?? (string) ( $idx + 1 );
             ?>
-            <a href="<?php echo esc_url( $r_url ); ?>" class="et-tile et-reveal" data-type="region" id="region-<?php echo esc_attr( $region['slug'] ?? '' ); ?>">
-                <div class="et-tile__img" style="background-image:url('<?php echo esc_url( $r_img_url ); ?>')"></div>
-                <div class="et-tile__overlay"></div>
-                <div class="et-tile__content">
-                    <span class="et-tile__label"><?php echo esc_html( $region['eyebrow'] ?? '' ); ?></span>
-                    <h3 class="et-tile__title"><?php echo esc_html( $region['title'] ?? '' ); ?></h3>
-                    <p class="et-tile__desc"><?php echo esc_html( $region['blurb'] ?? '' ); ?></p>
+            <div class="et-region-card et-reveal" data-type="region" id="region-<?php echo esc_attr( $region['slug'] ?? '' ); ?>">
+                <div class="et-region-card__media">
+                    <div class="et-region-card__img" style="background-image:url('<?php echo esc_url( $r_img_url ); ?>')"></div>
+                    <span class="et-region-card__num"><?php echo esc_html( $r_roman ); ?></span>
+                </div>
+                <div class="et-region-card__body">
+                    <?php if ( ! empty( $region['eyebrow'] ) ) : ?>
+                    <span class="et-region-card__badge"><?php echo esc_html( $region['eyebrow'] ); ?></span>
+                    <?php endif; ?>
+                    <h3 class="et-region-card__title"><?php echo esc_html( $region['title'] ?? '' ); ?></h3>
+                    <?php if ( ! empty( $region['blurb'] ) ) : ?>
+                    <p class="et-region-card__desc"><?php echo esc_html( $region['blurb'] ); ?></p>
+                    <?php endif; ?>
                     <?php if ( ! empty( $highlights ) ) : ?>
-                    <ul style="list-style:none;padding:0;margin:14px 0 12px 0;font-size:13px;line-height:1.5;color:rgba(255,255,255,0.85);">
+                    <ul class="et-region-card__highlights">
                         <?php foreach ( array_slice( $highlights, 0, 3 ) as $h ) : ?>
-                        <li style="position:relative;padding-left:14px;margin-bottom:4px;">
-                            <span style="position:absolute;left:0;top:0;color:rgba(255,255,255,0.5);">·</span>
-                            <?php echo esc_html( $h ); ?>
-                        </li>
+                        <li><?php echo esc_html( $h ); ?></li>
                         <?php endforeach; ?>
                     </ul>
                     <?php endif; ?>
-                    <span class="et-tile__cta"><?php echo esc_html( $region['tour_link_text'] ?? 'Explore' ); ?> &rsaquo;</span>
+                    <?php if ( ! empty( $region['tour_link_text'] ) ) : ?>
+                    <p class="et-region-card__featured"><?php echo esc_html( $region['tour_link_text'] ); ?></p>
+                    <?php endif; ?>
                 </div>
-            </a>
+            </div>
             <?php endforeach; ?>
         </div>
     </div>
