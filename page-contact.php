@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 $phone = et_site( 'phone_us', '+353 86 050 0500' );
 $phone_clean = preg_replace( '/[^+0-9]/', '', $phone );
-$email = et_site( 'contact_email', 'elitetoursireland@gmail.com' );
+$email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
 ?>
 
 <?php $base = get_template_directory_uri() . '/assets/images/'; ?>

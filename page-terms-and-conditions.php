@@ -11,7 +11,7 @@ get_header();
 
 $site_email = (function () {
     $opts = get_option( 'et_site_settings', [] );
-    return ! empty( $opts['contact_email'] ) ? $opts['contact_email'] : 'concierge@elitetours.ie';
+    return ! empty( $opts['contact_email'] ) ? $opts['contact_email'] : 'Info@elitetoursireland.com';
 })();
 $base = get_template_directory_uri() . '/assets/images/';
 ?>
