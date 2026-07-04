@@ -6,34 +6,12 @@ $headline      = et_option_raw( 'hero_headline',  'Ireland,<br>Experienced Prope
 $subheading    = et_option( 'hero_subheading',    'Bespoke private journeys, tailored to you, delivered with genuine Irish care.' );
 $cta_primary   = et_option( 'hero_cta_primary',   'Plan Your Journey' );
 $cta_secondary = et_option( 'hero_cta_secondary', 'Explore Our Tours' );
-$proof_text    = et_option( 'hero_proof_text',    "Ireland's Highest-Rated Tour Provider on TripAdvisor" );
 $video_url     = et_option( 'hero_video_url',     '' );
 $image_id      = et_option( 'hero_image_id',      '' );
 $image_url     = $image_id
     ? wp_get_attachment_image_url( (int) $image_id, 'full' )
     : get_template_directory_uri() . '/assets/images/hero-default.jpg';
-
-// Trust bar, pull editable sub-labels and logo IDs from plugin settings
-$trust_failte_sub  = et_option( 'trust_failte_sub',  'Approved Partner' );
-$trust_failte_logo = et_option( 'trust_failte_logo_id', '' );
-$trust_asta_sub    = et_option( 'trust_asta_sub',    'Member' );
-$trust_asta_logo   = et_option( 'trust_asta_logo_id', '' );
-$trust_iagto_sub   = et_option( 'trust_iagto_sub',   'Golf Tourism' );
-$trust_iagto_logo  = et_option( 'trust_iagto_logo_id', '' );
-$trust_since_label = et_option( 'trust_since_label', 'Since 1973' );
-$trust_since_sub   = et_option( 'trust_since_sub',   '50+ years experience' );
-$trust_ta_sub      = et_option( 'trust_ta_sub',       '5.0 · 90 Reviews' );
-
-// Resolve logo URLs (fall back to bundled assets)
-$failte_url = $trust_failte_logo
-    ? wp_get_attachment_image_url( (int) $trust_failte_logo, 'full' )
-    : get_template_directory_uri() . '/assets/images/trust/failte-ireland.png';
-$asta_url   = $trust_asta_logo
-    ? wp_get_attachment_image_url( (int) $trust_asta_logo, 'full' )
-    : get_template_directory_uri() . '/assets/images/trust/asta.png';
-$iagto_url  = $trust_iagto_logo
-    ? wp_get_attachment_image_url( (int) $trust_iagto_logo, 'full' )
-    : get_template_directory_uri() . '/assets/images/trust/iagto.jpg';
+// Proof badge + trust bar are rendered via reusable template parts below.
 ?>
 
 <section class="et-hero" id="et-hero">
@@ -75,13 +53,10 @@ $iagto_url  = $trust_iagto_logo
                     <?php echo esc_html( $subheading ); ?>
                 </p>
 
-                <?php if ( $proof_text ) : ?>
-                <!-- TripAdvisor proof badge, above CTAs for conversion lift -->
-                <div class="et-hero__proof" aria-label="5-star rated">
-                    <span class="et-hero__proof-stars" aria-hidden="true">★★★★★</span>
-                    <span class="et-hero__proof-text"><?php echo esc_html( $proof_text ); ?></span>
+                <?php // TripAdvisor proof badge, above CTAs for conversion lift ?>
+                <div class="et-hero__proof-slot">
+                    <?php get_template_part( 'template-parts/proof-badge', null, [ 'context' => 'dark' ] ); ?>
                 </div>
-                <?php endif; ?>
 
                 <!-- CTAs -->
                 <div class="et-hero__ctas">
@@ -103,38 +78,7 @@ $iagto_url  = $trust_iagto_logo
 
     <!-- ── Trust Bar (above fold, bottom of hero) ────────────── -->
     <div class="et-hero__trust">
-        <div class="et-trust-wrap">
-            <button type="button" class="et-trust-arrow et-trust-arrow--left" aria-label="Scroll left">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <div class="et-trust-bar" id="et-hero-trust-scroll">
-                <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/tripadvisor.svg' ); ?>"
-                         alt="TripAdvisor" class="et-trust-bar__logo et-trust-bar__logo--ta" loading="lazy">
-                    <div class="et-trust-bar__stars" aria-label="5 stars">★★★★★</div>
-                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_ta_sub ); ?></span>
-                </div>
-                <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( $failte_url ); ?>" alt="Fáilte Ireland" class="et-trust-bar__logo" loading="lazy">
-                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_failte_sub ); ?></span>
-                </div>
-                <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( $asta_url ); ?>" alt="ASTA" class="et-trust-bar__logo" loading="lazy">
-                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_asta_sub ); ?></span>
-                </div>
-                <div class="et-trust-bar__item">
-                    <img src="<?php echo esc_url( $iagto_url ); ?>" alt="IAGTO" class="et-trust-bar__logo et-trust-bar__logo--iagto" loading="lazy">
-                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_iagto_sub ); ?></span>
-                </div>
-                <div class="et-trust-bar__item">
-                    <span class="et-trust-bar__badge et-trust-bar__badge--gold"><?php echo esc_html( $trust_since_label ); ?></span>
-                    <span class="et-trust-bar__sub"><?php echo esc_html( $trust_since_sub ); ?></span>
-                </div>
-            </div>
-            <button type="button" class="et-trust-arrow et-trust-arrow--right" aria-label="Scroll right">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-        </div>
+        <?php get_template_part( 'template-parts/trust-bar', null, [ 'context' => 'dark' ] ); ?>
     </div>
 
 </section>

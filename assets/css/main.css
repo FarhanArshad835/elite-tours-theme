@@ -606,32 +606,45 @@ input, textarea, select {
     margin-bottom: 28px;
 }
 
-/* TripAdvisor proof badge — sits above CTAs, near-buttons social proof */
-.et-hero__proof {
+/* TripAdvisor proof badge — reusable (hero + inner pages), context-themed */
+.et-proof {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 24px;
     padding: 6px 14px;
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 999px;
 }
-.et-hero__proof-stars {
+.et-proof__stars {
     font-size: 13px;
     color: #34E0A1;
     letter-spacing: 1px;
     line-height: 1;
 }
-.et-hero__proof-text {
+.et-proof__text {
     font-family: var(--et-font-body);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.02em;
-    color: var(--et-off-white);
 }
+
+/* Dark context — over the hero photo/video (original look) */
+.et-proof--dark {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+.et-proof--dark .et-proof__text { color: var(--et-off-white); }
+
+/* Light context — on white/off-white inner-page sections */
+.et-proof--light {
+    background: var(--et-white);
+    border: 1px solid var(--et-grey-light);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.et-proof--light .et-proof__stars { color: #00AA6C; }
+.et-proof--light .et-proof__text { color: var(--et-grey-dark); }
 
 /* CTAs — pill style like Adams & Butler */
 .et-hero__ctas {
@@ -765,6 +778,34 @@ input, textarea, select {
     height: 22px;
     max-width: 140px;
 }
+
+/* ── Trust bar — LIGHT context (inner pages, e.g. Contact) ──── */
+.et-trust-wrap--light .et-trust-bar__logo {
+    /* Show partner logos in their natural dark form on a light bg */
+    filter: brightness(0);
+    opacity: 0.7;
+}
+.et-trust-wrap--light .et-trust-bar__logo--iagto {
+    filter: none;
+    opacity: 0.9;
+}
+.et-trust-wrap--light .et-trust-bar__logo--ta {
+    filter: brightness(0);
+    opacity: 0.85;
+}
+.et-trust-wrap--light .et-trust-bar__stars { color: #00AA6C; }
+.et-trust-wrap--light .et-trust-bar__sub { color: var(--et-grey); }
+.et-trust-wrap--light .et-trust-bar__badge { color: var(--et-grey-dark); }
+.et-trust-wrap--light .et-trust-bar__badge--gold { color: var(--et-gold); }
+
+/* Contact / inner-page social-proof section wrapper */
+.et-trust-section { text-align: center; }
+.et-trust-section__proof {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+.et-trust-section .et-trust-bar { flex-wrap: wrap; row-gap: 24px; }
 
 /* ============================================================
    HOMEPAGE SECTIONS
@@ -1431,9 +1472,9 @@ input, textarea, select {
     .et-hero__label::before { width: 22px; }
     .et-hero__headline { font-size: 38px; margin-bottom: 14px; }
     .et-hero__subheading { font-size: 14px; margin-bottom: 16px; line-height: 1.5; }
-    .et-hero__proof { gap: 8px; padding: 5px 11px; margin-bottom: 18px; }
-    .et-hero__proof-stars,
-    .et-hero__proof-text { font-size: 11px; }
+    .et-proof { gap: 8px; padding: 5px 11px; margin-bottom: 18px; }
+    .et-proof__stars,
+    .et-proof__text { font-size: 11px; }
     .et-hero__ctas { gap: 10px; }
     .et-btn--pill { width: 100%; justify-content: center; padding: 12px 24px; font-size: 12px; }
 

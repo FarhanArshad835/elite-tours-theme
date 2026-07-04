@@ -200,4 +200,16 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
     </div>
 </section>
 
+<!-- Social proof — mirrors the homepage hero -->
+<section class="et-section et-section--offwhite et-trust-section">
+    <div class="et-container">
+        <div class="et-trust-section__proof et-reveal">
+            <?php get_template_part( 'template-parts/proof-badge', null, [ 'context' => 'light' ] ); ?>
+        </div>
+        <div class="et-reveal">
+            <?php get_template_part( 'template-parts/trust-bar', null, [ 'context' => 'light' ] ); ?>
+        </div>
+    </div>
+</section>
+
 <?php get_footer(); ?>
