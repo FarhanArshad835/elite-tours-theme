@@ -15,6 +15,17 @@ defined( 'ABSPATH' ) || exit;
 
 $context = isset( $args['context'] ) && $args['context'] === 'light' ? 'light' : 'dark';
 
+// Unique id so multiple trust bars on one page (hero + inner page) each
+// wire to their own scroll container via the shared carousel JS. A global
+// counter is used because get_template_part() re-includes the file each
+// call, so a file-scope static would not persist between instances.
+if ( isset( $args['id'] ) ) {
+	$scroll_id = $args['id'];
+} else {
+	$GLOBALS['et_trust_instance'] = isset( $GLOBALS['et_trust_instance'] ) ? $GLOBALS['et_trust_instance'] + 1 : 1;
+	$scroll_id = 'et-trust-scroll-' . $GLOBALS['et_trust_instance'];
+}
+
 // Editable sub-labels + logo IDs from plugin settings.
 $trust_failte_sub  = et_option( 'trust_failte_sub',  'Approved Partner' );
 $trust_failte_logo = et_option( 'trust_failte_logo_id', '' );
@@ -38,10 +49,11 @@ $iagto_url  = $trust_iagto_logo
 	: get_template_directory_uri() . '/assets/images/trust/iagto.jpg';
 ?>
 <div class="et-trust-wrap et-trust-wrap--<?php echo esc_attr( $context ); ?>">
-	<button type="button" class="et-trust-arrow et-trust-arrow--left" aria-label="Scroll left">
+	<button type="button" class="et-trust-arrow et-trust-arrow--left" aria-label="Scroll left"
+	        data-carousel-prev="<?php echo esc_attr( $scroll_id ); ?>">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
 	</button>
-	<div class="et-trust-bar">
+	<div class="et-trust-bar" id="<?php echo esc_attr( $scroll_id ); ?>">
 		<div class="et-trust-bar__item">
 			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/trust/tripadvisor.svg' ); ?>"
 			     alt="TripAdvisor" class="et-trust-bar__logo et-trust-bar__logo--ta" loading="lazy">
@@ -65,7 +77,8 @@ $iagto_url  = $trust_iagto_logo
 			<span class="et-trust-bar__sub"><?php echo esc_html( $trust_since_sub ); ?></span>
 		</div>
 	</div>
-	<button type="button" class="et-trust-arrow et-trust-arrow--right" aria-label="Scroll right">
+	<button type="button" class="et-trust-arrow et-trust-arrow--right" aria-label="Scroll right"
+	        data-carousel-next="<?php echo esc_attr( $scroll_id ); ?>">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
 	</button>
 </div>

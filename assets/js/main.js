@@ -90,7 +90,7 @@
         if ( ! track ) return;
 
         const cardStep = () => {
-            const card = track.querySelector( '.et-exp-card, .et-tile, .et-key-card' );
+            const card = track.querySelector( '.et-exp-card, .et-tile, .et-key-card, .et-trust-bar__item' );
             if ( ! card ) return track.clientWidth;
             const rect = card.getBoundingClientRect();
             const styles = getComputedStyle( track );
