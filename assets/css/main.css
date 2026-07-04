@@ -804,22 +804,15 @@ input, textarea, select {
    The strip reuses the shared .et-trust-bar / .et-trust-arrow rules so
    it behaves identically to the homepage (centered static row on
    desktop, scrollable strip with arrows on mobile). */
-/* Contact banner: a touch of extra bottom room so the badge, which
-   overlaps up into the banner, has photo beneath it. Scoped to contact. */
-.page-template-page-contact .et-page-hero {
-    padding-bottom: 120px;
-}
-
-/* Proof badge straddles the banner's bottom edge — sits over the photo
-   at the very bottom of the banner, then the strip begins cleanly below.
-   A small fixed overlap (not a big negative margin) keeps it stable. */
+/* Contact: proof badge + trust strip form ONE continuous green block
+   directly under the banner. No overlaps, no negative margins, no
+   transparent gaps — so there can be no white seam between sections.
+   The banner photo ends cleanly at its own bottom edge; green begins
+   immediately below it. */
 .et-hero-proof-bar {
-    background: transparent;
-    padding: 0;
+    background: var(--et-green);
+    padding: 28px 0;
     text-align: center;
-    margin-top: -44px;   /* half the badge height above the banner's edge */
-    position: relative;
-    z-index: 2;
 }
 .et-hero-proof-bar__proof {
     display: flex;
@@ -827,11 +820,11 @@ input, textarea, select {
 }
 .et-hero-proof-bar__proof .et-proof { margin-bottom: 0; }
 
-/* Trust strip: solid green bar starting right below the badge, giving the
-   banner photo a clean bottom edge (no bleed past this point). */
+/* Trust strip: continues the same green column, slightly darker. Shares
+   its top edge with the proof bar's bottom edge — no gap possible. */
 .et-trust-section--bar {
     background: var(--et-green-dark);
-    padding: 40px 0 18px;   /* top room so the overlapping badge clears the logos */
+    padding: 20px 0;
     text-align: center;
     overflow: hidden;
 }
