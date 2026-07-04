@@ -810,10 +810,10 @@ input, textarea, select {
     margin-top: 4px;
 }
 
-/* Trust strip directly below the banner — solid green bar, flush against
+/* Trust strip directly below the banner — solid black bar, flush against
    the banner's bottom edge so no white seam can appear. */
 .et-trust-section--bar {
-    background: var(--et-green-dark);
+    background: #000;
     padding: 20px 0;
     text-align: center;
     overflow: hidden;
