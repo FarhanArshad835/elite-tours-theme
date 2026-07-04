@@ -798,47 +798,17 @@ input, textarea, select {
 .et-trust-wrap--light .et-trust-bar__badge { color: var(--et-grey-dark); }
 .et-trust-wrap--light .et-trust-bar__badge--gold { color: var(--et-gold); }
 
-/* Contact / inner-page social-proof section wrapper */
+/* Contact / inner-page social-proof section wrapper.
+   The strip itself deliberately reuses the shared .et-trust-bar /
+   .et-trust-arrow rules so it behaves identically to the homepage hero
+   (centered static row on desktop, scrollable strip with arrows on
+   mobile). Only the section framing is added here. */
 .et-trust-section { text-align: center; }
 .et-trust-section__proof {
     display: flex;
     justify-content: center;
     margin-bottom: 32px;
 }
-
-/* Scrollable strip with working arrows (same behaviour as the hero bar) */
-.et-trust-section .et-trust-wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 8px;
-}
-.et-trust-section .et-trust-bar {
-    overflow-x: auto;
-    justify-content: flex-start;
-    scroll-behavior: smooth;
-    scrollbar-width: none;            /* Firefox */
-    -ms-overflow-style: none;         /* IE/Edge */
-    -webkit-overflow-scrolling: touch;
-}
-.et-trust-section .et-trust-bar::-webkit-scrollbar { display: none; }
-
-/* Show the nav arrows on the inner-page strip and make them tappable */
-.et-trust-section .et-trust-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: var(--et-white);
-    cursor: pointer;
-    transition: background 0.25s ease, opacity 0.25s ease;
-}
-.et-trust-section .et-trust-arrow:hover { background: rgba(255,255,255,0.22); }
-.et-trust-section .et-trust-arrow:disabled { opacity: 0.35; cursor: default; }
 
 /* ============================================================
    HOMEPAGE SECTIONS
