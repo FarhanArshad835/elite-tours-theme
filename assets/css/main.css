@@ -798,16 +798,29 @@ input, textarea, select {
 .et-trust-wrap--light .et-trust-bar__badge { color: var(--et-grey-dark); }
 .et-trust-wrap--light .et-trust-bar__badge--gold { color: var(--et-gold); }
 
-/* Contact / inner-page social-proof section wrapper.
-   The strip itself deliberately reuses the shared .et-trust-bar /
-   .et-trust-arrow rules so it behaves identically to the homepage hero
-   (centered static row on desktop, scrollable strip with arrows on
-   mobile). Only the section framing is added here. */
-.et-trust-section { text-align: center; }
-.et-trust-section__proof {
+/* Contact / inner-page social proof, laid out like the homepage hero:
+   proof badge directly under the banner, then the trust strip below it.
+   Both continue the banner's green so they read as part of the banner.
+   The strip reuses the shared .et-trust-bar / .et-trust-arrow rules so
+   it behaves identically to the homepage (centered static row on
+   desktop, scrollable strip with arrows on mobile). */
+.et-hero-proof-bar {
+    background: var(--et-green);
+    padding: 0 0 24px;
+    text-align: center;
+}
+.et-hero-proof-bar__proof {
     display: flex;
     justify-content: center;
-    margin-bottom: 32px;
+}
+.et-hero-proof-bar__proof .et-proof { margin-bottom: 0; }
+
+.et-trust-section--bar {
+    background: var(--et-green-dark);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-block: 16px;
+    text-align: center;
+    overflow: hidden;
 }
 
 /* ============================================================

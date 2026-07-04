@@ -16,6 +16,18 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
     'image_filename' => 'cliffs-overcast.jpg',
 ], $base ); ?>
 
+<!-- Proof badge + trust strip below the banner — same as the homepage hero -->
+<section class="et-hero-proof-bar">
+    <div class="et-container">
+        <div class="et-hero-proof-bar__proof et-reveal">
+            <?php get_template_part( 'template-parts/proof-badge', null, [ 'context' => 'dark' ] ); ?>
+        </div>
+    </div>
+</section>
+<section class="et-trust-section et-trust-section--bar">
+    <?php get_template_part( 'template-parts/trust-bar', null, [ 'context' => 'dark' ] ); ?>
+</section>
+
 <!-- Form + Contact -->
 <section class="et-section et-section--white">
     <div class="et-container">
@@ -196,18 +208,6 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
                 </div>
             </div>
 
-        </div>
-    </div>
-</section>
-
-<!-- Social proof — same look as the homepage hero (dark context) -->
-<section class="et-section et-section--green et-trust-section">
-    <div class="et-container">
-        <div class="et-trust-section__proof et-reveal">
-            <?php get_template_part( 'template-parts/proof-badge', null, [ 'context' => 'dark' ] ); ?>
-        </div>
-        <div class="et-reveal">
-            <?php get_template_part( 'template-parts/trust-bar', null, [ 'context' => 'dark' ] ); ?>
         </div>
     </div>
 </section>
