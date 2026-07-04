@@ -804,12 +804,20 @@ input, textarea, select {
    The strip reuses the shared .et-trust-bar / .et-trust-arrow rules so
    it behaves identically to the homepage (centered static row on
    desktop, scrollable strip with arrows on mobile). */
+/* Contact banner: give it extra bottom room so the photo (background-size:
+   cover) extends down far enough to sit behind the proof badge. Scoped to
+   the contact page so other page banners are unaffected. */
+.page-template-page-contact .et-page-hero {
+    padding-bottom: 150px;
+}
+
 .et-hero-proof-bar {
-    background: var(--et-green);
-    padding: 4px 0 28px;
+    /* Transparent + pulled up so the badge sits over the banner photo,
+       like the homepage hero (photo shows behind the badge). */
+    background: transparent;
+    padding: 0 0 28px;
     text-align: center;
-    /* Pull up into the banner's bottom padding so the badge hugs it */
-    margin-top: -60px;
+    margin-top: -110px;
     position: relative;
     z-index: 2;
 }
