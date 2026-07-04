@@ -804,24 +804,14 @@ input, textarea, select {
    The strip reuses the shared .et-trust-bar / .et-trust-arrow rules so
    it behaves identically to the homepage (centered static row on
    desktop, scrollable strip with arrows on mobile). */
-/* Contact: proof badge + trust strip form ONE continuous green block
-   directly under the banner. No overlaps, no negative margins, no
-   transparent gaps — so there can be no white seam between sections.
-   The banner photo ends cleanly at its own bottom edge; green begins
-   immediately below it. */
-.et-hero-proof-bar {
-    background: var(--et-green);
-    padding: 28px 0;
-    text-align: center;
+/* Proof badge rendered INSIDE a page hero (over the photo), like the
+   homepage. Sits after the subtitle with a little breathing room. */
+.et-page-hero__proof {
+    margin-top: 4px;
 }
-.et-hero-proof-bar__proof {
-    display: flex;
-    justify-content: center;
-}
-.et-hero-proof-bar__proof .et-proof { margin-bottom: 0; }
 
-/* Trust strip: continues the same green column, slightly darker. Shares
-   its top edge with the proof bar's bottom edge — no gap possible. */
+/* Trust strip directly below the banner — solid green bar, flush against
+   the banner's bottom edge so no white seam can appear. */
 .et-trust-section--bar {
     background: var(--et-green-dark);
     padding: 20px 0;

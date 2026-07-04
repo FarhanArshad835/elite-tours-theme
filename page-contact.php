@@ -14,16 +14,10 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
     'title'          => 'Start Your Journey Here',
     'subtitle'       => "There are no fixed packages. No automated quote tools. Just a real conversation about who you are and what you'd love to experience in Ireland.",
     'image_filename' => 'cliffs-overcast.jpg',
+    'show_proof'     => true, // TripAdvisor badge inside the banner, over the photo
 ], $base ); ?>
 
-<!-- Proof badge + trust strip below the banner — same as the homepage hero -->
-<section class="et-hero-proof-bar">
-    <div class="et-container">
-        <div class="et-hero-proof-bar__proof et-reveal">
-            <?php get_template_part( 'template-parts/proof-badge', null, [ 'context' => 'dark' ] ); ?>
-        </div>
-    </div>
-</section>
+<!-- Trust strip directly below the banner — same as the homepage hero -->
 <section class="et-trust-section et-trust-section--bar">
     <?php get_template_part( 'template-parts/trust-bar', null, [ 'context' => 'dark' ] ); ?>
 </section>
