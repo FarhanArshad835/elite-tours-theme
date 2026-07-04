@@ -806,8 +806,12 @@ input, textarea, select {
    desktop, scrollable strip with arrows on mobile). */
 .et-hero-proof-bar {
     background: var(--et-green);
-    padding: 0 0 24px;
+    padding: 4px 0 28px;
     text-align: center;
+    /* Pull up into the banner's bottom padding so the badge hugs it */
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
 }
 .et-hero-proof-bar__proof {
     display: flex;
@@ -818,10 +822,13 @@ input, textarea, select {
 .et-trust-section--bar {
     background: var(--et-green-dark);
     border-top: 1px solid rgba(255,255,255,0.1);
-    padding-block: 16px;
+    padding-block: 18px;
     text-align: center;
     overflow: hidden;
 }
+/* Ensure the strip sits in one centered row on this bar (desktop) */
+.et-trust-section--bar .et-trust-wrap { justify-content: center; }
+.et-trust-section--bar .et-trust-bar { gap: 40px; }
 
 /* ============================================================
    HOMEPAGE SECTIONS
