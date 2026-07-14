@@ -130,6 +130,7 @@ $quote_attr = $f['cta_quote_attribution'] ?? '';
                 feedback.textContent = res.data || 'Thanks, we\'ll be in touch shortly.';
                 feedback.className   = 'et-exp__cta-form-feedback is-success';
                 if ( txt ) txt.textContent = 'Sent';
+                if ( typeof fbq === 'function' ) fbq( 'track', 'Lead' );
             } else {
                 feedback.textContent = ( res.data && res.data.message ) || res.data || 'Sorry, something went wrong. Please try again.';
                 feedback.className   = 'et-exp__cta-form-feedback is-error';

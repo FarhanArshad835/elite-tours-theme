@@ -280,6 +280,30 @@ add_action( 'wp_head', function () {
     <?php
 }, 5 );
 
+// ─── Meta Pixel (Facebook) ───────────────────────────────────────────────────
+// Base pixel fires site-wide when a Pixel ID is set in Site Settings →
+// Tracking. Skipped for logged-in users so admin browsing doesn't pollute
+// ad data. Lead events fire from the enquiry forms' success callbacks.
+add_action( 'wp_head', function () {
+    $pixel_id = et_site( 'meta_pixel_id' );
+    if ( ! $pixel_id || is_user_logged_in() ) return;
+    ?>
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '<?php echo esc_js( $pixel_id ); ?>');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" alt=""
+        src="https://www.facebook.com/tr?id=<?php echo rawurlencode( $pixel_id ); ?>&ev=PageView&noscript=1"/></noscript>
+    <!-- /Meta Pixel -->
+    <?php
+} );
+
 // ─── Helper: wishlist heart button ──────────────────────────────────────────
 if ( ! function_exists( 'et_heart' ) ) {
     function et_heart( string $id, string $title = '', string $desc = '', string $img = '', string $url = '', string $type = '' ): string {

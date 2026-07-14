@@ -150,6 +150,7 @@ $email = et_site( 'contact_email', 'Info@elitetoursireland.com' );
                                 feedback.textContent = res.data || 'Thanks, we\'ll be in touch shortly.';
                                 feedback.style.color = 'var(--et-green)';
                                 if ( txt ) txt.textContent = 'Sent';
+                                if ( typeof fbq === 'function' ) fbq( 'track', 'Lead' );
                             } else {
                                 feedback.textContent = ( res.data && res.data.message ) || res.data || 'Sorry, something went wrong. Please try again.';
                                 feedback.style.color = '#b00020';
